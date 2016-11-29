@@ -25,15 +25,30 @@
           <h4 class="ui top attached header">
             <i class="icon" :class="activeComponent.icon"></i> {{ activeComponent.txt }} Text Input
           </h4>
+          <div class="ui center aligned basic segment">
+            <button class="ui orange basic button" @click.prevent="addComponent">
+              <i class="plus icon"></i>
+              Add question to workspace
+            </button>
+            <button 
+              class="ui   basic button" 
+              @click="(activeComponent.showEditor = !activeComponent.showEditor)">
+              <i class="edit icon"></i>
+              Edit question properties
+            </button>
+          </div>
 
           <normal-input 
             v-if="(activeComponent.txt === 'Normal')"
-            :properties="inputTemplates.normal"></normal-input>
-
-          <normal-properties-editor 
-            v-if="(activeComponent.txt === 'Normal')"
-            :save="saveProps"></normal-properties-editor> 
+            :properties="inputTemplates[activeComponent.txt.toLowerCase()]"></normal-input>
           
+          <transition name="componentEditor">
+            <normal-properties-editor 
+              v-if="(activeComponent.txt === 'Normal')"
+              v-show="activeComponent.showEditor"
+              :save="saveProps"></normal-properties-editor> 
+          </transition>
+
         </div>
 
       </div>
@@ -67,13 +82,16 @@ export default {
         { txt: 'Address', icon: 'building outline' },
         { txt: 'Paragraph', icon: 'text width' }
       ],
-      activeComponent: { txt: 'Normal', icon: 'text cursor' },
+      activeComponent: { txt: 'Normal', icon: 'text cursor', showEditor: false },
       inputTemplates: Object.assign({}, textInput)
     }
   },
   methods: {
     saveProps(data) {
-      this.inputTemplates[data.type] = Object.assign({}, data.props);
+      this.inputTemplates[data.type] = Object.assign({}, data.props)
+    },
+    addComponent() {
+      console.dir(this.inputTemplates[activeComponent.txt.toLowerCase()])
     }
   }
 }
@@ -82,5 +100,12 @@ export default {
 <style>
   #text-input-components{
     background: #FFF;
+  }
+
+  .componentEditor-enter-active{
+    animation: fadeIn .5s;
+  }
+  .componentEditor-leave-active{
+    animation: fadeOut .3s;
   }
 </style>
