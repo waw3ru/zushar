@@ -7,7 +7,7 @@
       <div class="centered three wide column">
         <div class="ui vertical menu">
           <div class="header item">Text Input Components</div>
-          <a class="item" :class="{'active': (activeComponent.txt===component.txt) }"
+          <a class="item" :class="{'blue active': (activeComponent.txt===component.txt) }"
             v-for="component in components" 
             @click.prevent="(activeComponent = component);">
 
@@ -20,34 +20,48 @@
 
       <!-- previewer for the components -->
       <div class="centered column">
-
+       
         <div class="ui stacked segments" >
           <h4 class="ui top attached header">
-            <i class="icon" :class="activeComponent.icon"></i> {{ activeComponent.txt }} Text Input
+            <i class="icon" :class="activeComponent.icon"></i> 
+            {{ activeComponent.txt }} Text Input
           </h4>
           <div class="ui center aligned basic segment">
             <button class="ui orange basic button" @click.prevent="addComponent">
               <i class="plus icon"></i>
               Add question to workspace
             </button>
-            <button 
-              class="ui   basic button" 
-              @click="(activeComponent.showEditor = !activeComponent.showEditor)">
-              <i class="edit icon"></i>
-              Edit question properties
-            </button>
           </div>
 
-          <normal-input 
-            v-if="(activeComponent.txt === 'Normal')"
-            :properties="inputTemplates[activeComponent.txt.toLowerCase()]"></normal-input>
+          <template v-if="(activeComponent.txt === 'Normal')">
+            <normal-input 
+              :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
+            </normal-input>
+            <normal-properties-editor :save="saveProps"></normal-properties-editor> 
+          </template>
           
-          <transition name="componentEditor">
-            <normal-properties-editor 
-              v-if="(activeComponent.txt === 'Normal')"
-              v-show="activeComponent.showEditor"
-              :save="saveProps"></normal-properties-editor> 
-          </transition>
+          <template v-if="(activeComponent.txt === 'Email')">
+            <email-input 
+              :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
+            </email-input>
+            <email-properties-editor :save="saveProps"></email-properties-editor> 
+          </template>
+          
+          <template v-if="(activeComponent.txt === 'Url')">
+            <url-input 
+              :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
+            </url-input>
+            <url-properties-editor :save="saveProps"></url-properties-editor> 
+          </template>
+
+          <template v-if="(activeComponent.txt === 'Phone')">
+            <phone-input 
+              :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
+            </phone-input>
+            <phone-properties-editor :save="saveProps"></phone-properties-editor> 
+          </template>
+          
+
 
         </div>
 
@@ -61,13 +75,24 @@
 import { textInput } from '../vuex/questionTypes.js'
 import normalInput from '../components/text-input/NormalPreview.vue'
 import normalPropertiesEditor from '../components/text-input/NormalPropertiesEditor.vue'
-
+import emailInput from '../components/text-input/EmailPreview.vue'
+import emailPropertiesEditor from '../components/text-input/EmailPropertiesEditor.vue'
+import urlInput from '../components/text-input/UrlPreview.vue'
+import urlPropertiesEditor from '../components/text-input/UrlPropertiesEditor.vue'
+import phoneInput from '../components/text-input/PhonePreview.vue'
+import phonePropertiesEditor from '../components/text-input/PhonePropertiesEditor.vue'
 
 export default {
   name: 'textInput',
   components: {
     normalInput,
-    normalPropertiesEditor
+    normalPropertiesEditor,
+    emailInput,
+    emailPropertiesEditor,
+    urlInput,
+    urlPropertiesEditor,
+    phoneInput,
+    phonePropertiesEditor
   },
   data() {
     return {
@@ -82,16 +107,17 @@ export default {
         { txt: 'Address', icon: 'building outline' },
         { txt: 'Paragraph', icon: 'text width' }
       ],
-      activeComponent: { txt: 'Normal', icon: 'text cursor', showEditor: false },
+      activeComponent: { txt: 'Normal', icon: 'text cursor' },
       inputTemplates: Object.assign({}, textInput)
     }
   },
   methods: {
-    saveProps(data) {
-      this.inputTemplates[data.type] = Object.assign({}, data.props)
+    saveProps(data, cb = function () {}) {
+      this.inputTemplates[data.type] = Object.assign({}, data.props);
+      cb();
     },
     addComponent() {
-      console.dir(this.inputTemplates[activeComponent.txt.toLowerCase()])
+      console.dir(this.inputTemplates[this.activeComponent.txt.toLowerCase()])
     }
   }
 }

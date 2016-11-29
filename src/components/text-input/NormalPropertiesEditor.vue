@@ -79,6 +79,7 @@
 
 <script>
 import 'semantic/dist/components/checkbox.js'
+import { textInput } from '../../vuex/questionTypes.js'
 
 export default {
   name: 'normalPropertiesEditor',
@@ -90,24 +91,7 @@ export default {
   },
   data() {
     return {
-      current: {
-        id: null,
-        label: null,
-        fieldType: 'text-input',
-        field: 'Normal',
-        instructions: null,
-        isMandatory: false,
-        addon: {
-          prefix: null,
-          suffix: null
-        },
-        addedBy: null,
-        params: {
-          max: 25,
-          min: 1
-        },
-        placeholder: null
-      }
+      current: Object.assign({}, textInput.normal)
     }
   },
   mounted() {
@@ -118,7 +102,14 @@ export default {
       this.save({
         type: 'normal',
         props: Object.assign({}, data)
-      });
+      }, 
+      function () {
+        /*
+        * after submitting properties return the props form to default
+        * */
+        this.current = {};
+        this.current = Object.assign({}, textInput.normal);
+      }.bind(this));
     }
   }
 }

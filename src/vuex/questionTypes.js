@@ -18,9 +18,39 @@ export const textInput = {
     },
     placeholder: null
   },
-  email: {},
-  phone: {},
-  url: {},
+  email: {
+    id: null,
+    fieldType: 'text-input',
+    field: 'email',
+    label: null,
+    instructions: null,
+    isMandatory: false,
+    addedBy: null,
+    validate: true,
+    placeholder: null
+  },
+  phone: {
+    id: null,
+    fieldType: 'text-input',
+    field: 'url',
+    label: null,
+    instructions: null,
+    isMandatory: false,
+    addedBy: null,
+    validate: true,
+    placeholder: null 
+  },
+  url: {
+    id: null,
+    fieldType: 'text-input',
+    field: 'url',
+    label: null,
+    instructions: null,
+    isMandatory: false,
+    addedBy: null,
+    validate: true,
+    placeholder: null 
+  },
   measurement: {},
   address: {},
   date: {},
