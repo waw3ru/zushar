@@ -53,7 +53,27 @@ export const textInput = {
   },
   measurement: {},
   address: {},
-  date: {},
+  date: {
+    id: null,
+    fieldType: 'text-input',
+    field: 'date',
+    label: null,
+    instructions: null,
+    isMandatory: false,
+    addedBy: null,
+    placeholder: null,
+    date: {
+      mode: 'single', /* single or multiple or range */
+      format: null,
+      utc: false,
+      default: null, /* use moment.js to format the date on save */
+      showWeekNum: false
+    },
+    params: {
+      max: null,
+      min: null
+    }
+  },
   time: {},
   paragraph: {}
 }

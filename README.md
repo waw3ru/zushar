@@ -1,4 +1,4 @@
-![Zushar Logo](https://github.com/shevigroup/zushar/blob/NormalTextInput/static/zushar_3.png)
+![Zushar Logo](https://github.com/shevigroup/zushar/blob/master/src/assets/zushar_1.png)
 # Zushar
 
 > A questionnaire builder tool for researchers and scholars using web technologies
@@ -17,5 +17,5 @@ npm run dev
 npm run build
 ```
 
-License
+## License
 MIT

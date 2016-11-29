@@ -61,7 +61,13 @@
             <phone-properties-editor :save="saveProps"></phone-properties-editor> 
           </template>
           
-
+          <template v-if="(activeComponent.txt === 'Date')">
+            <date-input 
+              :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
+            </date-input>
+            <!-- <phone-properties-editor :save="saveProps"></phone-properties-editor>  -->
+          </template>
+          
 
         </div>
 
@@ -81,6 +87,7 @@ import urlInput from '../components/text-input/UrlPreview.vue'
 import urlPropertiesEditor from '../components/text-input/UrlPropertiesEditor.vue'
 import phoneInput from '../components/text-input/PhonePreview.vue'
 import phonePropertiesEditor from '../components/text-input/PhonePropertiesEditor.vue'
+import dateInput from '../components/text-input/DatePreview.vue'
 
 export default {
   name: 'textInput',
@@ -92,7 +99,8 @@ export default {
     urlInput,
     urlPropertiesEditor,
     phoneInput,
-    phonePropertiesEditor
+    phonePropertiesEditor,
+    dateInput
   },
   data() {
     return {
