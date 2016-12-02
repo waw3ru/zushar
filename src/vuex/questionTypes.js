@@ -4,7 +4,7 @@ export const textInput = {
     id: null,
     label: null,
     fieldType: 'text-input',
-    field: 'Normal',
+    field: 'normal',
     instructions: null,
     isMandatory: false,
     addon: {
@@ -32,7 +32,7 @@ export const textInput = {
   phone: {
     id: null,
     fieldType: 'text-input',
-    field: 'url',
+    field: 'phone',
     label: null,
     instructions: null,
     isMandatory: false,
@@ -51,8 +51,36 @@ export const textInput = {
     validate: true,
     placeholder: null 
   },
-  measurement: {},
-  address: {},
+  measure: {
+    id: null,
+    fieldType: 'text-input',
+    field: 'measure',
+    label: null,
+    instructions: null,
+    addedBy: null,
+    isMandatory: false,
+    placeholder: null,
+    params: {
+      max: null,
+      min: null,
+      decimalPoints: 2,
+      decimalSeparationType: '.'
+    },
+    addon: {
+      prefix: null,
+      suffix: null
+    },
+    typeOfMeasure: null
+  },
+  address: {
+    id: null,
+    fieldType: 'text-input',
+    field: 'address',
+    label: null,
+    instructions: null,
+    addedBy: null,  
+    isMandatory: false
+  },
   date: {
     id: null,
     fieldType: 'text-input',
@@ -63,19 +91,28 @@ export const textInput = {
     addedBy: null,
     placeholder: null,
     date: {
-      mode: 'single', /* single or multiple or range */
       format: null,
-      utc: false,
       default: null, /* use moment.js to format the date on save */
-      showWeekNum: false
+      startView: 0
     },
     params: {
       max: null,
       min: null
     }
   },
-  time: {},
-  paragraph: {}
+  paragraph: {
+    id: null,
+    label: null,
+    fieldType: 'text-input',
+    field: 'paragraph',
+    instructions: null,
+    isMandatory: false,
+    addedBy: null,
+    params: {
+      max: 25,
+      min: 1
+    }
+  }
 }
 
 export const selection = {

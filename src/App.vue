@@ -43,9 +43,7 @@ html, body, #app {
 #app .top-bar{
   width: 100%;
   height: auto;
-  padding: 0;
   margin: 0;
-  top: 0;
   position: fixed;
   z-index: 30;
 }

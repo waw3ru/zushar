@@ -19,6 +19,7 @@
     "font-awesome": "fontawesome#4.7.0",
     "animate.css": "3.5.2",
     "semantic": "semantic-ui#2.2.6",
-    "flatpickr": "flatpickr-calendar#2.2.3"
+    "datepicker": "fengyuanchen/datepicker#0.4.0",
+    "TimePicki": "1.0.1"
   }
 }

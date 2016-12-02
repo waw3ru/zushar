@@ -34,20 +34,19 @@
 </template>
 
 <script>
-  import 'semantic/dist/components/visibility.js'
-  import 'semantic/dist/components/transition.js'
-  import 'semantic/dist/components/dropdown.js'
+import 'semantic/dist/components/transition.js'
+import 'semantic/dist/components/dropdown.js'
 
-  export default {
-    name: 'menuBar',
-    mounted() {
-      $('.ui.dropdown-menu')
-        .dropdown({
-          on: 'click',
-          transition: 'vertical flip'
-        });
-    }
+export default {
+  name: 'menuBar',
+  mounted() {
+    $('.ui.dropdown-menu')
+      .dropdown({
+        on: 'click',
+        transition: 'vertical flip'
+      });
   }
+}
 
 </script>
 

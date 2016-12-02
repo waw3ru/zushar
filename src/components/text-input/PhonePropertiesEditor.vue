@@ -79,13 +79,7 @@ export default {
       this.save({
         type: 'phone',
         props: Object.assign({}, data)
-      }, 
-      function () {
-        /*
-        * after submitting properties return the props form to default
-        * */
-        this.current = Object.assign({}, textInput.phone);
-      }.bind(this));
+      });
     }
   }
 }

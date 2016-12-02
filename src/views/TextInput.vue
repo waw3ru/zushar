@@ -5,7 +5,7 @@
 
       <!-- menu for text input components -->
       <div class="centered three wide column">
-        <div class="ui vertical menu">
+        <div class="ui secondary pointing vertical menu">
           <div class="header item">Text Input Components</div>
           <a class="item" :class="{'blue active': (activeComponent.txt===component.txt) }"
             v-for="component in components" 
@@ -65,9 +65,29 @@
             <date-input 
               :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
             </date-input>
-            <!-- <phone-properties-editor :save="saveProps"></phone-properties-editor>  -->
+            <date-properties-editor :save="saveProps"></date-properties-editor> 
+          </template>
+
+          <template v-if="(activeComponent.txt === 'Paragraph')">
+            <paragraph-input 
+              :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
+            </paragraph-input>
+            <paragraph-properties-editor :save="saveProps"></paragraph-properties-editor> 
+          </template>
+
+          <template v-if="(activeComponent.txt === 'Measure')">
+            <measure-input 
+              :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
+            </measure-input>
+            <measure-properties-editor :save="saveProps"></measure-properties-editor> 
           </template>
           
+          <template v-if="(activeComponent.txt === 'Address')">
+            <address-input 
+              :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
+            </address-input>
+            <address-properties-editor :save="saveProps"></address-properties-editor> 
+          </template>
 
         </div>
 
@@ -88,6 +108,13 @@ import urlPropertiesEditor from '../components/text-input/UrlPropertiesEditor.vu
 import phoneInput from '../components/text-input/PhonePreview.vue'
 import phonePropertiesEditor from '../components/text-input/PhonePropertiesEditor.vue'
 import dateInput from '../components/text-input/DatePreview.vue'
+import datePropertiesEditor from '../components/text-input/DatePropertiesEditor.vue'
+import paragraphInput from '../components/text-input/ParagraphPreview.vue'
+import paragraphPropertiesEditor from '../components/text-input/ParagraphPropertiesEditor.vue'
+import measureInput from '../components/text-input/MeasurePreview.vue'
+import measurePropertiesEditor from '../components/text-input/MeasurePropertiesEditor.vue'
+import addressInput from '../components/text-input/AddressPreview.vue'
+import addressPropertiesEditor from '../components/text-input/AddressPropertiesEditor.vue'
 
 export default {
   name: 'textInput',
@@ -100,7 +127,14 @@ export default {
     urlPropertiesEditor,
     phoneInput,
     phonePropertiesEditor,
-    dateInput
+    dateInput,
+    datePropertiesEditor,
+    paragraphInput,
+    paragraphPropertiesEditor,
+    measureInput,
+    measurePropertiesEditor,
+    addressInput,
+    addressPropertiesEditor
   },
   data() {
     return {
@@ -108,12 +142,11 @@ export default {
         { txt: 'Normal', icon: 'text cursor' },
         { txt: 'Email', icon: 'at' },
         { txt: 'Url', icon: 'external' },
-        { txt: 'Measure', icon: 'percent' },
         { txt: 'Phone', icon: 'call square' },
         { txt: 'Date', icon: 'calendar' },
-        { txt: 'Time', icon: 'hourglass half' },
-        { txt: 'Address', icon: 'building outline' },
-        { txt: 'Paragraph', icon: 'text width' }
+        { txt: 'Paragraph', icon: 'text width' },
+        { txt: 'Measure', icon: 'percent' },
+        { txt: 'Address', icon: 'building outline' }
       ],
       activeComponent: { txt: 'Normal', icon: 'text cursor' },
       inputTemplates: Object.assign({}, textInput)

@@ -7,22 +7,13 @@
       <div class="field" :class="{ 'required': properties.isMandatory }">
         <label v-if="properties.label">{{properties.label}}</label>
 
-        <div class="ui fluid input" 
-          :class="{ 
-            'right': properties.addon.suffix,
-            'labeled': (properties.addon.prefix || properties.addon.suffix)
-          }">
-          
-          <div class="ui label" v-if="properties.addon.prefix">{{properties.addon.prefix}}</div>
+        <div class="ui fluid input">
 
-          <input type="text" 
-            :placeholder="properties.placeholder" 
+          <textarea type="text"
             :maxlength="properties.params.max" 
             :minlength="properties.params.min">
+          </textarea>
 
-          <div class="ui label" v-if="properties.addon.suffix">
-            {{properties.addon.suffix}}
-          </div>
         </div>
 
         <p class="content" v-if="properties.instructions">
@@ -38,7 +29,7 @@
 <script>
 
 export default {
-  name: 'normalInput',
+  name: 'paragraphInput',
   props: {
     properties: {
       type: Object,
