@@ -1,4 +1,4 @@
-![Zushar Logo](https://github.com/shevigroup/zushar/blob/master/src/assets/zushar_1.png)
+![Zushar Logo](https://github.com/shevigroup/zushar/blob/master/src/assets/logos/zushar_1.png)
 # Zushar
 
 > A questionnaire builder tool for researchers and scholars using web technologies
