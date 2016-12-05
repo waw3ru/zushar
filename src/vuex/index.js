@@ -1,12 +1,11 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
+import uuid from 'uuid'
 
 Vue.use(Vuex)
 
 import QuestionTypes from './questionTypes';
-import mutations from './mutations';
-
 const store = new Vuex.Store({
   state: {
     form: {
@@ -23,7 +22,19 @@ const store = new Vuex.Store({
       questions: []
     }
   },
-  mutations
+  mutations: {
+    ADD_QUESTION(state, question) {
+      state.form.questions = (state.form.questions || []).concat(question)
+    }
+  },
+  actions: {
+    add_question({ commit }, payload) {
+      let question = Object.assign({}, payload.question)
+      question.id = uuid.v4();
+      question.addedBy = 'zushar'
+      commit(payload.TYPE, question);
+    }
+  }
 })
 
 export default store

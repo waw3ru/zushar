@@ -1,9 +1,6 @@
 
 <template>
-<div class="ui segment">
-  <h5 class="ui grey dividing header">Component Properties Editor</h5>
-
-  <form class="ui form" novalidate @submit.prevent="saveProps(current)">
+<form class="ui form" novalidate @submit.prevent="saveProps(current)">
 
     <div class="field">
       <label>Enter the question</label>
@@ -35,9 +32,8 @@
       <i class="save icon"></i> Save the Properties 
     </button>
 
-  </form>
-
-</div>
+</form>
+  
 </template>
 
 <script>

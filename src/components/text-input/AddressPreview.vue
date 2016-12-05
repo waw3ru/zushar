@@ -1,7 +1,6 @@
 
 <template>
 
-<div class="ui secondary segment">
   <form class="ui form" novalidate>
     <h4 class="ui dividing header" v-if="properties.label">{{ properties.label }}</h4>
 
@@ -40,15 +39,14 @@
         </div>
       </div>
     </div>
+    
 
-  </form>
-
-  <p class="content" v-if="properties.instructions">
-    {{ properties.instructions }}
-  </p>
+    <p class="content" v-if="properties.instructions">
+      {{ properties.instructions }}
+    </p>
   
-</div>
-
+  </form>
+  
 </template>
 
 <script>

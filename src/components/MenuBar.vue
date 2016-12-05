@@ -16,9 +16,9 @@
             <a class="item"><i class="star half icon"></i> Scale and Rating</a>
           </div>
         </div>
-        <a class="item">
+        <router-link :to="{ name: 'Workspace' }" class="item">
           <i class="object group icon"></i> Workspace
-        </a>
+        </router-link>
         <a class="item">
           <i class="cloud upload icon"></i> Save as draft
         </a>

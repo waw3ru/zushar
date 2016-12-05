@@ -27,67 +27,86 @@
             {{ activeComponent.txt }} Text Input
           </h4>
           <div class="ui center aligned basic segment">
-            <button class="ui orange basic button" @click.prevent="addComponent">
+            <button class="ui orange basic button" 
+              @click.prevent="addComponent">
               <i class="plus icon"></i>
               Add question to workspace
             </button>
           </div>
+          <div class="ui secondary segment">
+              <h5 class="ui dividing header">Component Preview</h5>
+              
+               <template v-if="(activeComponent.txt === 'Normal')">
+                <normal-input 
+                  :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
+                </normal-input>
+              </template>
+              <template v-if="(activeComponent.txt === 'Email')">
+                <email-input 
+                  :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
+                </email-input>
+              </template>
+              <template v-if="(activeComponent.txt === 'Url')">
+                <url-input 
+                  :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
+                </url-input>
+              </template>
+              <template v-if="(activeComponent.txt === 'Phone')">
+                <phone-input 
+                  :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
+                </phone-input>
+              </template>
+              <template v-if="(activeComponent.txt === 'Date')">
+                <date-input 
+                  :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
+                </date-input>
+              </template>
+              <template v-if="(activeComponent.txt === 'Paragraph')">
+              <paragraph-input 
+                :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
+              </paragraph-input>
+            </template>
+            <template v-if="(activeComponent.txt === 'Measure')">
+              <measure-input 
+                :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
+              </measure-input>
+            </template>
+            <template v-if="(activeComponent.txt === 'Address')">
+              <address-input 
+                :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
+              </address-input>
+            </template>
 
-          <template v-if="(activeComponent.txt === 'Normal')">
-            <normal-input 
-              :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
-            </normal-input>
-            <normal-properties-editor :save="saveProps"></normal-properties-editor> 
-          </template>
-          
-          <template v-if="(activeComponent.txt === 'Email')">
-            <email-input 
-              :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
-            </email-input>
-            <email-properties-editor :save="saveProps"></email-properties-editor> 
-          </template>
-          
-          <template v-if="(activeComponent.txt === 'Url')">
-            <url-input 
-              :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
-            </url-input>
-            <url-properties-editor :save="saveProps"></url-properties-editor> 
-          </template>
+          </div>
+          <div class="ui segment">
+            <h5 class="ui grey dividing header">Component Properties Editor</h5>
 
-          <template v-if="(activeComponent.txt === 'Phone')">
-            <phone-input 
-              :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
-            </phone-input>
-            <phone-properties-editor :save="saveProps"></phone-properties-editor> 
-          </template>
-          
-          <template v-if="(activeComponent.txt === 'Date')">
-            <date-input 
-              :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
-            </date-input>
-            <date-properties-editor :save="saveProps"></date-properties-editor> 
-          </template>
+            <template v-if="(activeComponent.txt === 'Normal')">
+              <normal-properties-editor :save="saveProps"></normal-properties-editor> 
+            </template>
+            <template v-if="(activeComponent.txt === 'Email')">
+              <email-properties-editor :save="saveProps"></email-properties-editor> 
+            </template>
+            <template v-if="(activeComponent.txt === 'Url')">
+              <url-properties-editor :save="saveProps"></url-properties-editor> 
+            </template>
+            <template v-if="(activeComponent.txt === 'Phone')">
+              <phone-properties-editor :save="saveProps"></phone-properties-editor> 
+            </template>
+            <template v-if="(activeComponent.txt === 'Date')">
+              <date-properties-editor :save="saveProps"></date-properties-editor> 
+            </template>
+            <template v-if="(activeComponent.txt === 'Paragraph')">
+              <paragraph-properties-editor :save="saveProps"></paragraph-properties-editor> 
+            </template>
+            <template v-if="(activeComponent.txt === 'Measure')">
+              <measure-properties-editor :save="saveProps"></measure-properties-editor> 
+            </template>
+            <template v-if="(activeComponent.txt === 'Address')">
+              <address-properties-editor :save="saveProps"></address-properties-editor> 
+            </template>
 
-          <template v-if="(activeComponent.txt === 'Paragraph')">
-            <paragraph-input 
-              :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
-            </paragraph-input>
-            <paragraph-properties-editor :save="saveProps"></paragraph-properties-editor> 
-          </template>
-
-          <template v-if="(activeComponent.txt === 'Measure')">
-            <measure-input 
-              :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
-            </measure-input>
-            <measure-properties-editor :save="saveProps"></measure-properties-editor> 
-          </template>
-          
-          <template v-if="(activeComponent.txt === 'Address')">
-            <address-input 
-              :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
-            </address-input>
-            <address-properties-editor :save="saveProps"></address-properties-editor> 
-          </template>
+          </div>
 
         </div>
 
@@ -99,6 +118,7 @@
 
 <script>
 import { textInput } from '../vuex/questionTypes.js'
+
 import normalInput from '../components/text-input/NormalPreview.vue'
 import normalPropertiesEditor from '../components/text-input/NormalPropertiesEditor.vue'
 import emailInput from '../components/text-input/EmailPreview.vue'
@@ -158,7 +178,11 @@ export default {
       cb();
     },
     addComponent() {
-      console.dir(this.inputTemplates[this.activeComponent.txt.toLowerCase()])
+      this.$store.dispatch('add_question', {
+        TYPE: 'ADD_QUESTION',
+        question: this.inputTemplates[this.activeComponent.txt.toLowerCase()]
+      })
+      this.inputTemplates[this.activeComponent.txt.toLowerCase()] = Object.assign({}, textInput[this.activeComponent.txt.toLowerCase()])
     }
   }
 }

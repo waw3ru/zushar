@@ -7,7 +7,7 @@
     </div>
 
     <div class="body">
-      <transition name="appLevel">
+      <transition name="appLevel" mode="out-in">
         <keep-alive>
           <router-view></router-view>
         </keep-alive>
@@ -46,6 +46,7 @@ html, body, #app {
   margin: 0;
   position: fixed;
   z-index: 30;
+  top: 0;
 }
 #app .body{
   width: 100%;
@@ -59,9 +60,9 @@ html, body, #app {
 
 /* top-level router transitions */
 .appLevel-enter-active{
-  animation: slideInUp .6s;
+  animation: bounceInUp .6s;
 }
 .appLevel-leave-active{
-  animation: fadeOut .4s;
+  animation: fadeOutLeft .3s;
 }
 </style>

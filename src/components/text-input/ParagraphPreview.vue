@@ -1,9 +1,7 @@
 
 <template>
 
-  <div class="ui secondary segment">
-    <h5 class="ui dividing header">Component Preview</h5>
-    <form class="ui form" novalidate>
+ <form class="ui form" novalidate>
       <div class="field" :class="{ 'required': properties.isMandatory }">
         <label v-if="properties.label">{{properties.label}}</label>
 
@@ -22,8 +20,6 @@
 
       </div>
     </form>
-  </div>
-
 </template>
 
 <script>
