@@ -48,7 +48,6 @@ const store = new Vuex.Store({
       Vue.set(state.form, 'questions', ids.map( id => (state.form.questions[_.findIndex(state.form.questions, ['id', id])]) ))
     },
     LOAD_QUESTIONS(state, questions) {
-      state.forms.questions = []; // empty array to load new set of questions
       Vue.set(state.form, 'questions', questions);
     }
   },

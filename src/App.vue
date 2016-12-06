@@ -34,6 +34,7 @@ export default {
   mounted() {
     let forms = getForms();
     let questions = getQuestions();
+
     if (hasDbInstance().questions && questions.length > 0) {
       this.$store.commit('LOAD_QUESTIONS', questions);
     }

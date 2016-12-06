@@ -52,6 +52,7 @@ export function updateForm(id, Form) {
 		if (form.id === id) {
 			return Form;
 		}
+		return form;
 	});
 	return Forms;
 }
@@ -77,10 +78,8 @@ export function clearForms(id) {
 // this is a temporary storage for the questions in the workspace to avoid loosing unsaved work
 
 export function saveQuestions(questions) {
-	let Questions = Store.get('questions');
-	Questions = Questions.concat(questions);
-	Store.set('questions', Questions);
-	return Questions;
+	Store.set('questions', questions);
+	return questions;
 }
 
 export function getQuestions() {
