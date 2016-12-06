@@ -3,61 +3,67 @@
 <div class="ui container" id="workspace">
   <div class="ui grid">
     <div class="centered eight wide column">
-      <div class="ui segments" v-for="(question, $index) in questions">
+      <transition-group name="workspaceList" mode="out-in" tag="span">
 
-        <div class="ui basic segment">
-          <h4 class="ui dividing header">Question #{{ $index+1 }}</h4>
-          <template v-if="question.field == 'normal'">
-            <normal-input :properties="question"></normal-input>
-          </template>
-          <template v-if="question.field == 'phone'">
-            <phone-input :properties="question"></phone-input>
-          </template>
-          <template v-if="question.field == 'email'">
-            <email-input :properties="question"></email-input>
-          </template>
-          <template v-if="question.field == 'url'">
-            <url-input :properties="question"></url-input>
-          </template>
-          <template v-if="question.field == 'measure'">
-            <measure-input :properties="question"></measure-input>
-          </template>
-          <template v-if="question.field == 'date'">
-            <date-input :properties="question" :picker_id="question.id"></date-input>
-          </template>
-          <template v-if="question.field == 'address'">
-            <address-input :properties="question" :picker_id="question.id"></address-input>
-          </template>
-          <template v-if="question.field == 'paragraph'">
-            <paragraph-input :properties="question" ></paragraph-input>
-          </template>
+        <div class="ui segments" v-for="(question, $index) in questions" :key="question.id">
+
+          <div class="ui basic segment">
+            <h4 class="ui dividing header">Question #{{ $index+1 }}</h4>
+            <template v-if="question.field == 'normal'">
+              <normal-input :properties="question"></normal-input>
+            </template>
+            <template v-if="question.field == 'phone'">
+              <phone-input :properties="question"></phone-input>
+            </template>
+            <template v-if="question.field == 'email'">
+              <email-input :properties="question"></email-input>
+            </template>
+            <template v-if="question.field == 'url'">
+              <url-input :properties="question"></url-input>
+            </template>
+            <template v-if="question.field == 'measure'">
+              <measure-input :properties="question"></measure-input>
+            </template>
+            <template v-if="question.field == 'date'">
+              <date-input :properties="question" :picker_id="question.id"></date-input>
+            </template>
+            <template v-if="question.field == 'address'">
+              <address-input :properties="question" :picker_id="question.id"></address-input>
+            </template>
+            <template v-if="question.field == 'paragraph'">
+              <paragraph-input :properties="question" ></paragraph-input>
+            </template>
+          </div>
+          <div class="ui bottom attached three item menu">
+            <a class="item" id="edit-props" @click="editQuestion($index)">
+              <i class="edit icon"></i>
+              Edit Properties
+            </a>
+            <a class="item" @click="removeQuestion($index)">
+              <i class="trash icon"></i>
+              Remove Question
+            </a>
+            <a class="item">
+              <i class="move icon"></i>
+              Move Question
+            </a>
+          </div>
         </div>
-        <div class="ui bottom attached three item menu">
-          <a class="item" id="edit-props" @click="editQuestion($index)">
-            <i class="edit icon"></i>
-            Edit Properties
-          </a>
-          <a class="item">
-            <i class="eye icon"></i>
-            View Properties
-          </a>
-          <a class="item" @click="removeQuestion($index)">
-            <i class="trash icon"></i>
-            Remove Question
-          </a>
-        </div>
+
+      </transition-group>
+    </div>
+    <transition name="workspaceLevel" mode="out-in">
+      <div class="centered ten wide column" v-if="(questions.length < 1)">
+        <h1 class="ui grey center aligned icon header">
+          <i class="remove circle outline icon"></i>
+          No
+          Questions
+          <p class="sub header">
+            added to the workspace
+          </p>
+        </h1>
       </div>
-    </div>
-    <div class="centered ten wide column" v-if="(questions.length < 1)">
-      <h1 class="ui grey center aligned icon header">
-        <i class="remove circle outline icon"></i>
-        No 
-        Questions 
-        <p class="sub header">
-          added to the workspace
-        </p>
-      </h1>
-    </div>
+    </transition>
   </div>
 
 </div>
@@ -115,5 +121,17 @@ export default {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     padding-top: 20px;
     padding-bottom: 20px;
+  }
+  .workspaceList-enter-active{
+    animation: fadeInRight .4s;
+  }
+  .workspaceList-leave-active{
+    animation: fadeOutDown .3s;
+  }
+  .workspaceList-enter-active{
+    animation: fadeIn .3s;
+  }
+  .workspaceLevel-leave-active{
+    animation: fadeOut .3s;
   }
 </style>

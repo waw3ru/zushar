@@ -58,9 +58,9 @@ html, body, #app {
 
 /* top-level router transitions */
 .appLevel-enter-active{
-  animation: bounceInUp .6s;
+  animation: slideInUp .3s;
 }
 .appLevel-leave-active{
-  animation: fadeOutLeft .3s;
+  animation: slideOutLeft .3s;
 }
 </style>
