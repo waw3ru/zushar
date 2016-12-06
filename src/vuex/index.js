@@ -2,6 +2,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import uuid from 'uuid'
+import moment from 'moment'
 
 Vue.use(Vuex);
 
@@ -17,7 +18,8 @@ const store = new Vuex.Store({
           updated: null
         },
         creator: null,
-        status: null
+        status: null,
+        description: null
       },
       questions: []
     },
@@ -31,6 +33,9 @@ const store = new Vuex.Store({
     LOAD_FORMS(state, forms) {
       state.forms = [];
       Vue.set(state, 'forms', forms);
+    },
+    LOAD_FORM(state, form) {
+      Vue.set(state, 'form', form);
     },
     ADD_QUESTION(state, question) {
 	    Vue.set(state.form, 'questions', state.form.questions.concat(question))
@@ -49,6 +54,9 @@ const store = new Vuex.Store({
     },
     LOAD_QUESTIONS(state, questions) {
       Vue.set(state.form, 'questions', questions);
+    },
+    CLEAR_QUESTIONS(state) {
+      Vue.set(state.form, 'questions', []);
     }
   },
   actions: {
@@ -74,6 +82,30 @@ const store = new Vuex.Store({
     sort_questions({ state, commit }, payload) {
       commit(payload.TYPE, payload.ids);
 	    db.saveQuestions(state.form.questions);
+    },
+    create_form({ state, commit }, payload) {
+      let metadata = Object.assign({}, payload.metadata, {
+        timestamp: {
+          creation: moment().format('DD/MM/YYYY'),
+          updated: null
+        },
+        creator: 'zushar',
+        status: 'draft'
+      });
+      commit(payload.TYPE, metadata);
+      db.createForm(state.form);
+      commit('CLEAR_QUESTIONS');
+      db.clearAllQuestions();
+    },
+    load_forms({ commit }) {
+      db.clearAllQuestions();
+      commit('LOAD_FORMS', db.getForms())
+    },
+    load_form({ state, commit }, index) {
+	    db.clearAllQuestions();
+      commit('LOAD_FORM', state.forms[index]);
+      db.saveQuestions(state.forms[index].questions);
+      commit('LOAD_QUESTIONS', db.getQuestions());
     }
   }
 });

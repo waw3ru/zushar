@@ -71,7 +71,7 @@ export function removeForm(id) {
 }
 
 export function clearForms(id) {
-	Store.clear('forms');
+	Store.set('forms', []);
 	return true;
 }
 
@@ -87,7 +87,7 @@ export function getQuestions() {
 }
 
 export function clearAllQuestions() {
-	Store.clear('questions');
+	Store.set('questions', []);
 	return true;
 }
 

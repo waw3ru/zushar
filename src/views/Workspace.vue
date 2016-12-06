@@ -136,7 +136,6 @@ export default {
     background: #FFF;
     height: auto;
     border: 1px solid rgba(0,0,0,0.1);
-    border-top: 6px solid #757575;
     border-bottom: 6px solid #757575;
     padding-top: 20px;
     padding-bottom: 20px;

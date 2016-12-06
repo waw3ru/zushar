@@ -39,7 +39,7 @@ export default {
       this.$store.commit('LOAD_QUESTIONS', questions);
     }
     if (hasDbInstance().forms && forms.length > 0) {
-      this.$store.commit('LOAD_FORMS', forms);
+      this.$store.dispatch('load_forms', forms);
     }
   }
 }

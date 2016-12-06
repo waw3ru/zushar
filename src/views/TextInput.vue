@@ -195,6 +195,9 @@ export default {
 <style>
   #text-input-components{
     background: #FFF;
+    border: 1px solid rgba(0,0,0,0.1);
+    padding-top: 30px;
+    padding-bottom: 20px;
   }
 
   .componentEditor-enter-active{
