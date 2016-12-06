@@ -9,6 +9,7 @@ import Workspace from './views/Workspace.vue'
 import TextInput from './views/TextInput.vue'
 import Workscape from './views/Workspace.vue'
 import EditProperties from './views/EditProperties.vue'
+import SaveDraft from './views/SaveDraft.vue'
 
 export default new Router({
   mode: 'history',
@@ -19,6 +20,7 @@ export default new Router({
     { path: '/text-input', component: TextInput, name: 'textInputComponents' },
     { path: '/workspace', component: Workspace, name: 'Workspace' },
     { path: '/editor', component: EditProperties, name: 'editProperties' },
+    { path: '/save-draft', component: SaveDraft, name: 'saveDraft' },
     { path: '/', redirect: '/workspace' }
   ]
 })

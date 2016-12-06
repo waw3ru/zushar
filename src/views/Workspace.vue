@@ -3,7 +3,7 @@
 <div class="ui container" id="workspace">
   <div class="ui grid">
     <div class="centered eight wide column" id="workspace-draft">
-      <div class="ui segments question-templates" v-for="(question, $index) in questions" :key="question.id" :id="question.id">
+      <div class="ui segments question-templates" v-for="(question, $index) in questions" :key="question.id">
         <div class="ui basic segment">
           <h4 class="ui dividing header">Question #{{ $index+1 }}</h4>
           <template v-if="question.field == 'normal'">
@@ -25,7 +25,7 @@
             <date-input :properties="question" :picker_id="question.id"></date-input>
           </template>
           <template v-if="question.field == 'address'">
-            <address-input :properties="question" :picker_id="question.id"></address-input>
+            <address-input :properties="question"></address-input>
           </template>
           <template v-if="question.field == 'paragraph'">
             <paragraph-input :properties="question" ></paragraph-input>
@@ -136,8 +136,8 @@ export default {
     background: #FFF;
     height: auto;
     border: 1px solid rgba(0,0,0,0.1);
-    border-top: 3px solid #757575;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-top: 6px solid #757575;
+    border-bottom: 6px solid #757575;
     padding-top: 20px;
     padding-bottom: 20px;
   }

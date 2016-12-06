@@ -75,7 +75,7 @@ html, body, #app {
 
 /* top-level router transitions */
 .appLevel-enter-active{
-  animation: slideInUp .3s;
+  animation: slideInRight .2s;
 }
 .appLevel-leave-active{
   animation: slideOutLeft .3s;
