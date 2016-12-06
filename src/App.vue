@@ -16,6 +16,12 @@
 </template>
 
 <script>
+import {
+  hasDbInstance,
+  clearQuestions,
+  getQuestions,
+  getForms
+} from './vuex/database.js'
 import titleBar from './components/TitleBar.vue'
 import menuBar from './components/MenuBar.vue'
 
@@ -24,6 +30,16 @@ export default {
   components:{
     titleBar,
     menuBar
+  },
+  mounted() {
+    let forms = getForms();
+    let questions = getQuestions();
+    if (hasDbInstance().questions && questions.length > 0) {
+      this.$store.commit('LOAD_QUESTIONS', questions);
+    }
+    if (hasDbInstance().forms && forms.length > 0) {
+      this.$store.commit('LOAD_FORMS', forms);
+    }
   }
 }
 </script>

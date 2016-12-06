@@ -5,7 +5,7 @@ import uuid from 'uuid'
 
 Vue.use(Vuex);
 
-// import { Forms, Questions } from './database'
+import * as db from './database'
 
 const store = new Vuex.Store({
   state: {
@@ -21,11 +21,16 @@ const store = new Vuex.Store({
       },
       questions: []
     },
-    selectedQuestion: null
+    selectedQuestion: null,
+    forms: []
   },
   mutations: {
     CREATE_FORM(state, metadata) {
       Vue.set(state.form, 'metadata', metadata)
+    },
+    LOAD_FORMS(state, forms) {
+      state.forms = [];
+      Vue.set(state, 'forms', forms);
     },
     ADD_QUESTION(state, question) {
 	    Vue.set(state.form, 'questions', state.form.questions.concat(question))
@@ -41,32 +46,35 @@ const store = new Vuex.Store({
     },
     SORT_QUESTIONS(state, ids) {
       Vue.set(state.form, 'questions', ids.map( id => (state.form.questions[_.findIndex(state.form.questions, ['id', id])]) ))
+    },
+    LOAD_QUESTIONS(state, questions) {
+      state.forms.questions = []; // empty array to load new set of questions
+      Vue.set(state.form, 'questions', questions);
     }
   },
   actions: {
-    create_form({ state, commit }, payload) {
-      commit(payload.TYPE, payload.metadata);
-      // insert the form to database
-      // Forms.insert(state.form)
-    },
     add_question({ state, commit }, payload) {
       let question = Object.assign({}, payload.question);
       question.id = uuid.v4();
       question.addedBy = 'zushar';
-      commit(payload.TYPE, question);
-      // Questions.insert(state.questions)
+
+	    commit(payload.TYPE, question);
+      db.saveQuestions(state.form.questions);
     },
-    edit_question({ commit }, payload) {
+    edit_question({ state, commit }, payload) {
       commit(payload.TYPE, {
         index: payload.id,
         question: payload.question
       });
+	    db.saveQuestions(state.form.questions);
     },
-    remove_question({ commit }, payload) {
-      commit(payload.TYPE, payload.index)
+    remove_question({ state, commit }, payload) {
+      commit(payload.TYPE, payload.index);
+	    db.saveQuestions(state.form.questions);
     },
-    sort_questions({ commit }, payload) {
-      commit(payload.TYPE, payload.ids)
+    sort_questions({ state, commit }, payload) {
+      commit(payload.TYPE, payload.ids);
+	    db.saveQuestions(state.form.questions);
     }
   }
 });
