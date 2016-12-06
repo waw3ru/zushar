@@ -34,6 +34,9 @@ const store = new Vuex.Store({
     },
     REMOVE_QUESTION(state, index) {
       Vue.set(state.form, 'questions', state.form.questions.filter( (val, id) => (index !== id) ))
+    },
+    SORT_QUESTIONS(state, ids) {
+      Vue.set(state.form, 'questions', ids.map( id => (state.form.questions[_.findIndex(state.form.questions, ['id', id])]) ))
     }
   },
   actions: {
@@ -51,6 +54,9 @@ const store = new Vuex.Store({
     },
     remove_question({ commit }, payload) {
       commit(payload.TYPE, payload.index)
+    },
+    sort_questions({ commit }, payload) {
+      commit(payload.TYPE, payload.ids)
     }
   }
 });

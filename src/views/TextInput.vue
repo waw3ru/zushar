@@ -27,7 +27,7 @@
             {{ activeComponent.txt }} Text Input
           </h4>
           <div class="ui center aligned basic segment">
-            <button class="ui orange basic button" 
+            <button class="ui orange labeled icon button"
               @click.prevent="addComponent">
               <i class="plus icon"></i>
               Add question to workspace

@@ -56,7 +56,7 @@
     </div>
 
     <div class="centered ten wide column" v-if="(question===false)">
-      <h1 class="ui red center aligned icon header">
+      <h1 class="ui blue center aligned icon header">
         <i class="remove circle outline icon"></i>
         No 
         Question 
@@ -97,10 +97,11 @@ export default {
   },
   computed: {
     question() {
-      if (_.isNumber(this.$store.state.selectedQuestion)) {
+      if (_.isNumber(this.$store.state.selectedQuestion) && this.$store.state.form.questions.length > 0) {
         return this.$store.state.form.questions[this.$store.state.selectedQuestion]
       }
       else {
+        this.$store.commit('SELECT_QUESTION', null);
         return false;
       }
     }
@@ -122,7 +123,7 @@ export default {
 #workspace-editor{
   background: #FFF;
   border: 1px solid rgba(0,0,0,0.1);
-  border-top: 3px solid #01579B;
+  border-top: 3px solid #0277BD;
   padding-top: 10px;
   padding-bottom: 10px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);

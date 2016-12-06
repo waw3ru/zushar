@@ -29,7 +29,7 @@ module.exports = {
     ]
   },
   resolve: {
-    modules: ['node_modules', 'bower_components', 'web_modules']
+    modules: ['node_modules', 'bower_components', 'custom_components']
   },
   devServer: {
     historyApiFallback: true,
