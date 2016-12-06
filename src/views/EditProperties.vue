@@ -8,7 +8,7 @@
       </router-link>
     </div>
 
-    <div class="centered eight wide column" v-if="question">
+    <div class="centered eight wide column" v-if="(question!==false)">
       <div class="ui basic segment">
         <h3 class="ui header">
           Editing Question #{{ $store.state.selectedQuestion+1 }}
@@ -55,7 +55,7 @@
       </div>
     </div>
 
-    <div class="centered ten wide column" v-if="!question">
+    <div class="centered ten wide column" v-if="(question===false)">
       <h1 class="ui red center aligned icon header">
         <i class="remove circle outline icon"></i>
         No 
@@ -97,11 +97,11 @@ export default {
   },
   computed: {
     question() {
-      if (this.$store.state.selectedQuestion) {
+      if (_.isNumber(this.$store.state.selectedQuestion)) {
         return this.$store.state.form.questions[this.$store.state.selectedQuestion]
       }
       else {
-        return null;
+        return false;
       }
     }
   },
