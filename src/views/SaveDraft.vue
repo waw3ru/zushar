@@ -57,10 +57,13 @@ export default{
                 description: (_.isEmpty(this.current.description)) ? 'no description' : this.current.description
             }
 
-            this.$store.dispatch('create_form', {
-                TYPE: 'CREATE_FORM',
-                metadata
-            });
+            if (this.$store.state.form.questions.length > 1) {
+                this.$store.dispatch('create_form', {
+                    TYPE: 'CREATE_FORM',
+                    metadata
+                });
+            }
+
 
             this.$router.push({ name: 'Workspace' });
         }
@@ -72,7 +75,8 @@ export default{
     #save-draft{
         background: #FFF;
         border: 1px solid rgba(0,0,0,0.1);
-        padding-top: 30px;
-        padding-bottom: 20px;
+        border-top: 4px solid #0097A7;
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
 </style>

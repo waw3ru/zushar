@@ -25,7 +25,11 @@
         <router-link :to="{ name: 'helpSupport' }" class="item">
           <i class="help circle outline icon"></i> Help and Support
         </router-link>
-  
+
+        <a class="right floated item">
+          <i class="inbox icon"></i> Go to View Drafts
+        </a>
+
       </div>
 
     </div>

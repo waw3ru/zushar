@@ -136,9 +136,10 @@ export default {
     background: #FFF;
     height: auto;
     border: 1px solid rgba(0,0,0,0.1);
-    border-bottom: 6px solid #757575;
+    border-top: 4px solid #757575;
     padding-top: 20px;
     padding-bottom: 20px;
+    border-radius: 5px;
   }
   .workspaceLevel-enter-active{
     animation: fadeIn .3s;

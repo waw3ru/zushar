@@ -37,6 +37,9 @@ const store = new Vuex.Store({
     LOAD_FORM(state, form) {
       Vue.set(state, 'form', form);
     },
+    CLEAR_FORMS(state) {
+      state.forms = [];
+    },
     ADD_QUESTION(state, question) {
 	    Vue.set(state.form, 'questions', state.form.questions.concat(question))
     },

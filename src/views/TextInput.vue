@@ -196,6 +196,7 @@ export default {
   #text-input-components{
     background: #FFF;
     border: 1px solid rgba(0,0,0,0.1);
+    border-top: 3px solid #D84315;
     padding-top: 30px;
     padding-bottom: 20px;
   }
