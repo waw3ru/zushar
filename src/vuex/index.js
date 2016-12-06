@@ -5,10 +5,11 @@ import uuid from 'uuid'
 
 Vue.use(Vuex);
 
+// import { Forms, Questions } from './database'
+
 const store = new Vuex.Store({
   state: {
     form: {
-      id: null,
       metadata: {
         name: null,
         timestamp: {
@@ -23,6 +24,9 @@ const store = new Vuex.Store({
     selectedQuestion: null
   },
   mutations: {
+    CREATE_FORM(state, metadata) {
+      Vue.set(state.form, 'metadata', metadata)
+    },
     ADD_QUESTION(state, question) {
 	    Vue.set(state.form, 'questions', state.form.questions.concat(question))
     },
@@ -40,11 +44,17 @@ const store = new Vuex.Store({
     }
   },
   actions: {
-    add_question({ commit }, payload) {
+    create_form({ state, commit }, payload) {
+      commit(payload.TYPE, payload.metadata);
+      // insert the form to database
+      // Forms.insert(state.form)
+    },
+    add_question({ state, commit }, payload) {
       let question = Object.assign({}, payload.question);
       question.id = uuid.v4();
       question.addedBy = 'zushar';
       commit(payload.TYPE, question);
+      // Questions.insert(state.questions)
     },
     edit_question({ commit }, payload) {
       commit(payload.TYPE, {

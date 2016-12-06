@@ -17,8 +17,13 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /(node_modules|bower_components|web_modules)/
+        exclude: /(node_modules|bower_components|web_modules)/,
+	      query: { compact: true }
       },
+	    {
+		    test: /\.json$/,
+		    loader: 'json-loader'
+	    },
       {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
@@ -52,10 +57,10 @@ module.exports = {
       }
     })
   ]
-}
+};
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
+  module.exports.devtool = '#source-map';
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.optimize.UglifyJsPlugin({

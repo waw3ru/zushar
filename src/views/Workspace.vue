@@ -3,7 +3,7 @@
 <div class="ui container" id="workspace">
   <div class="ui grid">
     <div class="centered eight wide column" id="workspace-draft">
-      <div class="ui segments" v-for="(question, $index) in questions" :key="question.id" :id="question.id">
+      <div class="ui segments question-templates" v-for="(question, $index) in questions" :key="question.id" :id="question.id">
         <div class="ui basic segment">
           <h4 class="ui dividing header">Question #{{ $index+1 }}</h4>
           <template v-if="question.field == 'normal'">
@@ -67,8 +67,8 @@
 
 <script>
 // drag-drop-sort modules
-import 'jquery-ui/jquery-ui.js'
-import 'jquery-ui/jquery.ui.touch-punch.js'
+require('jquery-ui/jquery-ui.js')
+require('jquery-ui/jquery.ui.touch-punch.js')
 
 import { mapState } from 'vuex'
 import normalInput from '../components/text-input/NormalPreview.vue'
@@ -147,7 +147,7 @@ export default {
   .workspaceLevel-leave-active{
     animation: fadeOut .3s;
   }
-  #question-template{
+  .question-templates{
     background: #FFF;
   }
 </style>
