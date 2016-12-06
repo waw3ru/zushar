@@ -8,14 +8,17 @@ import HelpSupport from './views/HelpSupport.vue'
 import Workspace from './views/Workspace.vue'
 import TextInput from './views/TextInput.vue'
 import Workscape from './views/Workspace.vue'
+import EditProperties from './views/EditProperties.vue'
 
 export default new Router({
   mode: 'history',
   scrollBehavior: () => ({ y: 0 }),
+  linkActiveClass: 'active',
   routes: [
-    { path: '/', component: Workspace, name: 'workspace' },
     { path: '/help-n-support', component: HelpSupport, name: 'helpSupport' },
     { path: '/text-input', component: TextInput, name: 'textInputComponents' },
-    { path: '/workspace', component: Workspace, name: 'Workspace' }
+    { path: '/workspace', component: Workspace, name: 'Workspace' },
+    { path: '/editor', component: EditProperties, name: 'editProperties' },
+    { path: '/', redirect: '/workspace' }
   ]
 })

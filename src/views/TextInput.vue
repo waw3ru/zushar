@@ -33,7 +33,7 @@
               Add question to workspace
             </button>
           </div>
-          <div class="ui secondary segment">
+          <div class="ui basic segment">
               <h5 class="ui dividing header">Component Preview</h5>
               
                <template v-if="(activeComponent.txt === 'Normal')">
@@ -58,7 +58,8 @@
               </template>
               <template v-if="(activeComponent.txt === 'Date')">
                 <date-input 
-                  :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
+                  :properties="inputTemplates[activeComponent.txt.toLowerCase()]"
+                  :picker_id="picker_id">
                 </date-input>
               </template>
               <template v-if="(activeComponent.txt === 'Paragraph')">
@@ -78,7 +79,7 @@
             </template>
 
           </div>
-          <div class="ui segment">
+          <div class="ui secondary segment">
             <h5 class="ui grey dividing header">Component Properties Editor</h5>
 
             <template v-if="(activeComponent.txt === 'Normal')">
@@ -118,6 +119,7 @@
 
 <script>
 import { textInput } from '../vuex/questionTypes.js'
+import uuid from 'uuid'
 
 import normalInput from '../components/text-input/NormalPreview.vue'
 import normalPropertiesEditor from '../components/text-input/NormalPropertiesEditor.vue'
@@ -169,7 +171,8 @@ export default {
         { txt: 'Address', icon: 'building outline' }
       ],
       activeComponent: { txt: 'Normal', icon: 'text cursor' },
-      inputTemplates: Object.assign({}, textInput)
+      inputTemplates: Object.assign({}, textInput),
+      picker_id: uuid.v4()
     }
   },
   methods: {
@@ -178,11 +181,12 @@ export default {
       cb();
     },
     addComponent() {
+      let component = this.activeComponent.txt.toLowerCase();
       this.$store.dispatch('add_question', {
         TYPE: 'ADD_QUESTION',
-        question: this.inputTemplates[this.activeComponent.txt.toLowerCase()]
+        question: this.inputTemplates[component]
       })
-      this.inputTemplates[this.activeComponent.txt.toLowerCase()] = Object.assign({}, textInput[this.activeComponent.txt.toLowerCase()])
+      this.inputTemplates[component] = Object.assign({}, textInput[component]);
     }
   }
 }

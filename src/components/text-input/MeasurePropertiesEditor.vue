@@ -105,6 +105,10 @@ export default {
     save: {
       type: Function,
       required: true
+    },
+    properties: {
+      type: Object,
+      default: () => { return {} }
     }
   },
   data() {
@@ -121,6 +125,9 @@ export default {
     }
   },
   mounted() {
+    if (!_.isEmpty(this.properties)) {
+      this.current = Object.assign({}, this.properties)
+    }
     $('.ui.checkbox').checkbox();
   }
 }

@@ -20,11 +20,18 @@ const store = new Vuex.Store({
         status: null
       },
       questions: []
-    }
+    },
+    selectedQuestion: null
   },
   mutations: {
     ADD_QUESTION(state, question) {
-      state.form.questions = (state.form.questions || []).concat(question)
+      state.form.questions = state.form.questions.concat(question)
+    },
+    EDIT_QUESTION(state, payload) {
+      Vue.set(state.form.questions, payload.index, payload.question)
+    },
+    SELECT_QUESTION(state, index) {
+      state.selectedQuestion = index
     }
   },
   actions: {
@@ -33,6 +40,12 @@ const store = new Vuex.Store({
       question.id = uuid.v4();
       question.addedBy = 'zushar'
       commit(payload.TYPE, question);
+    },
+    edit_question({ commit }, payload) {
+      commit(payload.TYPE, {
+        index: payload.id,
+        question: payload.question
+      });
     }
   }
 })

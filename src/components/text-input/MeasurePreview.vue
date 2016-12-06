@@ -35,7 +35,7 @@ export default {
   props: {
     properties: {
       type: Object,
-      default: {}
+      default: () => { return {} }
     }
   }
 }

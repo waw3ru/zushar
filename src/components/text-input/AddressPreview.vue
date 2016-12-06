@@ -28,7 +28,7 @@
     <div class="fields">
       <div class="eight wide required field">
         <label>Enter your country</label>
-        <select class="ui dropdown" id="dropdown-menu">
+        <select class="ui dropdown" :id="picker_id">
           <option v-for="country in countries" :value="country.toLowerCase()">{{country}}</option>
         </select>
       </div>
@@ -51,13 +51,21 @@
 
 <script>
 import countries from '../../vuex/countries'
+import uuid from 'uuid'
+
+import 'semantic/dist/components/transition.js'
+import 'semantic/dist/components/dropdown.js'
 
 export default {
   name: 'addressInput',
   props: {
     properties: {
       type: Object,
-      default: {}
+      default: () => { return {} }
+    },
+    picker_id: {
+      type: String,
+      default: uuid.v1()
     }
   },
   data() {
@@ -66,11 +74,10 @@ export default {
     }
   },
   mounted() {
-    $('#dropdown-menu')
-      .dropdown({
-        on: 'click',
-        transition: 'horizontal flip'
-      });
+    $(`#${this.picker_id}`).dropdown({
+      on: 'click',
+      transition: 'horizontal flip'
+    })  
   }
 }
 </script>

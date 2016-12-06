@@ -8,9 +8,7 @@
 
     <div class="body">
       <transition name="appLevel" mode="out-in">
-        <keep-alive>
-          <router-view></router-view>
-        </keep-alive>
+        <router-view></router-view>
       </transition>
     </div>
 

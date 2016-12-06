@@ -6,7 +6,7 @@
       <label v-if="properties.label">{{properties.label}}</label>
 
       <div class="ui fluid input">
-        <input type="text" id="date-que-input" :placeholder="properties.placeholder">
+        <input type="text" :id="picker_id" :placeholder="properties.placeholder">
       </div>
 
       <p class="content" v-if="properties.instructions">
@@ -19,34 +19,54 @@
 </template>
 
 <script>
-import 'datepicker/dist/datepicker.js'
+import uuid from 'uuid'
 
 export default {
   name: 'dateInput',
   props: {
     properties: {
       type: Object,
-      default: {}
+      default: () => { return {} }
+    },
+    picker_id: {
+      type: String,
+      default: uuid.v1() 
     }
   },
   mounted() {
-    $('#date-que-input')
+    if (this.$parent.$el.id === 'text-input-components') {
+      $(`#${this.picker_id}`)
       .datepicker({
         autoHide: true,
-        format: "yyyy-mm-dd",
+        format: "dd/mm/yyyy",
         zIndex: 100
       })
+    }
+    else {
+      $(`#${this.picker_id}`)
+        .datepicker({
+          autoHide: true,
+          date: (this.properties.date.default) ? new Date(this.properties.date.default) : new Date(),
+          startDate: new Date(this.properties.params.max),
+          endDate: new Date(this.properties.params.min),
+          format: "dd/mm/yyyy",
+          startView: this.properties.date.startView
+        })
+    }
+
+    
   },
   updated() {
-    $("#date-que-input").datepicker({
-      autoHide: true,
-      date: new Date(this.properties.date.default),
-      startDate: new Date(this.properties.params.max),
-      endDate: new Date(this.properties.params.min),
-      format: "dd/mm/yyyy",
-      startView: this.properties.date.startView,
-      zIndex: 100
-    })
+    $(`#${this.picker_id}`)
+      .datepicker({
+        autoHide: true,
+        date: (this.properties.date.default) ? new Date(this.properties.date.default) : new Date(),
+        startDate: new Date(this.properties.params.max),
+        endDate: new Date(this.properties.params.min),
+        format: "dd/mm/yyyy",
+        startView: this.properties.date.startView,
+        zIndex: 100
+      })
   }
 }
 </script>
