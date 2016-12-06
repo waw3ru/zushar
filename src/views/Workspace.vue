@@ -29,7 +29,7 @@
             <address-input :properties="question" :picker_id="question.id"></address-input>
           </template>
           <template v-if="question.field == 'paragraph'">
-            <paragraph-input :properties="question" ><paragraph-input>
+            <paragraph-input :properties="question" ></paragraph-input>
           </template>
         </div>
         <div class="ui bottom attached three item menu">
@@ -41,7 +41,7 @@
             <i class="eye icon"></i>
             View Properties
           </a>
-          <a class="item">
+          <a class="item" @click="removeQuestion($index)">
             <i class="trash icon"></i>
             Remove Question
           </a>
@@ -49,7 +49,7 @@
       </div>
     </div>
     <div class="centered ten wide column" v-if="(questions.length < 1)">
-      <h1 class="ui yellow center aligned icon header">
+      <h1 class="ui grey center aligned icon header">
         <i class="remove circle outline icon"></i>
         No 
         Questions 
@@ -96,6 +96,12 @@ export default {
     editQuestion(index) {
       this.$store.commit('SELECT_QUESTION', index);
       this.$router.push({ name: 'editProperties' })
+    },
+    removeQuestion(index) {
+      this.$store.dispatch('remove_question', {
+        TYPE: 'REMOVE_QUESTION',
+        index
+      })
     }
   }
 }
@@ -105,7 +111,7 @@ export default {
   #workspace{
     background: #FFF;
     border: 1px solid rgba(0,0,0,0.1);
-    border-top: 3px solid #FF3D00;
+    border-top: 3px solid #0D47A1;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     padding-top: 20px;
     padding-bottom: 20px;
