@@ -19,13 +19,17 @@
         <router-link :to="{ name: 'Workspace' }" class="item">
           <i class="object group icon"></i> Workspace
         </router-link>
-        <a class="item">
+        <router-link :to="{ name: 'saveDraft' }" class="item">
           <i class="cloud upload icon"></i> Save as draft
-        </a>
+        </router-link>
         <router-link :to="{ name: 'helpSupport' }" class="item">
           <i class="help circle outline icon"></i> Help and Support
+        </router-link>
+
+        <a class="right floated item">
+          <i class="inbox icon"></i> Go to View Drafts
         </a>
-  
+
       </div>
 
     </div>

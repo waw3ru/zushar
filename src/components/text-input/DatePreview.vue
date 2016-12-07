@@ -23,6 +23,11 @@ import uuid from 'uuid'
 
 export default {
   name: 'dateInput',
+  data() {
+        return {
+            current: ''
+        }
+    },
   props: {
     properties: {
       type: Object,
@@ -50,7 +55,8 @@ export default {
           startDate: new Date(this.properties.params.max),
           endDate: new Date(this.properties.params.min),
           format: "dd/mm/yyyy",
-          startView: this.properties.date.startView
+          startView: this.properties.date.startView,
+          zIndex: 100
         })
     }
 

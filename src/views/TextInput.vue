@@ -27,7 +27,7 @@
             {{ activeComponent.txt }} Text Input
           </h4>
           <div class="ui center aligned basic segment">
-            <button class="ui orange basic button" 
+            <button class="ui orange labeled icon button"
               @click.prevent="addComponent">
               <i class="plus icon"></i>
               Add question to workspace
@@ -195,6 +195,10 @@ export default {
 <style>
   #text-input-components{
     background: #FFF;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-top: 3px solid #D84315;
+    padding-top: 30px;
+    padding-bottom: 20px;
   }
 
   .componentEditor-enter-active{

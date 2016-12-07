@@ -17,8 +17,13 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /(node_modules|bower_components|web_modules)/
+        exclude: /(node_modules|bower_components|web_modules)/,
+	      query: { compact: true }
       },
+	    {
+		    test: /\.json$/,
+		    loader: 'json-loader'
+	    },
       {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
@@ -29,7 +34,7 @@ module.exports = {
     ]
   },
   resolve: {
-    modules: ['node_modules', 'bower_components', 'web_modules']
+    modules: ['node_modules', 'bower_components', 'custom_components']
   },
   devServer: {
     historyApiFallback: true,
@@ -52,10 +57,10 @@ module.exports = {
       }
     })
   ]
-}
+};
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
+  module.exports.devtool = '#source-map';
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.optimize.UglifyJsPlugin({
@@ -67,8 +72,7 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.LoaderOptionsPlugin({
       minimize: true
     }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin()
+    new webpack.optimize.OccurrenceOrderPlugin()
   ]);
 }
 else {

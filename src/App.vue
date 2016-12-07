@@ -16,6 +16,12 @@
 </template>
 
 <script>
+import {
+  hasDbInstance,
+  clearQuestions,
+  getQuestions,
+  getForms
+} from './vuex/database.js'
 import titleBar from './components/TitleBar.vue'
 import menuBar from './components/MenuBar.vue'
 
@@ -24,6 +30,17 @@ export default {
   components:{
     titleBar,
     menuBar
+  },
+  mounted() {
+    let forms = getForms();
+    let questions = getQuestions();
+
+    if (hasDbInstance().questions && questions.length > 0) {
+      this.$store.commit('LOAD_QUESTIONS', questions);
+    }
+    if (hasDbInstance().forms && forms.length > 0) {
+      this.$store.dispatch('load_forms', forms);
+    }
   }
 }
 </script>
@@ -58,9 +75,9 @@ html, body, #app {
 
 /* top-level router transitions */
 .appLevel-enter-active{
-  animation: bounceInUp .6s;
+  animation: slideInRight .2s;
 }
 .appLevel-leave-active{
-  animation: fadeOutLeft .3s;
+  animation: slideOutLeft .3s;
 }
 </style>
