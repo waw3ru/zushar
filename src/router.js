@@ -21,7 +21,7 @@ export default new Router({
     { path: '/workspace', component: Workspace, name: 'Workspace' },
     { path: '/editor', component: EditProperties, name: 'editProperties' },
     { path: '/save-draft', component: SaveDraft, name: 'saveDraft' },
-    { path: '/drafts', component: ViewDrafts, name: 'viewDrafs' },
+    { path: '/drafts', component: ViewDrafts, name: 'viewDrafts' },
     { path: '/', redirect: '/workspace' }
   ]
 })
