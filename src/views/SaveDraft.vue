@@ -57,7 +57,7 @@ export default{
                 description: (_.isEmpty(this.current.description)) ? 'no description' : this.current.description
             }
 
-            if (this.$store.state.form.questions.length > 1) {
+            if (this.$store.state.form.questions.length >= 1) {
                 this.$store.dispatch('create_form', {
                     TYPE: 'CREATE_FORM',
                     metadata
