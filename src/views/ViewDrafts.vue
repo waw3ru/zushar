@@ -5,22 +5,28 @@
             <div class="centered sixteen wide column">
                 <h2 class="ui center aligned header"> List of your drafts </h2>
                 <div class="ui basic segment">
-                    <table class="ui celled table">
+                    <table class="ui small celled table">
                         <thead>
-                            <tr class="right aligned">
-                                <th># No.</th>
-                                <th>Name</th>
+                            <tr>
+                                <th>Form Name</th>
                                 <th>Creator</th>
                                 <th>Status</th>
                                 <th>Creation date</th>
+                                <th v-if="(forms.length > 0)"></th>
+                                <th v-if="(forms.length > 0)"></th>
                             </tr>
                         </thead>
-                        <tr v-for="(form, $index) in forms" :key="form.id" class="center aligned">
-                            <td>{{ $index + 1 }}</td>
+                        <tr v-for="(form, $index) in forms" :key="$index">
                             <td>{{ form.metadata.name }}</td>
                             <td>{{ form.metadata.creator }}</td>
                             <td>{{ form.metadata.status }}</td>
                             <td>{{ form.metadata.timestamp.creation }}</td>
+                            <td @click="updateForm($index)" class="warning center aligned">
+                                <i class="icon refresh"></i> Update Form
+                            </td>
+                            <td @click="removeForm(form.id)" class="error center aligned">
+                                <i class="icon trash"></i> Delete Form
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -41,18 +47,24 @@ export default {
         })
     },
     mounted() {
-        this.$store.commit('CLEAR_FORMS');
         this.$store.dispatch('load_forms', {
             TYPE: 'LOAD_FORMS',
             forms: getForms()
         });
     },
     methods: {
-        removeQuestion(id) {
-            this.$store.dispatch('remove_question', {
-                TYPE: 'REMOVE_QUESTION',
+        removeForm(id) {
+            this.$store.dispatch('remove_form', {
+                TYPE: 'REMOVE_FORM',
                 id
-            });
+            })
+        },
+        updateForm(index) {
+            this.$store.dispatch('load_form', {
+                TYPE: 'LOAD_FORM',
+                index
+            })
+            this.$router.push({ name: 'Workspace' })
         }
     }
 }

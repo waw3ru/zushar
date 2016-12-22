@@ -22,6 +22,7 @@ import {
   getQuestions,
   getForms
 } from './vuex/database.js'
+
 import titleBar from './components/TitleBar.vue'
 import menuBar from './components/MenuBar.vue'
 
@@ -39,7 +40,10 @@ export default {
       this.$store.commit('LOAD_QUESTIONS', questions);
     }
     if (hasDbInstance().forms && forms.length > 0) {
-      this.$store.dispatch('load_forms', forms);
+      this.$store.dispatch('load_forms', {
+        TYPE: 'LOAD_FORMS',
+        forms: forms
+      });
     }
   }
 }

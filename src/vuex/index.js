@@ -95,6 +95,13 @@ const store = new Vuex.Store({
 	    db.saveQuestions(state.form.questions);
     },
     create_form({ state, commit }, payload) {
+      /*
+      * @desc
+      *   add form metadata to Store
+      *   save the form to database db[`forms`]
+      *   clear workspace and remove questions from database db[`questions`]
+      *   load questions from database to form.questions on store
+      * */
       let metadata = Object.assign({}, payload.metadata, {
         timestamp: {
           creation: moment().format('DD/MM/YYYY'),
@@ -104,39 +111,65 @@ const store = new Vuex.Store({
         status: 'draft'
       });
       commit(payload.TYPE, { id: uuid.v4(), metadata });
-      db.createForm(state.form);
+      db.saveForm(state.form);
       commit('CLEAR_QUESTIONS');
       db.clearAllQuestions();
 	    commit('LOAD_QUESTIONS', db.getQuestions());
     },
-    load_forms({ commit }) {
-      // free up workspace from any other form
-      db.clearAllQuestions();
-	    commit('LOAD_QUESTIONS', db.getQuestions());
-	    // load the forms in storage
-      commit('LOAD_FORMS', db.getForms());
+    load_forms({ commit }, payload) {
+      /*
+      * @status
+      *   bug
+      * @code
+      *   db.clearAllQuestions();
+      *    commit('LOAD_QUESTIONS', db.getQuestions());
+      *
+      * @desc
+      *   was suppose to clear the workspace and clear all questions on db[`questions`]
+      *   load all questions from db[`questions`] on to the form.questions on store
+      *
+      * */
+      commit('CLEAR_FORMS');
+      commit(payload.TYPE, payload.forms);
     },
-    load_form({ state, commit }, index) {
-	    // free up workspace from any other form
+    load_form({ state, commit }, payload) {
+	    /*
+      * @desc
+      *   clear the workspace and clear all questions on db[`questions`]
+      *   save new questions to db[`questions`]
+      *   load all questions from db[`questions`] on to the form.questions on store
+      * */
+
 	    db.clearAllQuestions();
-      commit('LOAD_FORM', state.forms[index]);
-      db.saveQuestions(state.forms[index].questions);
+      commit(payload.TYPE, state.forms[payload.index]);
+      db.saveQuestions(state.forms[payload.index].questions);
       commit('LOAD_QUESTIONS', db.getQuestions());
     },
-    remove_question({ commit }, id) {
-	    db.removeForm(id);
-	    commit('REMOVE_FORM', id);
-	    // clear the (workspace) to avoid having deleted form on the (workspace)
+    remove_form({ commit }, payload) {
+      /*
+      * @desc
+      *   remove form from db[`forms`]
+      *   clear the workspace and clear all questions on db[`questions`]
+      *   load all questions from db[`questions`] on to the form.questions on store
+      * */
+	    db.removeForm(payload.id);
+	    commit(payload.TYPE, payload.id);
 	    db.clearAllQuestions();
 	    commit('LOAD_QUESTIONS', db.getQuestions());
     },
     update_form({ commit }, payload){
+      /*
+      * @desc
+      *   Update the form on database db[`forms`]
+      *   update form on store (store.forms<Array>)
+      *   clear the workspace and clear all questions on db[`questions`]
+      *   load all questions from db[`questions`] on to the form.questions on store
+      * */
       db.updateForm(payload.form.id, payload.form);
       commit(payload.TYPE, {
         index: payload.index,
         form: payload.form
       });
-	    // clear the (workspace) to avoid having deleted form on the (workspace)
       db.clearAllQuestions();
 	    commit('LOAD_QUESTIONS', db.getQuestions());
     }

@@ -3,7 +3,12 @@
 <div class="ui container" id="workspace">
   <div class="ui grid">
     <div class="centered eight wide column" id="workspace-draft">
-      <div class="ui segments question-templates" v-for="(question, $index) in questions" :key="question.id">
+      <div 
+        class="ui segments question-templates" 
+        v-for="(question, $index) in questions" 
+        :key="question.id" 
+        :id="question.id">
+
         <div class="ui basic segment">
           <h4 class="ui dividing header">Question #{{ $index+1 }}</h4>
           <template v-if="question.field == 'normal'">
@@ -45,6 +50,7 @@
             Move Question
           </a>
         </div>
+
       </div>
 
     </div>
@@ -117,16 +123,17 @@ export default {
   },
   mounted() {
     let $sortElem = $('#workspace-draft')
+    let vm = this;
     $sortElem.sortable({
       appendTo: '#workspace',
       /** containment: '#workspace', **/ /* caused weird happenings on sorting */
       cursor: 'move',
       handle: `.move-question`
     })
-    $sortElem.disableSelection();
+    $sortElem.disableSelection()
     $sortElem.on( "sortupdate", function( event, ui ) {
-      this.sortQuestions(event, ui, $sortElem.sortable("toArray"));
-    }.bind(this));
+      vm.sortQuestions(event, ui, $sortElem.sortable("toArray"));
+    })
   }
 }
 </script>

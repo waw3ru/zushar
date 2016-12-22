@@ -6,10 +6,12 @@
         <div class="column">
           <img class="ui fluid small image logo" src="./../assets/logos/zushar_1.png">
         </div>
-        <div class="right floated three wide column">
-          <button class="ui orange basic button leave-zushar">
-            <i class="sign out icon"></i>
-            leave zushar
+        <div class="right floated five wide column">
+          <router-link :to="{ name: 'helpSupport' }" tag="button" class="ui tiny primary basic button btn">
+            <i class="help circle outline icon"></i> Help and Support
+          </router-link>
+          <button class="ui tiny basic button btn">
+            <i class="sign out icon"></i> Exit
           </button>
         </div>
       </div>
@@ -34,7 +36,8 @@
   #title-bar .logo{
     margin-top: 5px;
   }
-  #title-bar .leave-zushar{
+  #title-bar .btn{
     margin-top: 7px;
+    margin-left: 10px;
   }
 </style>

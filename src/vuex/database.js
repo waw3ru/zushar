@@ -12,7 +12,7 @@ import Store from 'store'
 * @return
 *   Array/Objects (list of forms)
 * */
-export function createForm(form) {
+export function saveForm(form) {
 	let Forms = Store.get('forms');
 	Forms = Forms.concat(form);
 	Store.set('forms', Forms);
@@ -75,8 +75,11 @@ export function clearForms(id) {
 	return true;
 }
 
-// this is a temporary storage for the questions in the workspace to avoid loosing unsaved work
-
+/*
+* @collection: `questions`
+* @desc
+*	this is a temporary storage for the questions in the workspace to avoid loosing unsaved work
+* */ 
 export function saveQuestions(questions) {
 	Store.set('questions', questions);
 	return questions;

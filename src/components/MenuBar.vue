@@ -7,7 +7,7 @@
         <router-link :to="{ name: 'viewDrafts' }" class="item">
           <i class="inbox icon"></i> View your Drafts
         </router-link>
-        <router-link :to="{ name: 'Workspace', query: { mode: 'create' } }" class="item">
+        <router-link :to="{ name: 'Workspace' }" class="item">
           <i class="object group icon"></i> Workspace
         </router-link>
         <div class="ui dropdown item dropdown-menu">
@@ -22,10 +22,7 @@
           </div>
         </div>
         <router-link :to="{ name: 'saveDraft' }" class="item">
-          <i class="cloud upload icon"></i> Save as draft
-        </router-link>
-        <router-link :to="{ name: 'helpSupport' }" class="item">
-          <i class="help circle outline icon"></i> Help and Support
+          <i class="cloud save icon"></i> Save Form
         </router-link>
 
       </div>
