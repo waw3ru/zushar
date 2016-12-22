@@ -60,11 +60,7 @@ export default {
             })
         },
         updateForm(index) {
-            this.$store.dispatch('load_form', {
-                TYPE: 'LOAD_FORM',
-                index
-            })
-            this.$router.push({ name: 'Workspace' })
+            alert(`Not yet functioning`);
         }
     }
 }

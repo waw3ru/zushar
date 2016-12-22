@@ -3,12 +3,19 @@
     <div class="ui grid">
         <div class="centered eight wide column">
             <div class="ui basic segment">
-                <h3 class="ui dividing header">Save as Draft</h3>
+
+                <h3 class="ui dividing header">
+                    Save Form
+                </h3>
+
                 <form class="ui form" novalidate @submit.prevent="saveForm">
                     <div class="field">
                         <label>Enter the name of the form:</label>
                         <div class="ui fluid input">
-                            <input type="text" placeholder="enter the name of the form" v-model="current.name">
+                            <input 
+                                type="text" 
+                                placeholder="enter the name of the form" 
+                                v-model="current.name">
                         </div>
                     </div>
 
@@ -20,7 +27,10 @@
                     </div>
 
 
-                    <button class="ui basic button" type="submit">
+                    <button 
+                        class="ui basic button" 
+                        type="submit">
+
                         <i class="save icon"></i>
                         Save Form
                     </button>
@@ -34,13 +44,15 @@
 
 <script>
 
+import { mapState } from 'vuex'
+
 export default{
     name: 'saveDraft',
     data() {
         return {
             current: {
-                name: '',
-                description: ''
+                name: null,
+                description: null
             }
         }
     },
@@ -55,17 +67,19 @@ export default{
                 creator: null,
                 status: null,
                 description: (_.isEmpty(this.current.description)) ? 'no description' : this.current.description
-            }
+            };
 
-            if (this.$store.state.form.questions.length >= 1) {
-                this.$store.dispatch('create_form', {
-                    TYPE: 'CREATE_FORM',
-                    metadata
-                });
-            }
-
-
-            this.$router.push({ name: 'Workspace' });
+            this.$store.dispatch('create_form', {
+                TYPE: 'CREATE_FORM',
+                metadata
+            });
+            this.$router.push({ name: 'viewDrafts' });
+        },
+        updateForm() {
+            this.$store.dispatch('update_form', {
+                TYPE: 'UPDATE_FORM'
+            });
+            this.$router.push({ name: 'viewDrafts' });
         }
     }
 }

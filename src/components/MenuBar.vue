@@ -21,8 +21,10 @@
             <a class="item"><i class="star half icon"></i> Scale and Rating</a>
           </div>
         </div>
-        <router-link :to="{ name: 'saveDraft' }" class="item">
-          <i class="cloud save icon"></i> Save Form
+        <router-link 
+          :to="{ name: 'saveDraft' }" 
+          class="item">
+          <i class="cloud upload icon"></i> Save Form
         </router-link>
 
       </div>
@@ -36,6 +38,8 @@
 import 'semantic/dist/components/transition.js'
 import 'semantic/dist/components/dropdown.js'
 
+import { mapState } from 'vuex'
+
 export default {
   name: 'menuBar',
   mounted() {
@@ -44,6 +48,12 @@ export default {
         on: 'click',
         transition: 'vertical flip'
       });
+  },
+  computed: {
+    ...mapState({
+      component: state => state.route.name,
+      query: state => state.route.query
+    })
   }
 }
 

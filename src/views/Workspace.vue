@@ -1,6 +1,7 @@
 
 <template>
 <div class="ui container" id="workspace">
+
   <div class="ui grid">
     <div class="centered eight wide column" id="workspace-draft">
       <div 

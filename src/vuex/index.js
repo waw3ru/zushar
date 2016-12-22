@@ -40,7 +40,7 @@ const store = new Vuex.Store({
       Vue.set(state, 'form', form);
     },
     UPDATE_FORM(state, payload) {
-      Vue.set(state.form, payload.index, payload.form);
+      Vue.set(state.forms, payload.index, payload.form);
     },
     REMOVE_FORM(state, id) {
       Vue.set(state, 'forms', state.forms.filter(form => (form.id !== id)))
@@ -104,7 +104,7 @@ const store = new Vuex.Store({
       * */
       let metadata = Object.assign({}, payload.metadata, {
         timestamp: {
-          creation: moment().format('DD/MM/YYYY'),
+          creation: moment().format('YYYY/MM/DD'),
           updated: null
         },
         creator: 'zushar',
@@ -157,7 +157,7 @@ const store = new Vuex.Store({
 	    db.clearAllQuestions();
 	    commit('LOAD_QUESTIONS', db.getQuestions());
     },
-    update_form({ commit }, payload){
+    update_form({ state, commit }, payload){
       /*
       * @desc
       *   Update the form on database db[`forms`]
@@ -165,10 +165,14 @@ const store = new Vuex.Store({
       *   clear the workspace and clear all questions on db[`questions`]
       *   load all questions from db[`questions`] on to the form.questions on store
       * */
-      db.updateForm(payload.form.id, payload.form);
+
+      let form = Object.assign({}, state.form, {
+        'metadata.timestamp.updated': moment().format('YYYY/MM/DD')
+      });
+      db.updateForm(form.id, form);
       commit(payload.TYPE, {
-        index: payload.index,
-        form: payload.form
+        index: _.findIndex(state.forms, ['id', form.id]),
+        form: form
       });
       db.clearAllQuestions();
 	    commit('LOAD_QUESTIONS', db.getQuestions());
