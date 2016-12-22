@@ -18,4 +18,6 @@ npm run build
 ```
 
 ## License
-MIT
+[MIT](http://opensource.org/licenses/MIT)
+
+Copyright (c) 2016-2017 John Waweru 
