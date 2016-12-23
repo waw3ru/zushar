@@ -107,10 +107,16 @@ export const hasDbInstance = () => {
 
 
 (function () {
+	'use strict';
+	
+	/*
+	* Create Database instance on Web Storage
+	* */
 	if (!hasDbInstance().questions) {
 		Store.set('questions', []);
 	}
 	if (!hasDbInstance().forms) {
 		Store.set('forms', []);
 	}
+
 })();

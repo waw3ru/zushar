@@ -17,6 +17,10 @@ npm run dev
 npm run build
 ```
 
+## Changelog
+
+Details changes for each release are documented in the [release notes](https://github.com/trendy-weshy/zushar/releases).
+
 ## License
 [MIT](http://opensource.org/licenses/MIT)
 
