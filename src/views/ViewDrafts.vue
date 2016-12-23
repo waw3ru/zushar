@@ -77,17 +77,9 @@ export default {
     padding-bottom: 20px;
     border-radius: 5px;
 }
-
 .options{
     cursor: pointer;
-}
-.options:first{
-    background: rgba(3,169,244,.1);
+    background: rgba(3,169,244,.07);
     color: rgba(1,87,155,1);
 }
 </style>
-
-<!--
-    load a list of all forms
-    have functions: load form to workspace, remove form
--->
