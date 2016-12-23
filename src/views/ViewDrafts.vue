@@ -21,13 +21,13 @@
                             <td>{{ form.metadata.status }}</td>
                             <td>{{ form.metadata.timestamp.creation }}</td>
                             <!-- options buttons -->
-                            <td class="center aligned options info">
+                            <td class="center aligned tbl-options info">
                                 <i class="eye icon"></i> Preview Form
                             </td>
-                            <td @click="updateForm($index)" class="warning center aligned options">
+                            <td @click="updateForm($index)" class="warning center aligned tbl-options">
                                 <i class="refresh icon"></i> Update Form
                             </td>
-                            <td @click="removeForm(form.id)" class="error center aligned options">
+                            <td @click="removeForm(form.id)" class="error center aligned tbl-options">
                                 <i class="trash icon"></i> Delete Form
                             </td>
 
@@ -77,7 +77,7 @@ export default {
     padding-bottom: 20px;
     border-radius: 5px;
 }
-.options{
+.tbl-options{
     cursor: pointer;
     background: rgba(3,169,244,.07);
     color: rgba(1,87,155,1);
