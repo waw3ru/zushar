@@ -12,8 +12,7 @@
                                 <th>Creator</th>
                                 <th>Status</th>
                                 <th>Creation date</th>
-                                <th v-if="(forms.length > 0)"></th>
-                                <th v-if="(forms.length > 0)"></th>
+                                <th v-for="options in 3" v-if="(forms.length > 0)"></th>
                             </tr>
                         </thead>
                         <tr v-for="(form, $index) in forms" :key="$index">
@@ -21,12 +20,17 @@
                             <td>{{ form.metadata.creator }}</td>
                             <td>{{ form.metadata.status }}</td>
                             <td>{{ form.metadata.timestamp.creation }}</td>
-                            <td @click="updateForm($index)" class="warning center aligned">
-                                <i class="icon refresh"></i> Update Form
+                            <!-- options buttons -->
+                            <td class="center aligned options info">
+                                <i class="eye icon"></i> Preview Form
                             </td>
-                            <td @click="removeForm(form.id)" class="error center aligned">
-                                <i class="icon trash"></i> Delete Form
+                            <td @click="updateForm($index)" class="warning center aligned options">
+                                <i class="refresh icon"></i> Update Form
                             </td>
+                            <td @click="removeForm(form.id)" class="error center aligned options">
+                                <i class="trash icon"></i> Delete Form
+                            </td>
+
                         </tr>
                     </table>
                 </div>
@@ -72,6 +76,14 @@ export default {
     padding-top: 20px;
     padding-bottom: 20px;
     border-radius: 5px;
+}
+
+.options{
+    cursor: pointer;
+}
+.options:first{
+    background: rgba(3,169,244,.1);
+    color: rgba(1,87,155,1);
 }
 </style>
 
