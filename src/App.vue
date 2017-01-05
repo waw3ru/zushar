@@ -12,6 +12,8 @@
       </transition>
     </div>
 
+    <zsr-alert></zsr-alert>
+
   </div>
 </template>
 
@@ -25,12 +27,14 @@ import {
 
 import titleBar from './components/TitleBar.vue'
 import menuBar from './components/MenuBar.vue'
+import zsrAlert from './components/Alerts.vue'
 
 export default {
   name: 'app',
   components:{
     titleBar,
-    menuBar
+    menuBar,
+    zsrAlert
   },
   mounted() {
     let forms = getForms();
@@ -46,6 +50,23 @@ export default {
         forms
       });
     }
+
+    // testing the alert component
+    let vm = this;
+    setTimeout(() => {
+      vm.$store.dispatch('alert', {
+        TYPE: 'CREATE_ALERT',
+        alert: {
+          content: {
+            message: 'sample alert for testing the countdown for the zsrAlert component',
+            heading: 'Sample Alert for Zushar',
+            icon: 'inbox'
+          },
+          level: 'normal'
+        },
+        timeout: 2000
+      })
+    }, 5000);
   }
 }
 </script>

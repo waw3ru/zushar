@@ -5,6 +5,7 @@ import uuid from 'uuid'
 import moment from 'moment'
 import * as db from './database'
 import workspace from './workspace'
+import zsrAlert from './zsrAlert'
 
 Vue.use(Vuex);
 
@@ -13,7 +14,8 @@ const store = new Vuex.Store({
     forms: []
   },
   modules: {
-    workspace
+    workspace,
+    zsrAlert
   },
   mutations: {
     LOAD_FORMS(state, forms) {
