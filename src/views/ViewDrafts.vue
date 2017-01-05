@@ -77,6 +77,7 @@ export default {
 
         },
         updateForm(index) {
+            // feature under development
             this.$store.dispatch('alert', {
                 TYPE: 'CREATE_ALERT',
                 alert: {
@@ -91,6 +92,7 @@ export default {
             })
         },
         previewForm() {
+            // feature under development
             this.$store.dispatch('alert', {
                 TYPE: 'CREATE_ALERT',
                 alert: {
