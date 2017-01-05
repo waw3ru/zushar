@@ -45,11 +45,9 @@ import { getForms } from '../vuex/database'
 
 export default {
     name: 'ViewDrafts',
-    computed: {
-        ...mapState({
-            forms: state => state.forms
-        })
-    },
+    computed: mapState({
+        forms: state => state.forms
+    }),
     mounted() {
         this.$store.dispatch('load_forms', {
             TYPE: 'LOAD_FORMS',
@@ -62,9 +60,49 @@ export default {
                 TYPE: 'REMOVE_FORM',
                 id
             })
+
+            // alert on removing the form
+            this.$store.dispatch('alert', {
+                TYPE: 'CREATE_ALERT',
+                alert: {
+                    content: {
+                        heading: 'Form removal successfully',
+                        message: `Removed form from the local database, this action is not reversible`,
+                        icon: 'warning sign'
+                    },
+                    level: 'warning'
+                },
+                timeout: 4000
+            })
+
         },
         updateForm(index) {
-            alert(`Not yet functioning`);
+            this.$store.dispatch('alert', {
+                TYPE: 'CREATE_ALERT',
+                alert: {
+                    content: {
+                        heading: 'Feature not supported',
+                        message: `This feature is still under development and will be released soon`,
+                        icon: 'idea'
+                    },
+                    level: 'error'
+                },
+                timeout: 4000
+            })
+        },
+        previewForm() {
+            this.$store.dispatch('alert', {
+                TYPE: 'CREATE_ALERT',
+                alert: {
+                    content: {
+                        heading: 'Feature not supported',
+                        message: `This feature is still under development and will be released soon`,
+                        icon: 'idea'
+                    },
+                    level: 'error'
+                },
+                timeout: 4000
+            })
         }
     }
 }
