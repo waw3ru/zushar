@@ -21,7 +21,7 @@
                             <td>{{ form.metadata.status }}</td>
                             <td>{{ form.metadata.timestamp.creation }}</td>
                             <!-- options buttons -->
-                            <td class="center aligned tbl-options info">
+                            <td @click="previewForm($index)" class="center aligned tbl-options info">
                                 <i class="eye icon"></i> Preview Form
                             </td>
                             <td @click="updateForm($index)" class="warning center aligned tbl-options">
