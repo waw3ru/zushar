@@ -97,8 +97,8 @@ export default {
   },
   computed: {
     question() {
-      if (_.isNumber(this.$store.state.selectedQuestion) && this.$store.state.form.questions.length > 0) {
-        return this.$store.state.form.questions[this.$store.state.selectedQuestion]
+      if (_.isNumber(this.$store.state.workspace.selectedQuestion) && this.$store.state.workspace.form.questions.length > 0) {
+        return this.$store.state.workspace.form.questions[this.$store.state.workspace.selectedQuestion]
       }
       else {
         this.$store.commit('SELECT_QUESTION', null);
@@ -110,7 +110,7 @@ export default {
     saveProps(data, cb=function() {}) { 
       this.$store.dispatch('edit_question', {
         TYPE: 'EDIT_QUESTION',
-        id: this.$store.state.selectedQuestion,
+        id: this.$store.state.workspace.selectedQuestion,
         question: data.props
       })
       this.$router.push({ name: 'Workspace' })

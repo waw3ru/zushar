@@ -80,17 +80,17 @@ export function clearForms(id) {
 * @desc
 *	this is a temporary storage for the questions in the workspace to avoid loosing unsaved work
 * */ 
-export function saveQuestions(questions) {
-	Store.set('questions', questions);
-	return questions;
+export function saveWorkspace(form) {
+	Store.set('workspace', form);
+	return form;
 }
 
-export function getQuestions() {
-	return Store.get('questions');
+export function retrieveWorkspace() {
+	return Store.get('workspace');
 }
 
-export function clearAllQuestions() {
-	Store.set('questions', []);
+export function clearWorkspace() {
+	Store.set('workspace', {});
 	return true;
 }
 
@@ -100,7 +100,7 @@ export function clearAllQuestions() {
 * */
 export const hasDbInstance = () => {
 	return {
-		questions: !_.isNil(Store.get('questions')),
+		workspace: !_.isNil(Store.get('workspace')),
 		forms: !_.isNil(Store.get('forms'))
 	}
 };
@@ -112,8 +112,8 @@ export const hasDbInstance = () => {
 	/*
 	* Create Database instance on Web Storage
 	* */
-	if (!hasDbInstance().questions) {
-		Store.set('questions', []);
+	if (!hasDbInstance().workspace) {
+		Store.set('workspace', {});
 	}
 	if (!hasDbInstance().forms) {
 		Store.set('forms', []);

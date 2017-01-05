@@ -17,7 +17,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /(node_modules|bower_components|web_modules)/,
+        exclude: /(node_modules|bower_components|custom_components)/,
 	      query: { compact: true }
       },
 	    {
@@ -33,12 +33,15 @@ module.exports = {
       }
     ]
   },
+  performance: {
+    hints: false
+  },
   resolve: {
     modules: ['node_modules', 'bower_components', 'custom_components']
   },
   devServer: {
     historyApiFallback: true,
-    noInfo: true
+    noInfo: false
   },
   devtool: '#eval-source-map',
   plugins: [

@@ -56,6 +56,19 @@ export default{
             }
         }
     },
+    computed: {
+        workspaceStatus: {
+            get() {
+                return this.$store.state.workspace.status
+            },
+            set(status) {
+                if (status==='update') {
+                    this.name = this.$store.workspace.form.metadata.name;
+                    this.description = this.$store.workspace.form.metadata.deescription;
+                }
+            }
+        }
+    },
     methods: {
         saveForm() {
             let metadata = {
@@ -72,12 +85,6 @@ export default{
             this.$store.dispatch('create_form', {
                 TYPE: 'CREATE_FORM',
                 metadata
-            });
-            this.$router.push({ name: 'viewDrafts' });
-        },
-        updateForm() {
-            this.$store.dispatch('update_form', {
-                TYPE: 'UPDATE_FORM'
             });
             this.$router.push({ name: 'viewDrafts' });
         }

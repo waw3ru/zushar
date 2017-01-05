@@ -131,7 +131,7 @@ import phoneInput from '../components/text-input/PhonePreview.vue'
 import phonePropertiesEditor from '../components/text-input/PhonePropertiesEditor.vue'
 import dateInput from '../components/text-input/DatePreview.vue'
 import datePropertiesEditor from '../components/text-input/DatePropertiesEditor.vue'
-import paragraphInput from '../components/text-input/ParagraphPreview.vue'
+import paragraphInput from '../components/text-input/ParagraphPreview.vue';
 import paragraphPropertiesEditor from '../components/text-input/ParagraphPropertiesEditor.vue'
 import measureInput from '../components/text-input/MeasurePreview.vue'
 import measurePropertiesEditor from '../components/text-input/MeasurePropertiesEditor.vue'

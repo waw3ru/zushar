@@ -28,7 +28,7 @@
             <measure-input :properties="question"></measure-input>
           </template>
           <template v-if="question.field == 'date'">
-            <date-input :properties="question" :picker_id="question.id"></date-input>
+            <date-input :properties="question" :picker_id="'date_'+$index"></date-input>
           </template>
           <template v-if="question.field == 'address'">
             <address-input :properties="question"></address-input>
@@ -99,11 +99,9 @@ export default {
     measureInput,
     addressInput
   },
-  computed: {
-    ...mapState({
-      questions: state => state.form.questions
-    })
-  },
+  computed: mapState({
+    questions: state => state.workspace.form.questions
+  }),
   methods: {
     editQuestion(index) {
       this.$store.commit('SELECT_QUESTION', index);

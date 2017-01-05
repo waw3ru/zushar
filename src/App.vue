@@ -18,8 +18,8 @@
 <script>
 import {
   hasDbInstance,
-  clearQuestions,
-  getQuestions,
+  clearWorkspace,
+  retrieveWorkspace,
   getForms
 } from './vuex/database.js'
 
@@ -34,15 +34,16 @@ export default {
   },
   mounted() {
     let forms = getForms();
-    let questions = getQuestions();
+    let workspace = retrieveWorkspace();
 
-    if (hasDbInstance().questions && questions.length > 0) {
-      this.$store.commit('LOAD_QUESTIONS', questions);
+    if (hasDbInstance().workspace && !_.isEmpty(workspace)) {
+      this.$store.commit('LOAD_FORM', workspace);
+      this.$store.commit(`CHANGE_WORKSPACE_STATE`, 'create');
     }
     if (hasDbInstance().forms && forms.length > 0) {
       this.$store.dispatch('load_forms', {
         TYPE: 'LOAD_FORMS',
-        forms: forms
+        forms
       });
     }
   }

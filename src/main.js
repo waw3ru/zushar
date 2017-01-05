@@ -9,10 +9,9 @@ import { sync } from 'vuex-router-sync'
 
 sync(store, router);
 
-const app = new Vue({
+new Vue({
+  el: '#zushar',
+  render: h => h(App),
 	store,
-  router,
-  ...App
-});
-
-app.$mount('#app');
+  router
+})

@@ -39,28 +39,12 @@ export default {
     }
   },
   mounted() {
-    if (this.$parent.$el.id === 'text-input-components') {
-      $(`#${this.picker_id}`)
+    $(`#${this.picker_id}`)
       .datepicker({
         autoHide: true,
         format: "dd/mm/yyyy",
         zIndex: 100
       })
-    }
-    else {
-      $(`#${this.picker_id}`)
-        .datepicker({
-          autoHide: true,
-          date: (this.properties.date.default) ? new Date(this.properties.date.default) : new Date(),
-          startDate: new Date(this.properties.params.max),
-          endDate: new Date(this.properties.params.min),
-          format: "dd/mm/yyyy",
-          startView: this.properties.date.startView,
-          zIndex: 100
-        })
-    }
-
-    
   },
   updated() {
     $(`#${this.picker_id}`)

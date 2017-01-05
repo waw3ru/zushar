@@ -4,28 +4,38 @@
     <div class="ui attached menu">
 
       <div class="ui container">
-        <router-link :to="{ name: 'viewDrafts' }" class="item">
-          <i class="inbox icon"></i> View your Drafts
-        </router-link>
-        <router-link :to="{ name: 'Workspace' }" class="item">
-          <i class="object group icon"></i> Workspace
-        </router-link>
-        <div class="ui dropdown item dropdown-menu">
-          <i class="folder open icon"></i> Create a Question
-          <i class="dropdown icon"></i>
-          <div class="menu">
-            <router-link :to="{ name: 'textInputComponents' }" class="item">
-              <i class="text width icon"></i> Text Input
-            </router-link>
-            <a class="item"><i class="options icon"></i> Selection</a>
-            <a class="item"><i class="star half icon"></i> Scale and Rating</a>
+
+        <!-- view-drafts routes -->
+          <router-link :to="{ name: 'Workspace' }" class="item" v-show="$route.name==='viewDrafts'">
+            <i class="inbox icon"></i> Go To Workspace
+          </router-link>
+        <!-- end of routes -->
+
+        <!-- workspace -->
+          <router-link :to="{ name: 'Workspace' }" class="item" v-show="$route.name!=='viewDrafts'">
+            <i class="object group icon"></i> Working Area
+          </router-link>
+          <div class="ui dropdown item dropdown-menu" v-show="$route.name!=='viewDrafts'">
+            <i class="folder open icon"></i> Create a Question
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <router-link :to="{ name: 'textInputComponents' }" class="item">
+                <i class="text width icon"></i> Text Input
+              </router-link>
+              <a class="item"><i class="options icon"></i> Selection</a>
+              <!--<a class="item"><i class="star half icon"></i> Scale and Rating</a>-->
+            </div>
           </div>
-        </div>
-        <router-link 
-          :to="{ name: 'saveDraft' }" 
-          class="item">
-          <i class="cloud upload icon"></i> Save Form
-        </router-link>
+          <router-link 
+            :to="{ name: 'saveDraft' }" 
+            v-show="$route.name!=='viewDrafts'"
+            class="item">
+            <i class="cloud upload icon"></i> Save Form
+          </router-link>
+          <router-link :to="{ name: 'viewDrafts' }" class="item" v-show="$route.name!=='viewDrafts'">
+            <i class="sign out icon"></i> Leave Workspace
+          </router-link>
+        <!-- end of routes -->
 
       </div>
 
@@ -48,12 +58,6 @@ export default {
         on: 'click',
         transition: 'vertical flip'
       });
-  },
-  computed: {
-    ...mapState({
-      component: state => state.route.name,
-      query: state => state.route.query
-    })
   }
 }
 
