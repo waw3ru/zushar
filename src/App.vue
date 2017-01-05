@@ -50,23 +50,21 @@ export default {
         forms
       });
     }
-
-    // testing the alert component
-    let vm = this;
-    setTimeout(() => {
-      vm.$store.dispatch('alert', {
-        TYPE: 'CREATE_ALERT',
-        alert: {
-          content: {
-            message: 'sample alert for testing the countdown for the zsrAlert component',
-            heading: 'Sample Alert for Zushar',
-            icon: 'inbox'
-          },
-          level: 'normal'
+    
+    // a welcoming message
+    this.$store.dispatch('alert', {
+      TYPE: 'CREATE_ALERT',
+      alert: {
+        content: {
+          heading: 'Welcome to zushar',
+          message: 'This is a simple tool built for create forms and simple questionnaires',
+          icon: 'smile'
         },
-        timeout: 2000
-      })
-    }, 5000);
+        level: 'info'
+      },
+      timeout: 3500
+    })
+
   }
 }
 </script>

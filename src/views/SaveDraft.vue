@@ -86,6 +86,20 @@ export default{
                 TYPE: 'CREATE_FORM',
                 metadata
             });
+
+            this.$store.dispatch('alert', {
+                TYPE: 'CREATE_ALERT',
+                alert: {
+                    content: {
+                        message: `Successfully saved the form to you local database.`,
+                        icon: `thumbs up`,
+                        heading: `Saved form`
+                    },
+                    level: 'success'
+                },
+                timeout: 3500
+            })
+
             this.$router.push({ name: 'viewDrafts' });
         }
     }

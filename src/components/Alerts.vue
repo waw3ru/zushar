@@ -1,17 +1,27 @@
 <!-- created by waweru -->
 
 <template>
-    <div class="zsr-alert-container" v-if="isActive">
-        <div :class="['ui', (alert.icon) ? 'icon' : '','message']">
-            <i :class="[alert.icon, 'icon']" v-if="alert.icon"></i>
-            <div class="content">
-                <div class="header" v-if="alert.heading">
-                    {{ alert.heading }}
+    <transition name="zsrAlert">
+    
+        <div class="zsr-alert-container" v-if="isActive">
+            <div 
+                :class="[
+                    'ui', 
+                    (alert.icon) ? 'icon' : '',
+                    (level==='normal') ? 'black' : level,
+                    'message'
+            ]">
+                <i :class="[alert.icon, 'icon']" v-if="alert.icon"></i>
+                <div class="content">
+                    <div class="header" v-if="alert.heading">
+                        {{ alert.heading }}
+                    </div>
+                    <p>{{ alert.message }}</p>
                 </div>
-                <p>{{ alert.message }}</p>
             </div>
         </div>
-    </div>
+
+    </transition>
 </template>
 
 <script>
@@ -43,5 +53,13 @@
     padding-left: 20px;
     padding-right: 0;
     z-index: 30;
+}
+
+/* transition for zsr-alert */
+.zsrAlert-enter-active{
+  animation: slideInUp .4s;
+}
+.zsrAlert-leave-active{
+  animation: slideOutLeft .3s;
 }
 </style>
