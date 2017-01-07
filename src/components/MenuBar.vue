@@ -22,8 +22,9 @@
               <router-link :to="{ name: 'textInputComponents' }" class="item">
                 <i class="text width icon"></i> Text Input
               </router-link>
-              <a class="item"><i class="options icon"></i> Selection</a>
-              <!--<a class="item"><i class="star half icon"></i> Scale and Rating</a>-->
+              <router-link :to="{ name: 'Selection' }" class="item">
+                <i class="options icon"></i> Selection
+              </router-link>
             </div>
           </div>
           <router-link 

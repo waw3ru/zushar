@@ -116,11 +116,38 @@ export const textInput = {
 }
 
 export const selection = {
-  dropdown: {},
-  multiChoice: {},
-  multiSelect: {}
-}
-
-export const scale = {
-  singleScale: {}
+  dropdown: {
+    id: null,
+    label: null,
+    fieldType: 'selection',
+    field: 'dropdown',
+    instructions: null,
+    isMandatory: false,
+    addedBy: null,
+    choices: []
+  },
+  multiChoice: {
+    id: null,
+    label: null,
+    fieldType: 'selection',
+    field: 'multi-choice',
+    instructions: null,
+    isMandatory: false,
+    addedBy: null,
+    choices: []
+  },
+  multiSelect: {
+    id: null,
+    label: null,
+    fieldType: 'selection',
+    field: 'multi-select',
+    instructions: null,
+    isMandatory: false,
+    addedBy: null,
+    choices: [],
+    params: {
+      max: null,
+      min: null
+    }
+  }
 }
