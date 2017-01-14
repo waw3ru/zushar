@@ -1,4 +1,15 @@
 
+/*
+* sample choices for all question types requiring choices
+* */
+
+let choices = [
+  { display: 'Sample Choice 1', value: 1 },
+  { display: 'Sample Choice 2', value: 2 },
+  { display: 'Sample Choice 3', value: 3 }
+]
+// end of sample choices
+
 export const textInput = {
   normal: {
     id: null,
@@ -124,9 +135,9 @@ export const selection = {
     instructions: null,
     isMandatory: false,
     addedBy: null,
-    choices: []
+    choices
   },
-  multiChoice: {
+  multichoice: {
     id: null,
     label: null,
     fieldType: 'selection',
@@ -134,9 +145,10 @@ export const selection = {
     instructions: null,
     isMandatory: false,
     addedBy: null,
-    choices: []
+    choices,
+    displayFormat: 'vertical' /* horizontal or vertical */
   },
-  multiSelect: {
+  multiselect: {
     id: null,
     label: null,
     fieldType: 'selection',
@@ -144,10 +156,7 @@ export const selection = {
     instructions: null,
     isMandatory: false,
     addedBy: null,
-    choices: [],
-    params: {
-      max: null,
-      min: null
-    }
+    choices,
+    displayFormat: 'vertical' /* horizontal or vertical */
   }
 }

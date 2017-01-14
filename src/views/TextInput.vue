@@ -36,7 +36,7 @@
           <div class="ui basic segment">
               <h5 class="ui dividing header">Component Preview</h5>
               
-               <template v-if="(activeComponent.txt === 'Normal')">
+              <template v-if="(activeComponent.txt === 'Normal')">
                 <normal-input 
                   :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
                 </normal-input>

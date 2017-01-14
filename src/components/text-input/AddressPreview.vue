@@ -61,7 +61,8 @@ export default {
   props: {
     properties: {
       type: Object,
-      default: () => { return {} }
+      default: () => { return {} },
+      required: true
     },
     picker_id: {
       type: String,
