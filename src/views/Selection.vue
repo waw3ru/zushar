@@ -28,7 +28,7 @@
                     </h4>
                     
                     <div class="ui center aligned basic segment">
-                        <button class="ui orange labeled icon button"
+                        <button class="ui brown labeled icon button"
                         @click.prevent="addComponent">
                         <i class="plus icon"></i>
                         Add question to workspace
@@ -113,6 +113,26 @@
                 cb();
             },
             addComponent() {
+
+                let component = this.activeComponent.txt.toLowerCase();
+                this.$store.dispatch('add_question', {
+                    TYPE: 'ADD_QUESTION',
+                    question: this.inputTemplates[component]
+                })
+                this.inputTemplates[component] = Object.assign({}, selection[component]);
+
+                this.$store.dispatch('alert', {
+                    TYPE: 'CREATE_ALERT',
+                    alert: {
+                    content: {
+                        message: `Successfully added the question of type: ${this.activeComponent.txt} to the workspace`,
+                        icon: `${this.activeComponent.icon}`,
+                        heading: `Question added successfully`
+                    },
+                    level: 'success'
+                    },
+                    timeout: 3500
+                })
 
             }
         }

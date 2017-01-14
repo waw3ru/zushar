@@ -50,7 +50,20 @@
             </measure-properties-editor> 
           </template>
           <template v-if="(question.field === 'address')">
-            <address-properties-editor :save="saveProps" :properties="question"></address-properties-editor> 
+              <address-properties-editor :save="saveProps" :properties="question">
+              </address-properties-editor> 
+          </template>
+          <template v-if="(question.field === 'dropdown')">
+              <dropdown-editor :save="saveProps" :properties="question">
+              </dropdown-editor> 
+          </template>
+          <template v-if="(question.field === 'multi-choice')">
+              <multichoice-editor :save="saveProps" :properties="question">
+              </multichoice-editor> 
+          </template>
+          <template v-if="(question.field === 'multi-select')">
+              <multiselect-editor :save="saveProps" :properties="question">
+              </multiselect-editor> 
           </template>
       </div>
     </div>
@@ -83,6 +96,10 @@ import paragraphPropertiesEditor from '../components/text-input/ParagraphPropert
 import measurePropertiesEditor from '../components/text-input/MeasurePropertiesEditor.vue'
 import addressPropertiesEditor from '../components/text-input/AddressPropertiesEditor.vue'
 
+import dropdownEditor from '../components/selection/DropdownPropertiesEditor.vue'
+import multiselectEditor from '../components/selection/MultiselectPropertiesEditor.vue'
+import multichoiceEditor from '../components/selection/MultichoicePropertiesEditor.vue'
+
 export default {
   name: 'editProperties',
   components: {
@@ -93,7 +110,10 @@ export default {
     datePropertiesEditor,
     paragraphPropertiesEditor,
     measurePropertiesEditor,
-    addressPropertiesEditor
+    addressPropertiesEditor,
+    dropdownEditor,
+    multiselectEditor,
+    multichoiceEditor
   },
   computed: {
     question() {

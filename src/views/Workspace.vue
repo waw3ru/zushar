@@ -3,7 +3,7 @@
 <div class="ui container" id="workspace">
 
   <div class="ui grid">
-    <div class="centered eight wide column" id="workspace-draft">
+    <div class="centered ten wide column" id="workspace-draft">
       <div 
         class="ui segments question-templates" 
         v-for="(question, $index) in questions" 
@@ -35,6 +35,15 @@
           </template>
           <template v-if="question.field == 'paragraph'">
             <paragraph-input :properties="question" ></paragraph-input>
+          </template>
+          <template v-if="question.field == 'dropdown'">
+            <dropdown :properties="question" ></dropdown>
+          </template>
+          <template v-if="question.field == 'multi-select'">
+            <multi-select :properties="question" ></multi-select>
+          </template>
+          <template v-if="question.field == 'multi-choice'">
+            <multi-choice :properties="question" ></multi-choice>
           </template>
         </div>
         <div class="ui bottom attached three item menu">
@@ -86,6 +95,9 @@ import dateInput from '../components/text-input/DatePreview.vue'
 import paragraphInput from '../components/text-input/ParagraphPreview.vue'
 import measureInput from '../components/text-input/MeasurePreview.vue'
 import addressInput from '../components/text-input/AddressPreview.vue'
+import dropdown from '../components/selection/DropdownPreview.vue'
+import multiSelect from '../components/selection/MultiselectPreview.vue'
+import multiChoice from '../components/selection/MultichoicePreview.vue'
 
 export default {
   name: 'Workspace',
@@ -97,7 +109,10 @@ export default {
     dateInput,
     paragraphInput,
     measureInput,
-    addressInput
+    addressInput,
+    dropdown,
+    multiSelect,
+    multiChoice
   },
   computed: mapState({
     questions: state => state.workspace.form.questions
