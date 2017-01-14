@@ -20,6 +20,7 @@
                             <td>{{ form.metadata.creator }}</td>
                             <td>{{ form.metadata.status }}</td>
                             <td>{{ form.metadata.timestamp.creation }}</td>
+                            <td v-if="form.metadata.timestamp.updated">{{ form.metadata.timestamp.updated }}</td>
                             <!-- options buttons -->
                             <td @click="manipulateForm($index, 'preview')" class="center aligned tbl-options info">
                                 <i class="eye icon"></i> Preview Form

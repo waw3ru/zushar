@@ -103,10 +103,10 @@ export default{
         updateForm() {
             let metadata = Object.assign({}, this.$store.state.workspace.form.metadata, {
                 name: this.current.name,
-                description: this.current.description,
-                'timestamp.updated': moment().format('YYYY/MM/DD')
+                description: this.current.description
             })
-
+            metadata.timestamp.updated = moment().format('YYYY/MM/DD')
+            
             this.$store.dispatch('update_form', {
                 TYPE: 'UPDATE_FORM',
                 metadata
