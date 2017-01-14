@@ -21,10 +21,10 @@
                             <td>{{ form.metadata.status }}</td>
                             <td>{{ form.metadata.timestamp.creation }}</td>
                             <!-- options buttons -->
-                            <td @click="previewForm($index)" class="center aligned tbl-options info">
+                            <td @click="manipulateForm($index, 'preview')" class="center aligned tbl-options info">
                                 <i class="eye icon"></i> Preview Form
                             </td>
-                            <td @click="updateForm($index)" class="warning center aligned tbl-options">
+                            <td @click="manipulateForm($index, 'update')" class="warning center aligned tbl-options">
                                 <i class="refresh icon"></i> Update Form
                             </td>
                             <td @click="removeForm(form.id)" class="error center aligned tbl-options">
@@ -53,6 +53,12 @@ export default {
             TYPE: 'LOAD_FORMS',
             forms: getForms()
         });
+        
+        // make sure that workspace is always hydrated ($store)
+        if (this.$store.state.workspace.status === 'preview') {
+            this.$store.commit('CLEAR_WORKSPACE')
+            this.$store.commit('CHANGE_WORKSPACE_STATE', 'create')
+        }  
     },
     methods: {
         removeForm(id) {
@@ -76,35 +82,14 @@ export default {
             })
 
         },
-        updateForm(index) {
-            // feature under development
-            this.$store.dispatch('alert', {
-                TYPE: 'CREATE_ALERT',
-                alert: {
-                    content: {
-                        heading: 'Feature not supported',
-                        message: `This feature is still under development and will be released soon`,
-                        icon: 'idea'
-                    },
-                    level: 'error'
-                },
-                timeout: 4000
+        manipulateForm(index, status) {
+            this.$store.dispatch('load_form', {
+                TYPE: 'LOAD_FORM',
+                index,
+                status
             })
-        },
-        previewForm() {
-            // feature under development
-            this.$store.dispatch('alert', {
-                TYPE: 'CREATE_ALERT',
-                alert: {
-                    content: {
-                        heading: 'Feature not supported',
-                        message: `This feature is still under development and will be released soon`,
-                        icon: 'idea'
-                    },
-                    level: 'error'
-                },
-                timeout: 4000
-            })
+
+            this.$router.push({ name: 'Workspace' })
         }
     }
 }

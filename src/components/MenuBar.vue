@@ -12,10 +12,15 @@
         <!-- end of routes -->
 
         <!-- workspace -->
-          <router-link :to="{ name: 'Workspace' }" class="item" v-show="$route.name!=='viewDrafts'">
+          <router-link 
+            :to="{ name: 'Workspace' }" 
+            class="item" 
+            v-show="($route.name!=='viewDrafts')">
             <i class="object group icon"></i> Working Area
           </router-link>
-          <div class="ui dropdown item dropdown-menu" v-show="$route.name!=='viewDrafts'">
+          <div 
+            class="ui dropdown item dropdown-menu" 
+            v-show="($route.name!=='viewDrafts') && ($store.state.workspace.status!=='preview')">
             <i class="folder open icon"></i> Create a Question
             <i class="dropdown icon"></i>
             <div class="menu">
@@ -29,11 +34,15 @@
           </div>
           <router-link 
             :to="{ name: 'saveDraft' }" 
-            v-show="$route.name!=='viewDrafts'"
+            v-show="($route.name!=='viewDrafts') && ($store.state.workspace.status!=='preview')"
             class="item">
-            <i class="cloud upload icon"></i> Save Form
+              <i class="cloud upload icon"></i> 
+              {{ ($store.state.workspace.status === 'create') ? 'Save': 'Update' }} Form
           </router-link>
-          <router-link :to="{ name: 'viewDrafts' }" class="item" v-show="$route.name!=='viewDrafts'">
+          <router-link 
+            :to="{ name: 'viewDrafts' }" 
+            class="item" 
+            v-show="($route.name!=='viewDrafts')">
             <i class="sign out icon"></i> Leave Workspace
           </router-link>
         <!-- end of routes -->

@@ -47,13 +47,15 @@ export function getForm(id) {
  *   Array/Objects (list of forms with the updated form)
  * */
 export function updateForm(id, Form) {
-	let Forms =  Store.get('forms');
+	let Forms = Store.get('forms');
 	Forms = Forms.map(form => {
 		if (form.id === id) {
 			return Form;
 		}
 		return form;
 	});
+	// add the form changes to local database
+	Store.set('forms', Forms);
 	return Forms;
 }
 

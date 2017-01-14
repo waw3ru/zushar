@@ -5,10 +5,10 @@
             <div class="ui basic segment">
 
                 <h3 class="ui dividing header">
-                    Save Form
+                    {{ ($store.state.workspace.status === 'create') ? 'Save': 'Update' }} Form
                 </h3>
 
-                <form class="ui form" novalidate @submit.prevent="saveForm">
+                <form class="ui form" novalidate @submit.prevent="submitForm">
                     <div class="field">
                         <label>Enter the name of the form:</label>
                         <div class="ui fluid input">
@@ -29,10 +29,10 @@
 
                     <button 
                         class="ui basic button" 
-                        type="submit">
+                        type="submit" :class="[($store.state.workspace.status==='update') ? 'blue' : 'green']">
 
                         <i class="save icon"></i>
-                        Save Form
+                        {{ ($store.state.workspace.status === 'create') ? 'Save': 'Update' }} Form
                     </button>
 
                 </form>
@@ -45,6 +45,7 @@
 <script>
 
 import { mapState } from 'vuex'
+import moment from 'moment'
 
 export default{
     name: 'saveDraft',
@@ -56,20 +57,17 @@ export default{
             }
         }
     },
-    computed: {
-        workspaceStatus: {
-            get() {
-                return this.$store.state.workspace.status
-            },
-            set(status) {
-                if (status==='update') {
-                    this.name = this.$store.workspace.form.metadata.name;
-                    this.description = this.$store.workspace.form.metadata.deescription;
-                }
-            }
+    mounted() {
+        if (this.$store.state.workspace.status==='update') {
+            this.current.name = this.$store.state.workspace.form.metadata.name;
+            this.current.description = this.$store.state.workspace.form.metadata.description;
         }
     },
     methods: {
+        submitForm() {
+            if (this.$store.state.workspace.status==='create') this.saveForm()
+            if (this.$store.state.workspace.status==='update') this.updateForm()
+        },
         saveForm() {
             let metadata = {
                 name: (_.isEmpty(this.current.name)) ? 'Untitled Form' : this.current.name,
@@ -101,6 +99,21 @@ export default{
             })
 
             this.$router.push({ name: 'viewDrafts' });
+        },
+        updateForm() {
+            let metadata = Object.assign({}, this.$store.state.workspace.form.metadata, {
+                name: this.current.name,
+                description: this.current.description,
+                'timestamp.updated': moment().format('YYYY/MM/DD')
+            })
+
+            this.$store.dispatch('update_form', {
+                TYPE: 'UPDATE_FORM',
+                metadata
+            });
+
+            this.$router.push({ name: 'viewDrafts' });
+
         }
     }
 }

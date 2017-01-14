@@ -46,8 +46,11 @@ const store = new Vuex.Store({
       *   load all questions from db[`questions`] on to the form.questions on store
       *
       * */
-      commit('CLEAR_FORMS');
-      commit(payload.TYPE, payload.forms);
+      db.clearWorkspace()
+	    commit('CLEAR_WORKSPACE')
+      commit('CHANGE_WORKSPACE_STATE', 'create')
+      commit('CLEAR_FORMS')
+      commit(payload.TYPE, payload.forms)
     },
     remove_form({ commit }, payload) {
       /*
@@ -69,13 +72,13 @@ const store = new Vuex.Store({
       *   load all questions from db[`questions`] on to the form.questions on store
       * */
 
-      let form = Object.assign({}, state.form, {
-        'metadata.timestamp.updated': moment().format('YYYY/MM/DD')
+      let form = Object.assign({}, state.workspace.form, {
+        'metadata': payload.metadata
       });
       db.updateForm(form.id, form);
       commit(payload.TYPE, {
         index: _.findIndex(state.forms, ['id', form.id]),
-        form: form
+        form
       });
 	    db.clearWorkspace();
 	    commit('CLEAR_WORKSPACE');

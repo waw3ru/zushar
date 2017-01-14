@@ -46,7 +46,8 @@
             <multi-choice :properties="question" ></multi-choice>
           </template>
         </div>
-        <div class="ui bottom attached three item menu">
+        <div class="ui bottom attached three item menu" 
+          v-show="($store.state.workspace.status!=='preview')">
           <a class="item" id="edit-props" @click="editQuestion($index)">
             <i class="edit icon"></i>
             Edit Properties
@@ -135,7 +136,7 @@ export default {
       })
     }
   },
-  mounted() {
+  mounted() {  
     let $sortElem = $('#workspace-draft')
     let vm = this;
     $sortElem.sortable({

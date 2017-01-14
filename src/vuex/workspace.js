@@ -21,7 +21,7 @@ export default {
             questions: []
         },
         selectedQuestion: null,
-        status: null
+        status: 'create'
     },
     mutations: {
         CHANGE_WORKSPACE_STATE(state, status) {
@@ -55,8 +55,8 @@ export default {
                 metadata: {
                     name: null,
                     timestamp: {
-                    creation: null,
-                    updated: null
+                        creation: null,
+                        updated: null
                     },
                     creator: null,
                     status: null,
@@ -119,10 +119,10 @@ export default {
             *   change the state of the workspace to update 
             * */
 
-            db.clearAllQuestions();
+            db.clearWorkspace();
             commit(payload.TYPE, rootState.forms[payload.index]);
             db.saveWorkspace(rootState.forms[payload.index]);
-            commit('CHANGE_WORKSPACE_STATE', 'update');
+            commit('CHANGE_WORKSPACE_STATE', payload.status);
         }
     }
 }
