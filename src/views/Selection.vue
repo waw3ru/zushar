@@ -43,14 +43,27 @@
                             </dropdown>
                         </template>
                         <template v-if="(activeComponent.txt === 'Multiselect')">
-                            <multiselect
+                            <multi-select
                             :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
-                            </multiselect>
+                            </multi-select>
                         </template>
                         <template v-if="(activeComponent.txt === 'Multichoice')">
-                            <multichoice
+                            <multi-choice
                             :properties="inputTemplates[activeComponent.txt.toLowerCase()]">
-                            </multichoice>
+                            </multi-choice>
+                        </template>
+                    </div>
+
+                    <div class="ui secondary segment">
+                        <h5 class="ui grey dividing header">Component Properties Editor</h5>
+                        <template v-if="(activeComponent.txt === 'Dropdown')">
+                            <dropdown-editor :save="saveProps"></dropdown-editor> 
+                        </template>
+                        <template v-if="(activeComponent.txt === 'Multichoice')">
+                            <multichoice-editor :save="saveProps"></multichoice-editor> 
+                        </template>
+                        <template v-if="(activeComponent.txt === 'Multiselect')">
+                            <multiselect-editor :save="saveProps"></multiselect-editor> 
                         </template>
                     </div>
 
@@ -62,18 +75,26 @@
 </template>
 
 <script>
+    import Vue from 'vue'
     import { selection } from '../vuex/questionTypes.js'
     
     import dropdown from '../components/selection/DropdownPreview.vue'
-    import multiselect from '../components/selection/MultiselectPreview.vue'
-    import multichoice from '../components/selection/MultichoicePreview.vue'
+    import multiSelect from '../components/selection/MultiselectPreview.vue'
+    import multiChoice from '../components/selection/MultichoicePreview.vue'
+    import dropdownEditor from '../components/selection/DropdownPropertiesEditor.vue'
+    import multiselectEditor from '../components/selection/MultiselectPropertiesEditor.vue'
+    import multichoiceEditor from '../components/selection/MultichoicePropertiesEditor.vue'
+    
 
     export default {
         name: 'Selection',
         components: {
             dropdown,
-            multiselect,
-            multichoice
+            multiSelect,
+            multiChoice,
+            dropdownEditor,
+            multiselectEditor,
+            multichoiceEditor
         },
         data() {
             return {
@@ -84,6 +105,15 @@
                 ],
                 activeComponent: { txt: 'Dropdown', icon: 'text cursor' },
                 inputTemplates: Object.assign({}, selection)
+            }
+        },
+        methods: {
+            saveProps(data, cb = function () {}) {
+                this.inputTemplates[data.type] = Object.assign({}, data.props);
+                cb();
+            },
+            addComponent() {
+
             }
         }
     }

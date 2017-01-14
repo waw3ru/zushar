@@ -9,16 +9,20 @@
                 'vertical': (properties.displayFormat==='horizontal') 
             }">
 
-            <label for="choices" v-if="properties.label">{{properties.label}}</label>
+            <label class="que-label" v-if="properties.label">{{properties.label}}</label>
 
-            <div class="field" v-for="choice in properties.choices" :key="$index">
+            <div class="field" v-for="(choice, $index) in properties.choices" :key="$index">
                 <div class="ui checkbox">
-                    <input type="checkbox" name="choices" :value="choice.value">
+                    <input type="checkbox" name="multiselect" :value="choice.value">
                     <label>{{ choice.display }}</label>
                 </div>
             </div>
 
         </div>
+
+        <p class="content" v-if="properties.instructions">
+          {{ properties.instructions }}
+        </p>
     </form> 
 </template>
 
@@ -27,7 +31,7 @@
     import 'semantic/dist/components/dropdown.js'
     
     export default {
-        name: 'multiselect',
+        name: 'multiSelect',
         props: {
             properties: {
             type: Object,
@@ -41,5 +45,7 @@
 </script>
 
 <style>
-
+.que-label{
+    font-weight: bold;
+}
 </style>

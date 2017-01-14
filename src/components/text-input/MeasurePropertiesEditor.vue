@@ -105,10 +105,6 @@ export default {
     save: {
       type: Function,
       required: true
-    },
-    properties: {
-      type: Object,
-      default: () => { return {} }
     }
   },
   data() {
