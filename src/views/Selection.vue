@@ -121,6 +121,15 @@
                 })
                 this.inputTemplates[component] = Object.assign({}, selection[component]);
 
+                this.$store.dispatch('create_alert', {
+                    TYPE: 'CREATE_ALERT',
+                    heading: 'Question Added',
+                    message: `Question Type ${component.field} was added to your workspace`,
+                    icon: 'thumbs up',
+                    timeout: 3000,
+                    level: 'info'
+                });
+
             }
         }
     }

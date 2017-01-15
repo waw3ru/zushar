@@ -68,6 +68,16 @@ export default {
                 TYPE: 'REMOVE_FORM',
                 id
             })
+
+            this.$store.dispatch('create_alert', {
+                TYPE: 'CREATE_ALERT',
+                heading: 'Form Deletion',
+                message: `Form was successfully deleted from your local database`,
+                icon: 'remove',
+                timeout: 2000,
+                level: 'warning'
+            });
+
         },
         manipulateForm(index, status) {
             this.$store.dispatch('load_form', {

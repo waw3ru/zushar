@@ -12,9 +12,7 @@
       </transition>
     </div>
 
-    <!--
-      add zsr-alert component
-    -->
+    <zsr-alert :alerts="$store.state.zsrAlert.alerts"></zsr-alert>
 
   </div>
 </template>
@@ -51,7 +49,6 @@ export default {
         forms
       });
     }
-  
   }
 }
 </script>

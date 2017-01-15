@@ -28,7 +28,7 @@ export default {
             * @desc:
             *   where payload is an Object following the alert template
             * */
-            Vue.set(state, 'alerts', payload)
+            Vue.set(state, 'alerts', state.alerts.concat(payload))
         },
         CLEAR_ALERT(state, payload) {
             Vue.set(state, 'alerts', state.alerts.filter(alert=>(alert.id!==payload)))
@@ -37,32 +37,22 @@ export default {
     actions: {
         create_alert({ commit }, payload) {
 
-            if (_.isEmpty(payload.message) || _.isEmpty(payload.level) || _.isEmpty(payload.timeout)) 
-            {
-                let alert = Object.assign({}, alertTemplate, {
-                    id: uuid.v4(),
-                    message: `Alert passed misses some content inorder to display please check the api`,
-                    icon: (payload.icon || ''),
-                    heading: (payload.heading || ''),
-                    level: `error`,
-                    timeout: 4500
-                })
-            }
-            else {
-                let alert = Object.assign({}, alertTemplate, {
-                    id: uuid.v4(),
-                    message: payload.message,
-                    icon: (payload.icon || ''),
-                    heading: (payload.heading || ''),
-                    level: payload.level,
-                    timeout: payload.timeout
-                })
-            }
-            
+            let alert = Object.assign({}, alertTemplate, {
+                id: uuid.v4(),
+                message: payload.message,
+                icon: (payload.icon || ''),
+                heading: (payload.heading || ''),
+                level: payload.level,
+                timeout: payload.timeout
+            })
+
             commit(payload.TYPE, alert);
         },
         clear_alert({ commit }, payload) {
             commit(payload.TYPE, payload.id);
         }
+    },
+    getters: {
+        firstAlert: (state) => state.alerts[0]
     }
 }

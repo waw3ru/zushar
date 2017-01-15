@@ -1,54 +1,36 @@
 <!-- created by waweru -->
 
 <template>
-    <transition name="zsrAlert">
-    
-        <div class="zsr-alert-container">
-            <div 
-                :class="[
-                    'ui', 
-                    (alert.icon) ? 'icon' : '',
-                    (alert.level==='normal') ? 'black' : level,
-                    'message'
-            ]">
-                <i :class="[alert.icon, 'icon']" v-if="alert.icon"></i>
-                <div class="content">
-                    <div class="header" v-if="alert.heading">
-                        {{ alert.heading }}
-                    </div>
-                    <p>{{ alert.message }}</p>
-                </div>
-            </div>
-        </div>
 
-    </transition>
+    
+    <div class="zsr-alert-container">
+        <alert v-for="alert in alerts" :key="alert.id" :timeout="alertTimeout" :alert="alert"></alert>
+    </div>
+
+    
 </template>
 
 <script>
+    import Alert from './Alert.vue'
+
     export default {
         name: 'zsrAlerts',
+        components: {
+            Alert
+        },
         props: {
             alerts: {
                 type: Array,
                 required: true
-            },
-            timeout: {
-                type: Function,
-                required: true
             }
         },
         methods: {
-            closeAlerts() {
-                setTimeout(n => {
-                    this.timeout(alert.id)
-                    /*
-                    * add code for forcing destruction of the component
-                    * */
-                }, alert.timeout)
+            alertTimeout(id) {
+                this.$store.dispatch('clear_alert', {
+                    TYPE: 'CLEAR_ALERT',
+                    id
+                })
             }
-        },
-        mounted() {
-            this.closeAlert();
         }
     }   
 </script>
@@ -56,25 +38,17 @@
 <style>
 .zsr-alert-container{
     width: auto;
-    max-width: 400px;
+    max-width: 450px;
     height: auto;
     bottom: 0;
     display: block;
     position: fixed;
-    overflow-x: hidden;
     margin: 0;
     padding-top: 0;
     padding-bottom: 10px;
     padding-left: 20px;
     padding-right: 0;
     z-index: 30;
-}
-
-/* transition for zsr-alert */
-.zsrAlert-enter-active{
-  animation: slideInUp .4s;
-}
-.zsrAlert-leave-active{
-  animation: slideOutLeft .3s;
+    transition: all 1s ease;
 }
 </style>
