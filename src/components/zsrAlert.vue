@@ -3,12 +3,12 @@
 <template>
     <transition name="zsrAlert">
     
-        <div class="zsr-alert-container" v-if="isActive">
+        <div class="zsr-alert-container">
             <div 
                 :class="[
                     'ui', 
                     (alert.icon) ? 'icon' : '',
-                    (level==='normal') ? 'black' : level,
+                    (alert.level==='normal') ? 'black' : level,
                     'message'
             ]">
                 <i :class="[alert.icon, 'icon']" v-if="alert.icon"></i>
@@ -25,16 +25,31 @@
 </template>
 
 <script>
-    import moment from 'moment'
-    import { mapState } from 'vuex'
-
     export default {
         name: 'zsrAlerts',
-        computed: mapState({
-            alert: state => state.zsrAlert.content,
-            level: state => state.zsrAlert.level,
-            isActive: state => state.zsrAlert.isActive
-        })
+        props: {
+            alerts: {
+                type: Array,
+                required: true
+            },
+            timeout: {
+                type: Function,
+                required: true
+            }
+        },
+        methods: {
+            closeAlerts() {
+                setTimeout(n => {
+                    this.timeout(alert.id)
+                    /*
+                    * add code for forcing destruction of the component
+                    * */
+                }, alert.timeout)
+            }
+        },
+        mounted() {
+            this.closeAlert();
+        }
     }   
 </script>
 

@@ -187,19 +187,6 @@ export default {
         question: this.inputTemplates[component]
       })
       this.inputTemplates[component] = Object.assign({}, textInput[component]);
-
-      this.$store.dispatch('alert', {
-        TYPE: 'CREATE_ALERT',
-        alert: {
-          content: {
-            message: `Successfully added the question of type: ${this.activeComponent.txt} to the workspace`,
-            icon: `${this.activeComponent.icon}`,
-            heading: `Question added successfully`
-          },
-          level: 'success'
-        },
-        timeout: 3500
-      })
       
     }
   }

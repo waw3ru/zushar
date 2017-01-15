@@ -133,18 +133,6 @@ export default {
         id: this.$store.state.workspace.selectedQuestion,
         question: data.props
       })
-      this.$store.dispatch('alert', {
-        TYPE: 'CREATE_ALERT',
-        alert: {
-          content: {
-            message: `Successfully edited question number #${this.$store.state.workspace.selectedQuestion+1}`,
-            icon: `checkmark`,
-            heading: `Question edited successfully`
-          },
-          level: 'success'
-        },
-        timeout: 3500
-      })
       this.$router.push({ name: 'Workspace' })
     }
   }
