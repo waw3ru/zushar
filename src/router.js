@@ -11,6 +11,7 @@ import EditProperties from './views/EditProperties.vue'
 import SaveDraft from './views/SaveDraft.vue'
 import ViewDrafts from './views/ViewDrafts.vue'
 import Selection from './views/Selection.vue'
+import ChoicesEditor from './views/ChoicesEditor.vue'
 
 export default new Router({
   mode: 'history',
@@ -24,6 +25,7 @@ export default new Router({
     { path: '/save-draft', component: SaveDraft, name: 'saveDraft' },
     { path: '/drafts', component: ViewDrafts, name: 'viewDrafts' },
     { path: '/selection', component: Selection, name: 'Selection' },
+    { path: '/choices', component: ChoicesEditor, name: 'choicesEditor' },
     { path: '/', redirect: '/workspace' }
   ]
 })
