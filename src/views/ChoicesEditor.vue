@@ -50,7 +50,7 @@
 
                 </div>
             </div>
-            
+
             <div class="centered eight wide column">
                 <choice-editor-form></choice-editor-form>
             </div>
