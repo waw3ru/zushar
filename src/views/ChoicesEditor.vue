@@ -207,9 +207,25 @@
                 /*
                 * mutate the store
                 * */
-                this.$store.commit('REMOVE_CHOICE', {
-                    index
-                })
+
+                if (this.question.choices.length < 3) {
+                    this.$store.dispatch('create_alert', {
+                        TYPE: 'CREATE_ALERT',
+                        heading: 'Error!',
+                        message: `Cannot have less than two choices`,
+                        icon: 'warning sign',
+                        timeout: 4000,
+                        level: 'error'
+                    });
+                    return 0;
+                }
+                else {
+                    this.$store.commit('REMOVE_CHOICE', {
+                        index
+                    });
+                    return 0;
+                }
+                
             }
         }      
     }
