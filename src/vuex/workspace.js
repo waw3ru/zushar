@@ -73,8 +73,8 @@ export default {
             temp = temp.concat(payload);
             Vue.set(state.form.questions[state.selectedQuestion], 'choices', temp);
         },
-        REMOVE_CHOICES(state, payload) {
-            Vue.set(state.form.questions[state.selectedQuestion], 'choices', state.form.questions[state.selectedQuestion].filter( (val, id) => (payload.index!==id) ));
+        REMOVE_CHOICE(state, payload) {
+            Vue.set(state.form.questions[state.selectedQuestion], 'choices', state.form.questions[state.selectedQuestion].choices.filter( (val, id) => (payload.index!==id) ));
         }
     },
     actions: {

@@ -40,7 +40,9 @@
                                     </button>
                                 </td>
                                 <td>
-                                    <button class="ui mini red basic button">
+                                    <button 
+                                        class="ui mini red basic button"
+                                        @click="removeChoice($index)">
                                         <i class="remove icon"></i>
                                         remove
                                     </button>
