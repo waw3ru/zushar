@@ -5,7 +5,7 @@
     <div class="ui container" id="choices-editor">
         <div class="ui grid">
             <div class="centered ten wide column">
-                <router-link tag="button" class="ui left floated brown basic button" :to="{ name: 'editProperties' }">
+                <router-link tag="button" class="ui left floated green basic button" :to="{ name: 'editProperties' }">
                     <i class="chevron left icon"></i> Return to question editor
                 </router-link>
             </div>
@@ -32,15 +32,17 @@
                                 <td>{{ choice.display }}</td>
                                 <td>{{ choice.value }}</td>
                                 <td>
-                                    <button class="ui tiny blue basic button">
-                                        <i class="edit icon"></i>
-                                        edit choice
+                                    <button 
+                                        class="ui mini blue basic button"
+                                        @click="select_choice($index, 'edit')">
+                                            <i class="edit icon"></i>
+                                            edit
                                     </button>
                                 </td>
                                 <td>
-                                    <button class="ui tiny red basic button">
+                                    <button class="ui mini red basic button">
                                         <i class="remove icon"></i>
-                                        remove choice
+                                        remove
                                     </button>
                                 </td>
                             </tr>
@@ -48,11 +50,51 @@
 
                     </table>
 
+                    <button 
+                        class="ui yellow labeled icon button"
+                        @click="select_choice(null, 'add')">
+                            <i class="add square icon"></i>
+                            Add a New Choice
+                    </button>
+
                 </div>
             </div>
 
-            <div class="centered eight wide column">
-                <choice-editor-form></choice-editor-form>
+            <div class="centered eight wide column" v-if="(question!==false)">
+                <form class="ui form" novalidate v-if="editMode!==null">
+                    <h5 class="ui header">{{ (editMode==='edit') ? 'Edit': 'Add' }} Your Choice</h5>
+                    <div class="ui divider"></div>
+                    <div class="fields">
+                        <div class="field">
+                            <label>Enter the display text for the choice: </label>
+                            <div class="ui input">
+                                <input 
+                                    type="text" 
+                                    placeholder="Display Text"
+                                    v-model.lazy="current.display"
+                                    name="display">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Enter the value for the choice: </label>
+                            <div class="ui input">
+                                <input 
+                                    type="text" 
+                                    placeholder="Value for the choice"
+                                    v-model.lazy="current.value"
+                                    name="value">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button 
+                        class="ui basic blue button" 
+                        type="submit"
+                        @click.prevent="submitChoice(current)">
+                        {{ (editMode==='edit') ? 'Edit': 'Add' }} Choice
+                    </button>
+
+                </form>
             </div>
 
             <div class="centered ten wide column" v-if="(question===false)">
@@ -70,25 +112,104 @@
 </template>
 
 <script>
-    import choiceEditorForm from '../components/ChoiceEditorForm.vue'
 
     export default {
         name: 'choicesEditor',
-        components: {
-            choiceEditorForm
+        data() {
+            return {
+                editMode: null,
+                current: {
+                    display: null,
+                    value: null,
+                    index: null
+                }
+            }
         },
         computed: {
             question() {
+                let selectedQuestion, 
+                    question; 
+
                 if (_.isNumber(this.$store.state.workspace.selectedQuestion) && this.$store.state.workspace.form.questions.length > 0) {
-                    return this.$store.state.workspace.form.questions[this.$store.state.workspace.selectedQuestion]
+                    selectedQuestion = this.$store.state.workspace.selectedQuestion;
+                    question = this.$store.state.workspace.form.questions[selectedQuestion];
+                    return question;
                 }
                 else {
                     this.$store.commit('SELECT_QUESTION', null);
                     return false;
                 }
             }
-        }
-                
+        },
+        methods: {
+            select_choice(choice, mode) {
+
+                switch (mode) {
+                    case 'add':
+                        this.current.display = null;
+                        this.current.value = null;
+                        this.current.index = null;
+                        this.editMode = mode;
+                        break;
+                    case 'edit':
+                        this.current.display = this.question.choices[choice].display;
+                        this.current.value = this.question.choices[choice].value;
+                        this.current.index = choice;
+                        this.editMode = mode;
+                        break;
+                }
+
+            },
+            submitChoice(opts) {
+                if (this.editMode === 'add') {
+                    this.addChoice({
+                        display: opts.display,
+                        value: opts.value    
+                    });
+                }
+                if (this.editMode === 'edit') {
+                    this.editChoice({
+                        display: opts.display,
+                        value: opts.value,
+                        index: opts.index    
+                    });
+                }
+
+                this.current.display = null;
+                this.current.value = null;
+                this.current.index = null;
+                this.editMode = null;
+            },
+            addChoice(opts) {
+                /*
+                * mutate store to sync new choice
+                * */
+                this.$store.commit('ADD_CHOICE', {
+                    display: opts.display,
+                    value: opts.value
+                })
+            },
+            editChoice(opts) {
+                /*
+                * mutate the store to sync the choices
+                * */
+                this.$store.commit('EDIT_CHOICE', {
+                    index: opts.index,
+                    choice: {
+                        display: opts.display,
+                        value: opts.value
+                    }
+                })
+            },
+            removeChoice(index) {
+                /*
+                * mutate the store
+                * */
+                this.$store.commit('REMOVE_CHOICE', {
+                    index
+                })
+            }
+        }      
     }
 </script>
 
