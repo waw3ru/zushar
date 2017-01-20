@@ -21,6 +21,9 @@ npm run build
 
 Details changes for each release are documented in the [release notes](https://github.com/trendy-weshy/zushar/releases).
 
+## Screenshots
+![alt text](https://github.com/trendy-weshy/zushar/blob/master/screenshot.png "screenshot for zushar")
+
 ## License
 [MIT](http://opensource.org/licenses/MIT)
 
