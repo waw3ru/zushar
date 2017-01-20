@@ -128,6 +128,15 @@ export default {
         TYPE: 'REMOVE_QUESTION',
         index
       })
+
+      this.$store.dispatch('create_alert', {
+        TYPE: 'CREATE_ALERT',
+        heading: 'Question removed',
+        message: `Question #${index+1} is removed and questions reordered`,
+        icon: 'remove',
+        timeout: 2500,
+        level: 'warning'
+      });
     },
     sortQuestions(e, ui, ids) {
       this.$store.dispatch('sort_questions', {

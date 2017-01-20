@@ -121,18 +121,14 @@
                 })
                 this.inputTemplates[component] = Object.assign({}, selection[component]);
 
-                this.$store.dispatch('alert', {
+                this.$store.dispatch('create_alert', {
                     TYPE: 'CREATE_ALERT',
-                    alert: {
-                    content: {
-                        message: `Successfully added the question of type: ${this.activeComponent.txt} to the workspace`,
-                        icon: `${this.activeComponent.icon}`,
-                        heading: `Question added successfully`
-                    },
-                    level: 'success'
-                    },
-                    timeout: 3500
-                })
+                    heading: 'Question Added',
+                    message: `Question Type ${component.field} was added to your workspace`,
+                    icon: 'thumbs up',
+                    timeout: 3000,
+                    level: 'info'
+                });
 
             }
         }

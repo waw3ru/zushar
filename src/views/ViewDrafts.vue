@@ -12,6 +12,7 @@
                                 <th>Creator</th>
                                 <th>Status</th>
                                 <th>Creation date</th>
+                                <th>Updated on</th>
                                 <th v-for="options in 3" v-if="(forms.length > 0)"></th>
                             </tr>
                         </thead>
@@ -20,7 +21,7 @@
                             <td>{{ form.metadata.creator }}</td>
                             <td>{{ form.metadata.status }}</td>
                             <td>{{ form.metadata.timestamp.creation }}</td>
-                            <td v-if="form.metadata.timestamp.updated">{{ form.metadata.timestamp.updated }}</td>
+                            <td>{{ form.metadata.timestamp.updated }}</td>
                             <!-- options buttons -->
                             <td @click="manipulateForm($index, 'preview')" class="center aligned tbl-options info">
                                 <i class="eye icon"></i> Preview Form
@@ -68,19 +69,14 @@ export default {
                 id
             })
 
-            // alert on removing the form
-            this.$store.dispatch('alert', {
+            this.$store.dispatch('create_alert', {
                 TYPE: 'CREATE_ALERT',
-                alert: {
-                    content: {
-                        heading: 'Form removal successfully',
-                        message: `Removed form from the local database, this action is not reversible`,
-                        icon: 'warning sign'
-                    },
-                    level: 'warning'
-                },
-                timeout: 4000
-            })
+                heading: 'Form Deletion',
+                message: `Form was successfully deleted from your local database`,
+                icon: 'remove',
+                timeout: 2000,
+                level: 'warning'
+            });
 
         },
         manipulateForm(index, status) {

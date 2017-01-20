@@ -7,48 +7,52 @@
 * */
 
 import Vue from 'vue'
+import uuid from 'uuid'
+
+let alertTemplate = {
+    id: null,
+    message: null,
+    icon: null,
+    heading: null,
+    level: null,
+    timeout: null
+}
 
 export default {
     state: {
-        content: {
-            message: null,
-            icon: null,
-            heading: null,
-        },
-        level: null,
-        isActive: false
+        alerts: []
     },
     mutations: {
         CREATE_ALERT(state, payload) {
-            state.level = (payload.level) ? payload.level : 'normal';
-            state.isActive = true;
-            Vue.set(state, 'content', payload.content)
+            /*
+            * @desc:
+            *   where payload is an Object following the alert template
+            * */
+            Vue.set(state, 'alerts', state.alerts.concat(payload))
         },
-        CLEAR_ALERT(state) {
-            state.level = null;
-            state.isActive = false;            
-            Vue.set(state, 'content', {
-                message: null,
-                icon: null,
-                heading: null,
-            });
+        CLEAR_ALERT(state, payload) {
+            Vue.set(state, 'alerts', state.alerts.filter(alert=>(alert.id!==payload)))
         }
     },
     actions: {
-        alert({ commit }, payload) {
-            /*
-            * @desc: 
-            *   set a timer to call the CLEAR_ALERT mutation
-            *   this allows for the automatic termination of alert after a timeout set by the 
-            *   component which dispatched the alert.
-            * */
-            setTimeout(() => {
-                commit('CLEAR_ALERT');
-            }, payload.timeout);
+        create_alert({ commit }, payload) {
 
-            if (!_.isEmpty(payload.alert.content.message) || !_.isEmpty(payload.alert.content.heading)) {
-                commit(payload.TYPE, payload.alert);
-            }
+            let alert = Object.assign({}, alertTemplate, {
+                id: uuid.v4(),
+                message: payload.message,
+                icon: (payload.icon || ''),
+                heading: (payload.heading || ''),
+                level: payload.level,
+                timeout: payload.timeout
+            })
+
+            commit(payload.TYPE, alert);
+        },
+        clear_alert({ commit }, payload) {
+            commit(payload.TYPE, payload.id);
         }
+    },
+    getters: {
+        firstAlert: (state) => state.alerts[0]
     }
 }

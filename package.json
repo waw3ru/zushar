@@ -1,7 +1,7 @@
 {
   "name": "zushar",
   "description": "a form building tool",
-  "version": "0.0.8",
+  "version": "0.1.0",
   "author": "John Waweru <wambugu.john.waweru@outlook.com>",
   "private": true,
   "scripts": {

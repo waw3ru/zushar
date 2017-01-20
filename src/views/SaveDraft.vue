@@ -85,18 +85,14 @@ export default{
                 metadata
             });
 
-            this.$store.dispatch('alert', {
+            this.$store.dispatch('create_alert', {
                 TYPE: 'CREATE_ALERT',
-                alert: {
-                    content: {
-                        message: `Successfully saved the form to you local database.`,
-                        icon: `thumbs up`,
-                        heading: `Saved form`
-                    },
-                    level: 'success'
-                },
-                timeout: 3500
-            })
+                heading: 'Form was successfully created',
+                message: `Form was created and stored in the local database`,
+                icon: 'checkmark',
+                timeout: 3000,
+                level: 'success'
+            });
 
             this.$router.push({ name: 'viewDrafts' });
         },
@@ -110,6 +106,15 @@ export default{
             this.$store.dispatch('update_form', {
                 TYPE: 'UPDATE_FORM',
                 metadata
+            });
+
+            this.$store.dispatch('create_alert', {
+                TYPE: 'CREATE_ALERT',
+                heading: 'Form was successfully updated',
+                message: `Form was updated and stored in the local database`,
+                icon: 'checkmark',
+                timeout: 3000,
+                level: 'success'
             });
 
             this.$router.push({ name: 'viewDrafts' });

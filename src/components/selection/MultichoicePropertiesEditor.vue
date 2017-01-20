@@ -51,9 +51,14 @@
             </div>
         </div>
 
-        <button class="ui teal button">
+        <router-link 
+            class="ui teal button" 
+            v-if="$route.name==='editProperties'"
+            :to="{ name: 'choicesEditor' }"
+            tag="button">
+
             <i class="wizard icon"></i> Add / Edit question choices
-        </button>
+        </router-link>
 
         <div class="ui divider"></div>
 

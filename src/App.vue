@@ -12,7 +12,7 @@
       </transition>
     </div>
 
-    <zsr-alert></zsr-alert>
+    <zsr-alert :alerts="$store.state.zsrAlert.alerts"></zsr-alert>
 
   </div>
 </template>
@@ -20,14 +20,13 @@
 <script>
 import {
   hasDbInstance,
-  clearWorkspace,
   retrieveWorkspace,
   getForms
 } from './vuex/database.js'
 
 import titleBar from './components/TitleBar.vue'
 import menuBar from './components/MenuBar.vue'
-import zsrAlert from './components/Alerts.vue'
+import zsrAlert from './components/zsrAlert.vue'
 
 export default {
   name: 'app',
@@ -50,21 +49,6 @@ export default {
         forms
       });
     }
-    
-    // a welcoming message
-    this.$store.dispatch('alert', {
-      TYPE: 'CREATE_ALERT',
-      alert: {
-        content: {
-          heading: 'Welcome to zushar',
-          message: 'This is a simple tool built for create forms and simple questionnaires',
-          icon: 'smile'
-        },
-        level: 'info'
-      },
-      timeout: 3500
-    })
-
   }
 }
 </script>
