@@ -83,7 +83,7 @@ html, body, #app {
 
 /* top-level router transitions */
 .appLevel-enter-active{
-  animation: slideInRight .2s;
+  animation: zoomIn .2s;
 }
 .appLevel-leave-active{
   animation: slideOutLeft .3s;
