@@ -36,7 +36,9 @@ if (process.env.NODE_ENV === 'development') {
   const webpackConfig = require('./webpack.config.js');
   const compiled = webpack(webpackConfig);
 
-  app.use(require("webpack-dev-middleware")(compiled));
+  app.use(require("webpack-dev-middleware")(compiled, {
+    noInfo: true
+  }));
   app.use(require("webpack-hot-middleware")(compiled));
 }
 app.use(express.static(path.join(__dirname, 'dist/')) );
