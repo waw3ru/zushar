@@ -1,4 +1,4 @@
-![Zushar Logo](https://github.com/shevigroup/zushar/blob/master/src/assets/logos/zushar_1.png)
+![Zushar Logo](https://zushar2.herokuapp.com/logo.png)
 # Zushar
 
 > A questionnaire builder tool for researchers and scholars using web technologies
@@ -20,9 +20,6 @@ npm run build
 ## Changelog
 
 Details changes for each release are documented in the [release notes](https://github.com/trendy-weshy/zushar/releases).
-
-## Screenshots
-![alt text](https://github.com/trendy-weshy/zushar/blob/master/screenshot.png "screenshot for zushar")
 
 ## License
 [MIT](http://opensource.org/licenses/MIT)

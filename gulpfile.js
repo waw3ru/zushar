@@ -1,30 +1,47 @@
 /*
-* Created on 23/12/2016 by John Waweru
+* created by waweru
 * */
 
 'use strict';
 
 const gulp = require('gulp');
-const connect = require('gulp-connect');
+const gutil = require('gulp-util');
+const nodemon = require('gulp-nodemon');
 
-const testServer = () => {
-    /*
-    * @desc: Runs the testing server for zushar build
-    * @params: null
-    * @return: null
-    * */
-
-    connect.server({
-       name: 'TestServer',
-       debug: true,
-       port: process.env.PORT || 5000,
-       livereload: false,
-       fallback: 'index.html'
+gulp.task('default', function () {
+    let stream = nodemon({
+        script: './dist/bin.js',
+        ext: 'js json',
+        env: {
+        'NODE_ENV': 'development'
+        },
+        ignore: [
+            'node_modules/',
+            'logs/',
+            '*.md',
+            'src/zushar-docs/',
+            'src/zushar-main/',            
+        ],
+        watch: 'src/zushar-api'
     });
-};
 
-/*
-* @task: run test server
-* @method: testServer 
-* */
-gulp.task('test:server', testServer);
+    stream
+        .on('start', () => {
+            gutil.log(gutil.colors.underline.bold.green('Nodemon started server'));
+        })
+        .on('crash', () => {
+            gutil.log(gutil.colors.underline.bgRed('Server Crashed'));
+            stream.emit('quit');
+            process.exit(0);
+        })
+        .on('restart', () => {
+            gutil.log(gutil.colors.underline.blue('nodemon restarting server'));
+        })
+        .on('quit', () => {
+            gutil.log(gutil.colors.underline.bold('nodemon has exited!'));
+        });
+});
+
+gulp.task('stop:server', () => {
+  process.kill(process.pid, 'SIGUSR2');
+});
