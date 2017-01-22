@@ -37,7 +37,11 @@ process.on('SIGINT', function() {
 });
 
 // all the models
+const userModel = require('../users/schema');
+const formsModel = require('../forms/schema');
 
-module.exports = (url, opts) => {
+module.exports = function (url, opts) {
   mongoose.connect(url, opts);
+  mongoose.model('users', userModel);
+  mongoose.model('forms', formsModel);
 };

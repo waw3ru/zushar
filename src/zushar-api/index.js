@@ -6,20 +6,13 @@
 
 const express = require('express');
 const Router = express.Router();
+const user = require('./users');
+const forms = require('./forms');
 
 /*
 * @desc:
 *   api configurations and library settings
 * */
-const mongoURL = (process.env.NODE_ENV==='production') ? process.env.MONGODB_URL : 'mongodb://localhost:27017/zushar'
-require('./lib/database')((mongoURL), {
-  "db": {
-    "native_parse": true
-  },
-  "server": {
-    "poolSize": 15
-  }
-});
 require('./lib/logger').debug('Welcome to the zushar web services api.');
 
 /*
@@ -41,17 +34,13 @@ Router.get('/', (req, res) => {
 * @desc:
 *   user management services
 * */
-Router.get('user', (req, res) => {
-  res.send('Hello user!');
-});
+Router.use('/user', user);
 
 /*
 * @desc:
 *   forms management services
 * */
-Router.get('forms', (req, res) => {
-    res.send('Hello we are in forms!');
-});
+Router.use('/forms', forms);
 
 //# expose api to the web server
 module.exports = Router;
