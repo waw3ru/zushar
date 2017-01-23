@@ -27,6 +27,14 @@ const schema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    gender: {
+        type: String,
+        enum: {
+            values: 'male,female'.split(','),
+            message: 'Gender not available'
+        },
+        required: true
+    },
     creation_date: {
         type: Date,
         default: new Date()
@@ -56,8 +64,18 @@ const schema = new mongoose.Schema({
 });
 
 schema.set('strict');
-schema.methods.validatePassword = function(code) {
-  return (this.validation_code === code);
+schema.methods.validatePassword = function(password) {
+  let pwd = this.password.split(';');
+  let hmac = crypto.createHmac('sha512WithRSAEncryption', pwd[1]);
+  hmac.update(password);
+  let hash_pwd = hmac.digest('hex') + ';' + pwd[1];
+  return (this.password === hash_pwd);
+};
+schema.statics.setPassword = function(password) {
+  let salt = crypto.randomBytes(24).toString('hex');
+  let hmac = crypto.createHmac('sha512WithRSAEncryption', salt);
+  hmac.update(password);
+  return hmac.digest('hex') + ';' + salt;
 };
 
 module.exports = schema;
