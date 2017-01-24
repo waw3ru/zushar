@@ -21,7 +21,8 @@ const schema = new mongoose.Schema({
     },
     author: {
         type: mongoose.Schema.Types.ObjectId,
-        required: [true, 'missing author of the form']
+        required: [true, 'missing author of the form'],
+        ref: 'user-accounts'
     },
     questions: { type: Array },
     responses: { type: Array },
@@ -33,9 +34,7 @@ const schema = new mongoose.Schema({
     modification_date: {
         type: Date
     }
-}, 
-{
-    strict: false
 });
 
+schema.set('strict', false);
 module.exports = schema;
