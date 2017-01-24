@@ -42,6 +42,6 @@ const formsModel = require('../forms/schema');
 
 module.exports = function (url, opts) {
   mongoose.connect(url, opts);
-  mongoose.model('users', userModel);
+  mongoose.model('user-accounts', userModel);
   mongoose.model('forms', formsModel);
 };
