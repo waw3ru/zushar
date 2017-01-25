@@ -15,7 +15,18 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const helmet = require("helmet");
 const webpack = require('webpack');
-const  app = express();
+const expressJWT = require('express-jwt');
+const app = express();
+
+const mongoURL = (process.env.NODE_ENV==='production') ? process.env.MONGODB_URL : 'mongodb://localhost:27017/zushar'
+require('./src/zushar-api/lib/database')(mongoURL, {
+  "db": {
+    "native_parse": true
+  },
+  "server": {
+    "poolSize": 15
+  }
+});
 
 app.use(compression());
 app.use(helmet({
@@ -36,11 +47,13 @@ if (process.env.NODE_ENV === 'development') {
   const webpackConfig = require('./webpack.config.js');
   const compiled = webpack(webpackConfig);
 
-  app.use(require("webpack-dev-middleware")(compiled));
+  app.use(require("webpack-dev-middleware")(compiled, {
+    noInfo: true
+  }));
   app.use(require("webpack-hot-middleware")(compiled));
 }
 app.use(express.static(path.join(__dirname, 'dist/')) );
-
+app.enable('trust proxy');
 
 /*
 * @desc:
