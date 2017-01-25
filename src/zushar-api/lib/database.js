@@ -37,13 +37,11 @@ process.on('SIGINT', function() {
 });
 
 // all the models
-const userModel = require('../users/schema');
+const userModel = require('../user-accounts/schema');
 const formsModel = require('../forms/schema');
-const sessionModel = require('../sessions/schema');
 
 module.exports = function (url, opts) {
   mongoose.connect(url, opts);
   mongoose.model('user-accounts', userModel);
   mongoose.model('forms', formsModel);
-  mongoose.model('sessions', sessionModel);
 };

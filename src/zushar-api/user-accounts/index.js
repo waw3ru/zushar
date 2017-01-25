@@ -16,20 +16,19 @@ const auth = require('../lib/auth');
 * @route: user-account registration
 * */
 Router.post('/', 
-    auth.jwtMiddleware,
     function (req, res, next) {
         if (_.isNil(req.body.email) || _.isNil(req.body.phone)) {
             let date = new Date();
             let error = new Error(`${date.toDateString()}:: some inputs are invalid please try again`);
             res.status(500);
-            res.json(error);
+            res.json({error});
         }
         else {
             accountModel
                 .createAccount(req.body, function (error, result) {
                     if (!_.isNil(error)) {
                         res.status(500);
-                        res.json(error);
+                        res.json({error});
                     }
                     else {
                         res.json(result);
@@ -44,20 +43,19 @@ Router.post('/',
 * @route: login user-account
 * */
 Router.post('/login', 
-    auth.jwtMiddleware,
     function (req, res, next) {
         if (_.isNil(req.body.email) || _.isNil(req.body.phone)) {
             let date = new Date();
             let error = new Error(`${date.toDateString()}:: some inputs are invalid please try again`);
             res.status(500);
-            res.json(error);
+            res.json({error});
         }
         else {
             accountModel
                 .loginAccount(req.body, function (error, result) {
                    if (!_.isNil(error)) {
                         res.status(500);
-                        res.json(error);
+                        res.json({error});
                     }
                     else {
                         res.json(result);
@@ -79,13 +77,13 @@ Router.put('/',
             let date = new Date();
             let error = new Error(`${date.toDateString()}:: some inputs are invalid please try again`);
             res.status(500);
-            res.json(error);
+            res.json({error});
         }
-        else if (!req.zsrLoggedIn) {
+        else if (!req.zushar_auth.isLoggedin) {
             let date = new Date();
             let error = new Error(`${date.toDateString()}:: authentication problem`);
             res.status(500);
-            res.json(error);
+            res.json({error});
         }
         else {
             accountModel
@@ -99,7 +97,7 @@ Router.put('/',
                     function (error, result) {
                         if (!_.isNil(error)) {
                             res.status(500);
-                            res.json(error);
+                            res.json({error});
                         }
                         else {
                             res.json(result);
@@ -121,7 +119,7 @@ Router.delete('/',
             let date = new Date();
             let error = new Error(`${date.toDateString()}:: some inputs are invalid please try again`);
             res.status(500);
-            res.json(error);
+            res.json({error});
         }
         else {
             accountModel
@@ -138,7 +136,7 @@ Router.delete('/',
                     function (error, result) {
                         if (!_.isNil(error)) {
                             res.status(500);
-                            res.json(error);
+                            res.json({error});
                         }
                         else {
                             res.json(result);
@@ -147,5 +145,17 @@ Router.delete('/',
         }
     });
 
+/*
+* @path: '/',
+* @method: GET
+* @route: default route for testing the user-accounts endpoint
+* */
+Router.get('/', 
+    function (req, res, next) {
+        res.json({
+            message: 'User accounts module',
+            status: 'Good'
+        });
+    });
 
 module.exports = Router;
