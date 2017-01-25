@@ -15,6 +15,7 @@ const bodyParser = require('body-parser');
 const compression = require('compression');
 const helmet = require("helmet");
 const webpack = require('webpack');
+const expressJWT = require('express-jwt');
 const app = express();
 
 const mongoURL = (process.env.NODE_ENV==='production') ? process.env.MONGODB_URL : 'mongodb://localhost:27017/zushar'

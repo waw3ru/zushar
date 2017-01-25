@@ -5,7 +5,8 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const uuid = require('uuid');
+const crypto = require('crypto');
+const JWT = require('jsonwebtoken');
 
 const schema = new mongoose.Schema({
     name: {
@@ -50,9 +51,9 @@ const schema = new mongoose.Schema({
         type: String,
         unique: true,
         required: true,
-        default: uuid.v4()
+        default: crypto.randomBytes(4).toString('hex')
     },
-    disabled: {
+    deletion: {
         type: Boolean,
         default: false
     },
@@ -76,6 +77,12 @@ schema.statics.setPassword = function(password) {
   let hmac = crypto.createHmac('sha512WithRSAEncryption', salt);
   hmac.update(password);
   return hmac.digest('hex') + ';' + salt;
+};
+schema.methods.generateJWT = function() {
+    return JWT.sign({
+        id: this._id,
+        creation_date: this.creation_date
+    }, process.env.JWT_SECRET, { expiresIn: '1d' });
 };
 
 module.exports = schema;
