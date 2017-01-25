@@ -24,9 +24,14 @@ const schema = new mongoose.Schema({
         required: [true, 'missing author of the form'],
         ref: 'user-accounts'
     },
-    questions: { type: Array },
-    responses: { type: Array },
-    contributors: { type: Array },
+    questions: { type: Array, default: [] },
+    responses: { type: Array, default: [] },
+    respondants: { type: Array, default: [] },
+    contributors: [{
+        type: mongoose.Schema.Types.ObjectId,
+        required: [true, 'missing author of the form'],
+        ref: 'user-accounts'
+    }],
     creation_date: {
         type: Date,
         default: new Date()
