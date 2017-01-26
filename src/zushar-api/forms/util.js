@@ -7,6 +7,7 @@
 const mongoose = require('mongoose');
 const formsModel = mongoose.model('forms');
 const _ = require('lodash');
+const Log = require('./../lib/logger');
 
 /*
 * @desc:
@@ -34,13 +35,24 @@ function addContributor(params, done) {
             _id: params.id,
             author: params.author
         })
-        exec(function (error, query) {
+        .exec(function (error, query) {
             if (!_.isNil(error)) {
                 Log.error(error);
                 return done(error, null);
             }
-            
-            query.contributors = (query.contributors || []).concat(params.contributor);
+
+            if (_.isEmpty(query)) {
+                let date = new Date();
+                let error = `[${date}] could not access form. check your permissions`;
+                Log.error(new Error(error));
+                return done(error, null); 
+            }
+
+            let newContributors = (query.contributors || []).concat(params.contributor);
+            if (query.contributors.length > 0) {
+                newContributors = [].concat(_.uniq((query.contributors || []), newContributors));
+            }
+            query.contributors = newContributors;
             query.save(function (error, results) {
                 if (!_.isNil(error)) {
                     Log.error(error);
@@ -60,20 +72,24 @@ function getContributors(params, done) {
     *   This method gets a list of all the contributors and returns an array of all the 
     *   contributors in the database for a specific form (record)
     * */
-    let contributorQuery = {
-        $in: [params.account_id]
-    };
-
     formsModel
         .findOne({
             _id: params.id,
-            [params.account]: (params.account==='author') ?  params.account_id : contributorsQuery
+            [params.account]: (params.account==='author') ?  params.account_id : { $in: [params.account_id] }
         })
         .exec(function (error, query) {
             if (!_.isNil(error)) {
                 Log.error(error);
                 return done(error, null);
             }
+
+            if (_.isEmpty(query)) {
+                let date = new Date();
+                let error = `[${date}] could not access form. check your permissions`;
+                Log.error(new Error(error));
+                return done(error, null); 
+            } 
+            
             return done(null, query.contributors);
         });
 }
@@ -95,7 +111,7 @@ function removeContributor(params, done) {
                 return done(error, null);
             }
             
-            query.contributors = (query.contributors || []).filter(id=>(id!==params.contributor));
+            query.contributors.remove(params.contributor);
             query.save(function (error, results) {
                 if (!_.isNil(error)) {
                     Log.error(error);
@@ -124,7 +140,8 @@ function addRespondant(params, done) {
                 return done(error, null);
             }
             
-            query.respondants = (query.respondants || []).concat(params.respondant);
+            let newRespondants = (query.respondants || []).concat(params.respondant);
+            query.respondants = [].concat(_.uniq((query.respondants || []), newRespondants));
             query.save(function (error, results) {
                 if (!_.isNil(error)) {
                     Log.error(error);

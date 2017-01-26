@@ -10,6 +10,7 @@ const express = require('express');
 const Router = express.Router();
 const _ = require('lodash');
 const formsUtil = require('./util');
+const auth = require('../lib/auth');
 
 /***************************************************************************/
 /*
@@ -25,21 +26,31 @@ const contributorsRouter = express.Router();
 * */
 contributorsRouter.post('/:form_id/:user_id',
     function (req, res, next) {
-        formsUtil
-            .addContributor({
-                id: req.params.form_id,
-                author: req.params.user_id,
-                contributor: req.body.contributor
-            },
-            function (error, results) {
-                if (!_.isNil(error)) {
-                    res.status(500);
-                    res.json({error});
-                }
-                else {
-                    res.json(results);
-                } 
-            });
+        
+        if (req.params.user_id !== req.zushar_auth.id) {
+            let date = new Date();
+            let error = `[${date.toDateString()}] could not access form. check your permissions`;
+            res.status(500);
+            res.json({error});
+        }
+        else {
+            formsUtil
+                .addContributor({
+                    id: req.params.form_id,
+                    author: req.params.user_id,
+                    contributor: req.body.contributor
+                },
+                function (error, results) {
+                    if (!_.isNil(error)) {
+                        res.status(500);
+                        res.json({error});
+                    }
+                    else {
+                        res.json(results);
+                    } 
+                });
+        }
+
     });
 
 /*
@@ -49,25 +60,31 @@ contributorsRouter.post('/:form_id/:user_id',
 * */
 contributorsRouter.get('/:form_id/:user_id/:user_type',
     function (req, res, next) {
-        let formUser = {
-            account_id: req.params.user_id,
-            account: req.params.user_type
-        };
-        formsUtil
-            .getContributors({
-                id: req.params.form_id,
-                account_id: req.params.user_id,
-                account: req.params.user_type
-            },
-            function (error, results) {
-                if (!_.isNil(error)) {
-                    res.status(500);
-                    res.json({error});
-                }
-                else {
-                    res.json(results);
-                } 
-            });
+
+        if ( req.params.user_type === 'author' && (req.params.user_id !== req.zushar_auth.id) ) {
+            let date = new Date();
+            let error = `[${date.toDateString()}] could not access form. check your permissions`;
+            res.status(500);
+            res.json({error});
+        }
+        else {
+            formsUtil
+                .getContributors({
+                    id: req.params.form_id,
+                    account_id: req.params.user_id,
+                    account: req.params.user_type
+                },
+                function (error, results) {
+                    if (!_.isNil(error)) {
+                        res.status(500);
+                        res.json({error});
+                    }
+                    else {
+                        res.json(results);
+                    } 
+                });
+        }
+
     });
 
 /*
@@ -77,24 +94,33 @@ contributorsRouter.get('/:form_id/:user_id/:user_type',
 * */
 contributorsRouter.delete('/:form_id/:user_id',
     function (req, res, next) {
-        formsUtil
-            .removeContributor({
-                id: req.params.form_id,
-                author: req.params.user_id,
-                contributor: req.body.contributor
-            },
-            function (error, results) {
-                if (!_.isNil(error)) {
-                    res.status(500);
-                    res.json({error});
-                }
-                else {
-                    res.json(results);
-                } 
-            });
+        if (req.params.user_id !== req.zushar_auth.id) {
+            let date = new Date();
+            let error = `[${date.toDateString()}] could not access form. check your permissions`;
+            res.status(500);
+            res.json({error});
+        }
+        else {
+            formsUtil
+                .removeContributor({
+                    id: req.params.form_id,
+                    author: req.params.user_id,
+                    contributor: req.body.contributor
+                },
+                function (error, results) {
+                    if (!_.isNil(error)) {
+                        res.status(500);
+                        res.json({error});
+                    }
+                    else {
+                        res.json(results);
+                    } 
+                });
+        }
+
     });
 // expose the contributors utility endpoint to the forms routing system
-Router.use('/contributors', contributorsRouter);
+Router.use('/contributors', auth.jwtMiddleware, auth.loggedInUser, contributorsRouter);
 
 /*
 * END OF CONTRIBUTORS ROUTING
@@ -106,7 +132,7 @@ Router.use('/contributors', contributorsRouter);
 * START OF RESPONDANTS ROUTING
 * */
 
-// contributors utility endpoints
+// respondants utility endpoints
 const respondantsRouter = express.Router();
 /*
 * @path: '/:form_id/:user_id'
@@ -115,21 +141,30 @@ const respondantsRouter = express.Router();
 * */
 respondantsRouter.post('/:form_id/:user_id/',
     function (req, res, next) {
-        formsUtil
-            .addRespondant({
-                id: req.params.form_id,
-                author: req.params.user_id,
-                respondant: req.body.respondant
-            },
-            function (error, results) {
-                if (!_.isNil(error)) {
-                    res.status(500);
-                    res.json({error});
-                }
-                else {
-                    res.json(results);
-                } 
+
+        if (req.params.user_id !== req.zushar_auth.id) {
+            let date = new Date();
+            let error = `[${date.toDateString()}] could not access form. check your permissions`;
+            res.status(500);
+            res.json({error});
+        }
+        else {
+            formsUtil
+                .addRespondant({
+                    id: req.params.form_id,
+                    author: req.params.user_id,
+                    respondant: req.body.respondant
+                },
+                function (error, results) {
+                    if (!_.isNil(error)) {
+                        res.status(500);
+                        res.json({error});
+                    }
+                    else {
+                        res.json(results);
+                    } 
             });
+        }
     });
 
 /*
@@ -143,21 +178,30 @@ respondantsRouter.get('/:form_id/:user_id/:user_type',
             account_id: req.params.user_id,
             account: req.params.user_type
         };
-        formsUtil
-            .getRespondants({
-                id: req.params.form_id,
-                account_id: req.params.user_id,
-                account: req.params.user_type
-            },
-            function (error, results) {
-                if (!_.isNil(error)) {
-                    res.status(500);
-                    res.json({error});
-                }
-                else {
-                    res.json(results);
-                } 
-            });
+
+        if ( req.params.user_type === 'author' && (req.params.user_id !== req.zushar_auth.id) ) {
+            let date = new Date();
+            let error = `[${date.toDateString()}] could not access form. check your permissions`;
+            res.status(500);
+            res.json({error});
+        }
+        else {
+            formsUtil
+                .getRespondants({
+                    id: req.params.form_id,
+                    account_id: req.params.user_id,
+                    account: req.params.user_type
+                },
+                function (error, results) {
+                    if (!_.isNil(error)) {
+                        res.status(500);
+                        res.json({error});
+                    }
+                    else {
+                        res.json(results);
+                    } 
+                });
+        }
     });
 
 /*
@@ -171,29 +215,38 @@ respondantsRouter.delete('/:form_id/:user_id/',
             account_id: req.params.user_id,
             account: req.params.user_type
         };
-        formsUtil
-            .removeRespondant({
-                id: req.params.form_id,
-                author: req.params.user_id,
-                respondant: req.body.respondant
-            },
-            function (error, results) {
-                if (!_.isNil(error)) {
-                    res.status(500);
-                    res.json({error});
-                }
-                else {
-                    res.json(results);
-                } 
-            });
+
+        if (req.params.user_id !== req.zushar_auth.id) {
+            let date = new Date();
+            let error = `[${date.toDateString()}] could not access form. check your permissions`;
+            res.status(500);
+            res.json({error});
+        }
+        else {
+            formsUtil
+                .removeRespondant({
+                    id: req.params.form_id,
+                    author: req.params.user_id,
+                    respondant: req.body.respondant
+                },
+                function (error, results) {
+                    if (!_.isNil(error)) {
+                        res.status(500);
+                        res.json({error});
+                    }
+                    else {
+                        res.json(results);
+                    } 
+                });
+        }
+
     });
-// expose the contributors utility endpoint to the forms routing system
-Router.use('/respondants', respondantsRouter);
+// expose the respondants utility endpoint to the forms routing system
+Router.use('/respondants', auth.jwtMiddleware, auth.loggedInUser, respondantsRouter);
 
 /*
 * END OF RESPONDANTS ROUTING
 * */
 /***************************************************************************/
-
 
 module.exports = Router;

@@ -33,7 +33,7 @@ module.exports.loggedInUser = function (req, res, next) {
             else {
                 let age = null;
                 req.zushar_auth.isLoggedin = true;
-                if (_.isEmpty(result.dob)) {
+                if (!_.isEmpty(result.dob)) {
                     let dob = moment(result.dob);
                     let now = moment();
                     age = now.diff(dob, 'years', true);

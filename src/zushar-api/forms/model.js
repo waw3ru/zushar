@@ -15,6 +15,7 @@ function createForm(params, done) {
     *   creates a new form obejct in the database
     * */
     let newForm = new formsModel(params);
+    newForm.contributors = [];
     newForm.save(function (error, query) {
         if (!_.isNil(error)) {
             Log.error(error);
