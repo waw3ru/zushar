@@ -10,6 +10,13 @@ const Router = express.Router();
 const _ = require('lodash');
 const formsModel = require('./model');
 const auth = require('../lib/auth');
+const formsUtil = require('./util-endpoints');
+
+/*
+* @desc:
+*   utility functions for form management
+* */
+Router.use('/util', formsUtil);
 
 /*
 * @path: '/',
