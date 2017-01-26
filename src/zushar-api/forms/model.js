@@ -111,7 +111,6 @@ function updateForm(params, updates, done) {
             });
         
         query.modification_date = new Date();
-
         query.save(function (error, results) {
             if (!_.isNil(error)) {
                 Log.error(error);

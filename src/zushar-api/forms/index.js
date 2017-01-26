@@ -26,7 +26,7 @@ Router.post('/',
         else {
             formsModel
                 .createForm(
-                    Object.assign({}, req.body, {
+                    Object.assign({}, req.body.form, {
                         author: req.zushar_auth.id
                     }),
                     function (error, results) {
@@ -46,9 +46,23 @@ Router.post('/',
 * @method: GET
 * @route: get form list
 * */
-Router.get('/:account/:account_type',
+Router.get('/:user_id/:user_type',
     function (req, res, next) {
-        
+        let formUser = {
+            account_id: req.params.user_id,
+            account: req.params.user_type
+        };
+
+        formsModel
+            .getForms(formUser, 
+                function (error, results) {
+                    if (!_.isNil(error)) {
+                        res.status(500);
+                        res.json({error});
+                    }
+
+                    res.json(results);
+                });
     });
 
 /*
@@ -57,9 +71,18 @@ Router.get('/:account/:account_type',
 * @method: GET
 * @route: get form object
 * */
-Router.get('/:account/:account_type/:id',
+Router.get('/:form_id',
     function (req, res, next) {
-        
+        formsModel
+            .getForm(req.params.form_id, 
+                function (error, result) {
+                    if (!_.isNil(error)) {
+                        res.status(500);
+                        res.json({error});
+                    }
+
+                    res.json(result);
+                });
     });
 
 /*
@@ -68,9 +91,24 @@ Router.get('/:account/:account_type/:id',
 * @method: PUT
 * @route: update a form
 * */
-Router.put('/:account/:account_type/:id',
+Router.put('/:form_id/:user_id/:user_type',
     function (req, res, next) {
-        
+        let { form_id, user_id, user_type } = req.params;
+        formsModel
+            .updateForm({
+                id: form_id,
+                account_id: user_id,
+                account: user_type
+            },
+            req.body.form,
+            function (error, results) {
+                if (!_.isNil(error)) {
+                    res.status(500);
+                    res.json({error});
+                }
+
+                res.json(result);
+            });
     });
 
 /*
@@ -79,9 +117,23 @@ Router.put('/:account/:account_type/:id',
 * @method: DELETE
 * @route: marks form for deletion
 * */
-Router.delete('/:account/:account_type/:id',
+Router.delete('/:form_id/:user/:user_type',
     function (req, res, next) {
-        
+        let { form_id, user_id, user_type } = req.params;
+        formsModel  
+            .deleteForm({
+                id: form_id,
+                account_id: user_id,
+                account: user_type
+            },
+            function (error, result) {
+                if (!_.isNil(error)) {
+                    res.status(500);
+                    res.json({error});
+                }
+
+                res.json(result);
+            });
     });
 
 module.exports = Router;
