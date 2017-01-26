@@ -14,7 +14,7 @@ const schema = new mongoose.Schema({
     form_state: {
         type: String,
         enum: {
-            values: 'draft,completed,ready'.split(','),
+            values: 'draft,complete,ready'.split(','),
             message: 'status not recongnized'
         },
         required: true
@@ -38,6 +38,10 @@ const schema = new mongoose.Schema({
     },
     modification_date: {
         type: Date
+    },
+    deletion: {
+        type: Boolean,
+        default: false
     }
 });
 

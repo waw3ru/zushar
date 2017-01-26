@@ -9,6 +9,7 @@ const express = require('express');
 const Router = express.Router();
 const _ = require('lodash');
 const formsModel = require('./model');
+const auth = require('../lib/auth');
 
 /*
 * @path: '/',
@@ -16,12 +17,13 @@ const formsModel = require('./model');
 * @route: add a new form
 * */
 Router.post('/', 
+    auth.jwtMiddleware,
+    auth.loggedInUser,
     function (req, res, next) {
-        if (!_.isEmpty(req.body.name)) {
+        if (_.isEmpty(req.body.form)) {
             let date = new Date();
-            let error = new Error(`${date.toDateString()}:: some inputs are invalid please try again`);
             res.status(500);
-            res.json({error});
+            res.json({ error: `${date.toDateString()}:: some inputs are invalid please try again`});
         }
         else {
             formsModel
@@ -47,6 +49,8 @@ Router.post('/',
 * @route: get form list
 * */
 Router.get('/:user_id/:user_type',
+    auth.jwtMiddleware,
+    auth.loggedInUser,
     function (req, res, next) {
         let formUser = {
             account_id: req.params.user_id,
@@ -60,8 +64,9 @@ Router.get('/:user_id/:user_type',
                         res.status(500);
                         res.json({error});
                     }
-
-                    res.json(results);
+                    else {
+                        res.json(results);
+                    }
                 });
     });
 
@@ -72,6 +77,8 @@ Router.get('/:user_id/:user_type',
 * @route: get form object
 * */
 Router.get('/:form_id',
+    auth.jwtMiddleware,
+    auth.loggedInUser,
     function (req, res, next) {
         formsModel
             .getForm(req.params.form_id, 
@@ -80,8 +87,9 @@ Router.get('/:form_id',
                         res.status(500);
                         res.json({error});
                     }
-
-                    res.json(result);
+                    else {
+                        res.json(result);
+                    }
                 });
     });
 
@@ -92,6 +100,8 @@ Router.get('/:form_id',
 * @route: update a form
 * */
 Router.put('/:form_id/:user_id/:user_type',
+    auth.jwtMiddleware,
+    auth.loggedInUser,
     function (req, res, next) {
         let { form_id, user_id, user_type } = req.params;
         formsModel
@@ -106,8 +116,9 @@ Router.put('/:form_id/:user_id/:user_type',
                     res.status(500);
                     res.json({error});
                 }
-
-                res.json(result);
+                else {
+                    res.json(results);
+                }
             });
     });
 
@@ -117,23 +128,39 @@ Router.put('/:form_id/:user_id/:user_type',
 * @method: DELETE
 * @route: marks form for deletion
 * */
-Router.delete('/:form_id/:user/:user_type',
+Router.delete('/:form_id/:author',
+    auth.jwtMiddleware,
+    auth.loggedInUser,
     function (req, res, next) {
-        let { form_id, user_id, user_type } = req.params;
         formsModel  
             .deleteForm({
-                id: form_id,
-                account_id: user_id,
-                account: user_type
+                id: req.params.form_id,
+                author: req.params.author
             },
             function (error, result) {
                 if (!_.isNil(error)) {
                     res.status(500);
                     res.json({error});
                 }
-
-                res.json(result);
+                else {
+                    res.json(result);
+                }
             });
+    });
+
+/*
+* @path: '/'
+* @method: GET
+* @route: default route for forms module
+* */
+Router.get('/', 
+    auth.jwtMiddleware,
+    auth.loggedInUser,
+    function (req, res, next) {
+        res.json({
+            message: 'Forms module',
+            status: 'Good'
+        });
     });
 
 module.exports = Router;
