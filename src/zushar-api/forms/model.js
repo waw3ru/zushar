@@ -20,7 +20,7 @@ function createForm(params, done) {
             Log.error(error);
             return done(error, null);
         }
-        return done(null, error);
+        return done(null, query);
     });
 }
 
@@ -39,14 +39,13 @@ function getForms(params, done) {
         .find({
             [params.account]: (params.account==='author') ?  params.account_id : contributorsQuery
         })
-        .sort({ creation_date: -1 })
         .populate({
             path: 'author',
-            select: '_id name gender -password -verification_code -validated -creation_date'
+            select: '_id name gender dob'
         })
         .populate({
             path: 'contributors',
-            select: '_id name gender -password -verification_code -validated -creation_date'
+            select: '_id name gender dob'
         })
         .exec(function (error, query) {
             if (!_.isNil(error)) {
@@ -68,11 +67,11 @@ function getForm(id, done) {
         .findById(id)
         .populate({
             path: 'author',
-            select: '_id name gender -password -verification_code -validated -creation_date'
+            select: '_id name gender'
         })
         .populate({
             path: 'contributors',
-            select: '_id name gender -password -verification_code -validated -creation_date'
+            select: '_id name gender'
         })
         .exec(function (error, query) {
             if (!_.isNil(error)) {
@@ -111,7 +110,6 @@ function updateForm(params, updates, done) {
             });
         
         query.modification_date = new Date();
-
         query.save(function (error, results) {
             if (!_.isNil(error)) {
                 Log.error(error);
@@ -130,7 +128,7 @@ function deleteForm(params, done) {
     * */
     formsModel
         .update({
-            _id: params._id,
+            _id: params.id,
             author: params.author
         },
         {
