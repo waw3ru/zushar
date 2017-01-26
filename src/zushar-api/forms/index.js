@@ -41,11 +41,45 @@ Router.post('/',
     });
 
 /*
-* @path: '/forms',
-* @method: POST
+* @path: '/forms/:account/:account_type',
+* @params: ':account_type' -> [author, contributor]; ':account' -> ObjectId
+* @method: GET
 * @route: get form list
 * */
-Router.get('/forms/:account/:account_type',
+Router.get('/:account/:account_type',
+    function (req, res, next) {
+        
+    });
+
+/*
+* @path: '/forms/:id/:account/:account_type',
+* @params: ':id' -> ObjectId; ':account_type' -> [author, contributor]; ':account' -> ObjectId
+* @method: GET
+* @route: get form object
+* */
+Router.get('/:account/:account_type/:id',
+    function (req, res, next) {
+        
+    });
+
+/*
+* @path: '/forms/:id/:account/:account_type',
+* @params: ':id' -> ObjectId; ':account_type' -> [author, contributor]; ':account' -> ObjectId
+* @method: PUT
+* @route: update a form
+* */
+Router.put('/:account/:account_type/:id',
+    function (req, res, next) {
+        
+    });
+
+/*
+* @path: '/forms/:id/:account/:account_type',
+* @params: ':id' -> ObjectId; ':account_type' -> [author, contributor]; ':account' -> ObjectId
+* @method: DELETE
+* @route: marks form for deletion
+* */
+Router.delete('/:account/:account_type/:id',
     function (req, res, next) {
         
     });
