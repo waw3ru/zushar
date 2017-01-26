@@ -10,7 +10,10 @@ const _ = require('lodash');
 const Log = require('./../lib/logger');
 
 function createForm(params, done) {
-    
+    /*
+    * @desc:
+    *   creates a new form obejct in the database
+    * */
     let newForm = new formsModel(params);
     newForm.save(function (error, query) {
         if (!_.isNil(error)) {
@@ -22,6 +25,12 @@ function createForm(params, done) {
 }
 
 function getForms(params, done) {
+    /*
+    * @desc:
+    *   gets a list of forms from the database using the author or contributors as the query 
+    *   criteria.
+    *   populates the author and contributors with data from the user-accounts table
+    * */
     let contributorQuery = {
         $in: [params.account_id]
     }
@@ -50,6 +59,11 @@ function getForms(params, done) {
 }
 
 function getForm(id, done) {
+    /*
+    * @desc:
+    *   get a single form from database based on the form ObjectId
+    *   populates the author and contributors with data from user-accounts table
+    * */
     formsModel
         .findById(id)
         .populate({
@@ -65,12 +79,17 @@ function getForm(id, done) {
                 Log.error(error);
                 return done(error, null);
             }
-
             return done(null, query);
         })
 }
 
 function updateForm(params, updates, done) {
+    /*
+    * @desc:
+    *   updates a form to the database.
+    *   method first does a find query with author or contributors as the criteria
+    *   and then updates the query instance and saves it
+    * */
     let contributorQuery = {
         $in: [params.account_id]
     };
@@ -105,6 +124,10 @@ function updateForm(params, updates, done) {
 }
 
 function deleteForm(params, done) {
+    /*
+    * @desc:
+    *   marks a form for deletion 
+    * */
     formsModel
         .update({
             _id: params._id,
