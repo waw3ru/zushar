@@ -9,6 +9,30 @@ const formsModel = mongoose.model('forms');
 const _ = require('lodash');
 const Log = require('./../lib/logger');
 
+/*
+* @desc:
+*   expose the model methods
+* */
+module.exports = {
+    createForm,
+    getForms,
+    getForm,
+    updateForm,
+    deleteForm,
+    addContributor,
+    getContributors,
+    removeContributor
+};
+
+/*
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* @desc:
+*   Forms management model functionality implementation
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* */
+
 function createForm(params, done) {
     /*
     * @desc:
@@ -164,10 +188,101 @@ function deleteForm(params, done) {
         });
 }
 
-module.exports = {
-    createForm,
-    getForms,
-    getForm,
-    updateForm,
-    deleteForm
-};
+function addContributor(params, done) {
+    /*
+    * @desc:
+    *   method adds contributor to the list of contributors in the database
+    *   only the author of the form can add contributors.
+    * */
+    formsModel
+        .findOne({
+            _id: params.id,
+            author: params.author
+        })
+        .exec(function (error, query) {
+            if (!_.isNil(error)) {
+                Log.error(error);
+                return done(error, null);
+            }
+
+            if (_.isEmpty(query)) {
+                let date = new Date();
+                let error = `[${date}] could not access form. check your permissions`;
+                Log.error(new Error(error));
+                return done(error, null); 
+            }
+
+            let newContributors = (query.contributors || []).concat(params.contributor);
+            if (query.contributors.length > 0) {
+                newContributors = [].concat(_.uniq((query.contributors || []), newContributors));
+            }
+            query.contributors = newContributors;
+            query.save(function (error, results) {
+                if (!_.isNil(error)) {
+                    Log.error(error);
+                    return done(error, null);
+                }
+                return done(null, results.contributors);
+            });
+
+        });
+}
+
+function getContributors(params, done) {
+    /*
+    * @desc:
+    *   Create a contributors query object with a conditional to ensure the query fits
+    *   for both author or contributors.
+    *   This method gets a list of all the contributors and returns an array of all the 
+    *   contributors in the database for a specific form (record)
+    * */
+    formsModel
+        .findOne({
+            _id: params.id,
+            [params.account]: (params.account==='author') ?  params.account_id : { $in: [params.account_id] }
+        })
+        .exec(function (error, query) {
+            if (!_.isNil(error)) {
+                Log.error(error);
+                return done(error, null);
+            }
+
+            if (_.isEmpty(query)) {
+                let date = new Date();
+                let error = `[${date}] could not access form. check your permissions`;
+                Log.error(new Error(error));
+                return done(error, null); 
+            } 
+            
+            return done(null, query.contributors);
+        });
+}
+
+function removeContributor(params, done) {
+    /*
+    * @desc:
+    *   Removes a contributor from the list of contributors in the form record.
+    *   The method uses Array.filter() to remove the correct contributors.
+    * */
+    formsModel
+        .findOne({
+            _id: params.id,
+            author: params.author
+        })
+        .exec(function (error, query) {
+            if (!_.isNil(error)) {
+                Log.error(error);
+                return done(error, null);
+            }
+            
+            query.contributors.remove(params.contributor);
+            query.save(function (error, results) {
+                if (!_.isNil(error)) {
+                    Log.error(error);
+                    return done(error, null);
+                }
+                return done(null, results.contributors);
+            });
+
+        });
+}

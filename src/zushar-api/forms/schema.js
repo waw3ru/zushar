@@ -26,7 +26,7 @@ const schema = new mongoose.Schema({
     },
     questions: { type: Array, default: [] },
     responses: { type: Array, default: [] },
-    respondants: { type: Array, default: [] },
+    /*respondants: { type: Array, default: [] },*/
     contributors: [{
         type: mongoose.Schema.Types.ObjectId,
         required: [true, 'missing author of the form'],

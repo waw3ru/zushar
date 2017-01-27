@@ -10,13 +10,128 @@ const Router = express.Router();
 const _ = require('lodash');
 const formsModel = require('./model');
 const auth = require('../lib/auth');
-const formsUtil = require('./util-endpoints');
 
 /*
 * @desc:
 *   utility functions for form management
 * */
-Router.use('/util', formsUtil);
+
+// contributors utility endpoints
+const contributorsRouter = express.Router();
+
+/***************************************************************************/
+/*
+* START OF CONTRIBUTORS ROUTING
+* */
+
+
+/*
+* @path: '/:form_id/:user_id'
+* @method: POST,
+* @route: adds contributors to the list of contributors
+* */
+contributorsRouter.post('/:form_id/:user_id',
+    function (req, res, next) {
+        
+        if (req.params.user_id !== req.zushar_auth.id) {
+            let date = new Date();
+            let error = `[${date.toDateString()}] could not access form. check your permissions`;
+            res.status(500);
+            res.json({error});
+        }
+        else {
+            formsModel
+                .addContributor({
+                    id: req.params.form_id,
+                    author: req.params.user_id,
+                    contributor: req.body.contributor
+                },
+                function (error, results) {
+                    if (!_.isNil(error)) {
+                        res.status(500);
+                        res.json({error});
+                    }
+                    else {
+                        res.json(results);
+                    } 
+                });
+        }
+
+    });
+
+/*
+* @path: '/:form_id/:user_id/:user_type'
+* @method: GET,
+* @route: get a list of all contributors related to a form
+* */
+contributorsRouter.get('/:form_id/:user_id/:user_type',
+    function (req, res, next) {
+
+        if ( req.params.user_type === 'author' && (req.params.user_id !== req.zushar_auth.id) ) {
+            let date = new Date();
+            let error = `[${date.toDateString()}] could not access form. check your permissions`;
+            res.status(500);
+            res.json({error});
+        }
+        else {
+            formsModel
+                .getContributors({
+                    id: req.params.form_id,
+                    account_id: req.params.user_id,
+                    account: req.params.user_type
+                },
+                function (error, results) {
+                    if (!_.isNil(error)) {
+                        res.status(500);
+                        res.json({error});
+                    }
+                    else {
+                        res.json(results);
+                    } 
+                });
+        }
+
+    });
+
+/*
+* @path: '/:form_id/:user_id'
+* @method: DELETE,
+* @route: remove a contributor
+* */
+contributorsRouter.delete('/:form_id/:user_id',
+    function (req, res, next) {
+        if (req.params.user_id !== req.zushar_auth.id) {
+            let date = new Date();
+            let error = `[${date.toDateString()}] could not access form. check your permissions`;
+            res.status(500);
+            res.json({error});
+        }
+        else {
+            formsModel
+                .removeContributor({
+                    id: req.params.form_id,
+                    author: req.params.user_id,
+                    contributor: req.body.contributor
+                },
+                function (error, results) {
+                    if (!_.isNil(error)) {
+                        res.status(500);
+                        res.json({error});
+                    }
+                    else {
+                        res.json(results);
+                    } 
+                });
+        }
+
+    });
+
+/*
+* END OF CONTRIBUTORS ROUTING
+* */
+/***************************************************************************/
+Router.use('/contributors', auth.jwtMiddleware, auth.loggedInUser, contributorsRouter);
+
 
 /*
 * @path: '/',
