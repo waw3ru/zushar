@@ -6,6 +6,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const node_env = proces.env.NODE_ENV;
 
 module.exports = {
     output: {
@@ -43,7 +44,8 @@ module.exports = {
         }),
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+                NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+                API: (node_env !== 'production') ? JSON.stringify('http://127.0.0.1:3000/api/') : JSON.stringify('http://zushar.herokuapp.com/api/')
             }
         })
     ],
@@ -56,7 +58,12 @@ module.exports = {
     devtool: '#eval-source-map'
 }
 
-if (process.env.NODE_ENV === 'production') {
+
+/*
+* @docs:
+*   [(NODE_ENV | environment_variable)]:- node_env specific configuration for webapck
+* */
+if (node_env === 'production') {
     module.exports.entry = {
         main: './src/zushar-main/index.js',
         docs: './src/zushar-docs/index.js'
@@ -85,6 +92,7 @@ if (process.env.NODE_ENV === 'production') {
             exclude: /(node_modules|bower_components|custom_components)/
         }
     ]);
+
 }
 else {
     module.exports.entry = {
@@ -110,4 +118,5 @@ else {
             exclude: /(node_modules|bower_components|custom_components)/
         }
     ]);
+
 }
