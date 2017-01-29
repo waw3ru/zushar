@@ -6,7 +6,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
-const node_env = proces.env.NODE_ENV;
+const node_env = process.env.NODE_ENV;
 
 module.exports = {
     output: {
