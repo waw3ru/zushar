@@ -60,10 +60,10 @@ app.enable('trust proxy');
 *   all the front-end rendering routes
 * */
 app.all('/m/*', function(req, res, next) {
-    res.sendFile(path.join(__dirname, './dist/zushar-main.html'));
+    res.sendFile(path.join(__dirname, './view/zushar-main.html'));
 });
 app.all('/docs/*', function(req, res, next) {
-    res.sendFile(path.join(__dirname, './dist/zushar-docs.html'));
+    res.sendFile(path.join(__dirname, './view/zushar-docs.html'));
 });
 
 /*
@@ -78,7 +78,7 @@ app.use('/api/', zusharApi);
 *   root '/'
 * */
 app.all('/', function (req, res, next) {
-  res.sendFile(path.join(__dirname, './dist/zushar.html'));
+  res.sendFile(path.join(__dirname, './view/zushar.html'));
 });
 
 
