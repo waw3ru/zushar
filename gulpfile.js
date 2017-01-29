@@ -10,7 +10,7 @@ const nodemon = require('gulp-nodemon');
 
 gulp.task('default', function () {
     let stream = nodemon({
-        script: './dist/bin.js',
+        script: './view/bin.js',
         ext: 'js json',
         env: {
         'NODE_ENV': 'development'
@@ -20,7 +20,7 @@ gulp.task('default', function () {
             'logs/',
             '*.md',
             'src/zushar-docs/',
-            'src/zushar-main/',            
+            'src/zushar-main/',         
         ],
         watch: 'src/zushar-api'
     });

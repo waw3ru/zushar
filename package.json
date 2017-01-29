@@ -5,7 +5,7 @@
   "author": "John Waweru <wambugu.john.waweru@outlook.com>",
   "private": true,
   "scripts": {
-    "start": "cross-env NODE_ENV=production node ./dist/bin.js",
+    "start": "cross-env NODE_ENV=production node ./view/bin.js",
     "dev": "cross-env NODE_ENV=development gulp",
     "build": "cross-env NODE_ENV=production webpack -p --hide-modules"
   },

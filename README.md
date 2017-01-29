@@ -17,11 +17,10 @@ The dependencies required for you to install, build and successfully run zushar 
 > * Run `$ npm install` to install local dependencies and dev dependencies
 > * Run `$ bower install` to install dependencies and dev dependencies
 > * The following scripts can be run to perform various things as will be stated: 
-
-> > * **start**: `$ npm start` -> used to run a production server must be run after build script.
-> > * **build**: `$ npm run build` -> used to build a production code for the project.
-> > * **dev**: `$ npm run dev` -> use to run the development server.
-> _runs on port: **3000**_
+>   1. **start**: `$ npm start` -> used to run a production server must be run after build script.
+>   2. **build**: `$ npm run build` -> used to build a production code for the project.
+>   3. **dev**: `$ npm run dev` -> use to run the development server.
+_runs on port: **3000**_
 
 ### Contribute
 Zushar project is open source and free to use. We would like to encourage the open source community and zushar users to help in contributing to this project through: 
