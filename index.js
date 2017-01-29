@@ -52,7 +52,7 @@ if (process.env.NODE_ENV === 'development') {
   }));
   app.use(require("webpack-hot-middleware")(compiled));
 }
-app.use(express.static(path.join(__dirname, 'dist/')) );
+app.use(express.static(path.join(__dirname, 'view/')) );
 app.enable('trust proxy');
 
 /*
