@@ -66,7 +66,8 @@ module.exports = {
 if (node_env === 'production') {
     module.exports.entry = {
         main: './src/zushar-main/index.js',
-        docs: './src/zushar-docs/index.js'
+        docs: './src/zushar-docs/index.js',
+        root: './src/zushar-root/index.js'
     };
   module.exports.devtool = false;
   module.exports.plugins = (module.exports.plugins || []).concat([
@@ -97,7 +98,8 @@ if (node_env === 'production') {
 else {
     module.exports.entry = {
         main: ['webpack/hot/dev-server', 'webpack-hot-middleware/client', './src/zushar-main/index.js'],
-        docs: ['webpack/hot/dev-server', 'webpack-hot-middleware/client', './src/zushar-docs/index.js']
+        docs: ['webpack/hot/dev-server', 'webpack-hot-middleware/client', './src/zushar-docs/index.js'],
+        root: ['webpack/hot/dev-server', 'webpack-hot-middleware/client', './src/zushar-root/index.js']
     };
     module.exports.plugins = (module.exports.plugins || []).concat([
         new webpack.HotModuleReplacementPlugin(),

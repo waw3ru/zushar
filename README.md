@@ -12,15 +12,15 @@ The dependencies required for you to install, build and successfully run zushar 
 * git
 
 #### Installation instruction
-> Git clone the project from [github](https://github.com/trendy-weshy/zushar/)
-> `$ git clone https://github.com/trendy-weshy/zushar.git`
-> Run `$ npm install` to install local dependencies and dev dependencies
-> Run `$ bower install` to install dependencies and dev dependencies
-> The following scripts can be run to perform various things as will be stated: 
-> **start**: `$ npm start` -> used to run a production server must be run after build script.
-> **build**: `$ npm run build` -> used to build a production code for the project.
-> **dev**: `$ npm run dev` -> use to run the development server.
-> _runs on port: 3000_
+> - Git clone the project from [github](https://github.com/trendy-weshy/zushar/)
+> - `$ git clone https://github.com/trendy-weshy/zushar.git`
+> - Run `$ npm install` to install local dependencies and dev dependencies
+> - Run `$ bower install` to install dependencies and dev dependencies
+> - The following scripts can be run to perform various things as will be stated: 
+> > - **start**: `$ npm start` -> used to run a production server must be run after build script.
+> > - **build**: `$ npm run build` -> used to build a production code for the project.
+> > - **dev**: `$ npm run dev` -> use to run the development server.
+> _runs on port: **3000**_
 
 ### Contribute
 Zushar project is open source and free to use. We would like to encourage the open source community and zushar users to help in contributing to this project through: 
@@ -38,13 +38,11 @@ Details changes and modifications for each release are available at the [release
 #### License
 [MIT License](http://opensource.org/licenses/MIT)
 
-______________
 ##### Extras
 current version under development: **v0.2.0**
 ##### screenshot
 `to be uploaded`
 ##### logo
 [Zushar Logo](https://zushar2.herokuapp.com/logo.png)
-______________
 
 Copyright (c) 2016-2017 John Waweru 
