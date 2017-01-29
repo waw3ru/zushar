@@ -11,7 +11,7 @@ const node_env = process.env.NODE_ENV;
 module.exports = {
     output: {
         filename: '[name].bundle.js',
-        publicPath: '/dist/',
+        publicPath: '/view/',
         path: path.resolve(__dirname, './dist')
     },
     module: {
