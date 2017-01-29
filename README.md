@@ -43,6 +43,6 @@ current version under development: **v0.2.0**
 ##### screenshot
 `to be uploaded`
 ##### logo
-[Zushar Logo](https://zushar2.herokuapp.com/logo.png)
+![Zushar Logo](https://zushar2.herokuapp.com/logo.png)
 
 Copyright (c) 2016-2017 John Waweru 
