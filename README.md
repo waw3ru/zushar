@@ -24,6 +24,7 @@ The dependencies required for you to install, build and successfully run zushar 
 
 ### Contribute
 Zushar project is open source and free to use. We would like to encourage the open source community and zushar users to help in contributing to this project through: 
+
 1. [Submitting bugs](https://github.com/trendy-weshy/zushar/issues) that occur while using or testing the project
 2. Helping and participating in doing [code reviews](https://github.com/trendy-weshy/zushar/pulls)
 3. Contribute in performing bug fixes and also developing new features. Just [fork](https://github.com/trendy-weshy/zushar) the project and start contributing through writing code today.
