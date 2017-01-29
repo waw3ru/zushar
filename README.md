@@ -12,14 +12,15 @@ The dependencies required for you to install, build and successfully run zushar 
 * git
 
 #### Installation instruction
-> - Git clone the project from [github](https://github.com/trendy-weshy/zushar/)
-> - `$ git clone https://github.com/trendy-weshy/zushar.git`
-> - Run `$ npm install` to install local dependencies and dev dependencies
-> - Run `$ bower install` to install dependencies and dev dependencies
-> - The following scripts can be run to perform various things as will be stated: 
-> > - **start**: `$ npm start` -> used to run a production server must be run after build script.
-> > - **build**: `$ npm run build` -> used to build a production code for the project.
-> > - **dev**: `$ npm run dev` -> use to run the development server.
+> * Git clone the project from [github](https://github.com/trendy-weshy/zushar/)
+> * `$ git clone https://github.com/trendy-weshy/zushar.git`
+> * Run `$ npm install` to install local dependencies and dev dependencies
+> * Run `$ bower install` to install dependencies and dev dependencies
+> * The following scripts can be run to perform various things as will be stated: 
+
+> > * **start**: `$ npm start` -> used to run a production server must be run after build script.
+> > * **build**: `$ npm run build` -> used to build a production code for the project.
+> > * **dev**: `$ npm run dev` -> use to run the development server.
 > _runs on port: **3000**_
 
 ### Contribute
