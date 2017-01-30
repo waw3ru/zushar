@@ -11,7 +11,7 @@ const node_env = process.env.NODE_ENV;
 module.exports = {
     output: {
         filename: '[name].bundle.js',
-        publicPath: '/view/',
+        publicPath: '/',
         path: path.resolve(__dirname, './view')
     },
     module: {
@@ -101,9 +101,9 @@ if (node_env === 'production') {
 }
 else {
     module.exports.entry = {
-        main: ['webpack/hot/dev-server', 'webpack-hot-middleware/client', './src/zushar-main/index.js'],
-        docs: ['webpack/hot/dev-server', 'webpack-hot-middleware/client', './src/zushar-docs/index.js'],
-        root: ['webpack/hot/dev-server', 'webpack-hot-middleware/client', './src/zushar-root/index.js']
+        main: ['./src/zushar-main/index.js', 'webpack/hot/only-dev-server', 'webpack-hot-middleware/client'],
+        docs: ['./src/zushar-docs/index.js', 'webpack/hot/only-dev-server', 'webpack-hot-middleware/client'],
+        root: ['./src/zushar-root/index.js', 'webpack/hot/only-dev-server', 'webpack-hot-middleware/client']
     };
     module.exports.plugins = (module.exports.plugins || []).concat([
         new webpack.HotModuleReplacementPlugin(),

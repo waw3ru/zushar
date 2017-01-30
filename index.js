@@ -48,7 +48,8 @@ if (process.env.NODE_ENV === 'development') {
   const compiled = webpack(webpackConfig);
 
   app.use(require("webpack-dev-middleware")(compiled, {
-    noInfo: true
+    noInfo: true,
+    publicPath: webpackConfig.output.publicPath
   }));
   app.use(require("webpack-hot-middleware")(compiled));
 }
