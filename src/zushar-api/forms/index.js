@@ -11,18 +11,10 @@ const _ = require('lodash');
 const formsModel = require('./model');
 const auth = require('../lib/auth');
 
-/*
-* @desc:
-*   utility functions for form management
-* */
 
-// contributors utility endpoints
+/************ utility functions for form management endpoints ************/
 const contributorsRouter = express.Router();
-
-/***************************************************************************/
-/*
-* START OF CONTRIBUTORS ROUTING
-* */
+/************ End ************/
 
 
 /*

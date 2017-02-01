@@ -10,7 +10,7 @@ const _ = require('lodash');
 const Log = require('./../lib/logger');
 
 /*
-* @desc:
+* @docs:
 *   expose the model methods
 * */
 module.exports = {
@@ -24,18 +24,11 @@ module.exports = {
     removeContributor
 };
 
-/*
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-* @desc:
-*   Forms management model functionality implementation
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-* */
+/************ Forms management model functionality implementation ************/
 
 function createForm(params, done) {
     /*
-    * @desc:
+    * @docs:
     *   creates a new form obejct in the database
     * */
     let newForm = new formsModel(params);
@@ -51,7 +44,7 @@ function createForm(params, done) {
 
 function getForms(params, done) {
     /*
-    * @desc:
+    * @docs:
     *   gets a list of forms from the database using the author or contributors as the query 
     *   criteria.
     *   populates the author and contributors with data from the user-accounts table
@@ -84,7 +77,7 @@ function getForms(params, done) {
 
 function getForm(id, done) {
     /*
-    * @desc:
+    * @docs:
     *   get a single form from database based on the form ObjectId
     *   populates the author and contributors with data from user-accounts table
     * */
@@ -109,7 +102,7 @@ function getForm(id, done) {
 
 function updateForm(params, updates, done) {
     /*
-    * @desc:
+    * @docs:
     *   updates a form to the database.
     *   method first does a find query with author or contributors as the criteria
     *   and then updates the query instance and saves it
@@ -148,7 +141,7 @@ function updateForm(params, updates, done) {
 
 function deleteForm(params, done) {
     /*
-    * @desc:
+    * @docs:
     *   marks a form for deletion 
     * */
     formsModel
@@ -190,7 +183,7 @@ function deleteForm(params, done) {
 
 function addContributor(params, done) {
     /*
-    * @desc:
+    * @docs:
     *   method adds contributor to the list of contributors in the database
     *   only the author of the form can add contributors.
     * */
@@ -230,7 +223,7 @@ function addContributor(params, done) {
 
 function getContributors(params, done) {
     /*
-    * @desc:
+    * @docs:
     *   Create a contributors query object with a conditional to ensure the query fits
     *   for both author or contributors.
     *   This method gets a list of all the contributors and returns an array of all the 
@@ -260,7 +253,7 @@ function getContributors(params, done) {
 
 function removeContributor(params, done) {
     /*
-    * @desc:
+    * @docs:
     *   Removes a contributor from the list of contributors in the form record.
     *   The method uses Array.filter() to remove the correct contributors.
     * */

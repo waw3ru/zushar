@@ -16,5 +16,7 @@
     "tests"
   ],
   "dependencies": {
+    "font-awesome": "4.7.0",
+    "animate.css": "3.5.2"
   }
 }

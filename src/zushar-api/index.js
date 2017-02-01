@@ -10,13 +10,13 @@ const user = require('./user-accounts');
 const forms = require('./forms');
 
 /*
-* @desc:
+* @docs:
 *   api configurations and library settings
 * */
 require('./lib/logger').debug('Welcome to the zushar web services api.');
 
 /*
-* @desc:
+* @docs:
 *   api endpoints
 * */
 Router.get('/', (req, res) => {
@@ -31,13 +31,13 @@ Router.get('/', (req, res) => {
 });
 
 /*
-* @desc:
+* @docs:
 *   user management services
 * */
 Router.use('/user', user);
 
 /*
-* @desc:
+* @docs:
 *   forms management services
 * */
 Router.use('/forms', forms);

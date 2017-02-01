@@ -12,7 +12,7 @@ const Log = require('./../lib/logger');
 function createAccount(params, done) {
     let { email, gender, phone, name, dob, password } = params;
     /*
-    * @desc:
+    * @docs:
     *   validate params<Object> for certain required { key:value }
     * */
     if (_.isNil(email) || _.isNil(password) || _.isNil(phone) || _.isNil(gender)) {
@@ -23,7 +23,7 @@ function createAccount(params, done) {
     }
 
     /*
-    * @desc:
+    * @docs:
     *   creates a Date constructor
     * */
     let formattedDob;
@@ -90,7 +90,7 @@ function loginAccount(params, done) {
 
 function updateAccount(params, updates, done) {
     /*
-    * @desc:
+    * @docs:
     *   update user details on the database
     * */
     let updatesCopy = Object.assign({}, updates);
@@ -105,7 +105,7 @@ function updateAccount(params, updates, done) {
             }   
 
             /*
-            * @desc:
+            * @docs:
             *   added a conditional so as to hash the new password before updating the record
             * */
             if (!_.isEmpty(updates.password)) {
@@ -115,7 +115,7 @@ function updateAccount(params, updates, done) {
             }
             
             /*
-            * @desc:
+            * @docs:
             *   perform updates if no error in authenticating the account
             * */
             accountsModel.update({

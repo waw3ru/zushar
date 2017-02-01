@@ -9,7 +9,7 @@ const algorithm = 'aes-256-cbc-hmac-sha256';
 
 function simpleEncryption(password,text) {
     /*
-    * @desc:
+    * @docs:
     *   does simple encryption for the Strings (text)
     * */
     let cipher = crypto.createCipher(algorithm,password)
@@ -20,7 +20,7 @@ function simpleEncryption(password,text) {
 
 function simpleDecryption(passwordtext){
     /*
-    * @desc:
+    * @docs:
     *   does simple decryption for the Strings (text)
     * */
     let decipher = crypto.createDecipher(algorithm,password)

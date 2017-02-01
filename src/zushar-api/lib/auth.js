@@ -21,7 +21,7 @@ module.exports.loggedInUser = function (req, res, next) {
     }
     else {
         /*
-        * @desc:
+        * @docs:
         *   from user-accounts model
         * */
         getAccount(req.zushar_auth.id, function (error, result) {
