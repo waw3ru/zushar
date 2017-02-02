@@ -14,13 +14,13 @@ import 'animate.css/animate.css' // css3 animation keyframes
 
 import Vue from 'vue'
 import Root from './Root.vue'
-/*import router from './router'
-import store from './store'*/
-import { sync } from 'vuex-router-sync'
-/*import ElementUI from 'element-ui'*/
+// import { sync } from 'vuex-router-sync'
+// import router from './router'
+// import store from './store'
+import ElementUI from 'element-ui'
 
-sync(store, router);
-/*Vue.use(ElementUI);*/
+// sync(store, router);
+Vue.use(ElementUI);
 
 /*
 * @docs:
