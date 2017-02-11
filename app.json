@@ -1,17 +1,16 @@
 {
     "name": "zushar",
-    "description": "a questionnaire building tool",
+    "description": "a form building tool",
     "keywords": [
         "productivity",
         "forms",
         "data collection",
         "data analysis",
-        "web tools",
-        "research"
+        "web tools"
     ],
-    "website": "https://zushar2.herokuapp.com/", 
-    "repository": "https://github.com/trendy-weshy/zushar.git",
-    "logo": "https://zushar2.herokuapp.com/logo.png",
+    "website": "https://zushar.herokuapp.com/", 
+    "repository": "https://github.com/trendy-weshy/zushar",
+    "logo": "https://zushar.herokuapp.com/static/zushar_favi_1.png",
     "formation": {
         "web": {
           "quantity": 1,
