@@ -1,6 +1,6 @@
-## Zushar ##
+# zushar _forms_ #
 
-> A questionnaire builder tool for researchers and scholars using web technologies
+> A questionnaire builder tool that uses web technologies
 
 ### Build Setup ###
 
