@@ -41,7 +41,7 @@
     background: #FFF;
   }
   #title-bar .logo{
-    margin-top: 5px;
+    margin-top: 10px;
     margin-left: 100px;
   }
   #title-bar .btn{
