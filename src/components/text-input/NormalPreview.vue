@@ -29,7 +29,7 @@
         </p>
 
       </div>
-    </form>s
+    </form>
 
 </template>
 

@@ -12,6 +12,6 @@ sync(store, router);
 new Vue({
   el: '#zushar',
   render: h => h(App),
-	store,
+  store,
   router
 })
