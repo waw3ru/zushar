@@ -1,28 +1,30 @@
-# zushar _forms_ #
+# Zushar V2
 
-> A questionnaire builder tool that uses web technologies
+> Form building tool
 
-### Build Setup ###
+![zushar logo](https://github.com/shevigroup/zushar/blob/master/src/assets/logos/zushar_1.png)
+
+## Build Setup
+
+**Uses node v20+
 
 ``` bash
 # install dependencies
-npm install
+pnpm install
 
 # serve with hot reload at localhost:8080
-npm run dev
+pnpm dev
 
 # build for production with minification
-npm run build
+pnpm build
 ```
 
-### Changelog ###
+## Changelog
 
 Details changes for each release are documented in the [release notes](https://github.com/trendy-weshy/zushar/releases).
 
-### Logo ###
-![zushar logo](https://github.com/shevigroup/zushar/blob/master/src/assets/logos/zushar_1.png)
+## License
 
-### License ###
 [MIT](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2016-2017 John Waweru
+Copyright (c) 2024
