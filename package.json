@@ -1,42 +1,45 @@
 {
-  "name": "zushar",
-  "description": "a form building tool",
-  "version": "0.1.0",
-  "author": "John Waweru <wambugu.john.waweru@outlook.com>",
-  "private": true,
-  "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "postinstall": "./node_modules/.bin/bower install",
-    "start": "./node_modules/.bin/gulp test:server"
-  },
-  "dependencies": {
-    "bower": "^1.8.0",
-    "gulp": "^3.9.1",
-    "gulp-connect": "^5.0.0",
-    "jquery": "^3.1.1",
-    "lodash": "^4.17.2",
-    "moment": "^2.17.0",
-    "store": "^1.3.20",
-    "vue": "^2.1.3",
-    "vue-router": "^2.0.3",
-    "vuex": "^2.0.0",
-    "vuex-router-sync": "^3.0.0"
-  },
-  "devDependencies": {
-    "babel-core": "^6.0.0",
-    "babel-loader": "^6.0.0",
-    "babel-plugin-transform-runtime": "^6.15.0",
-    "babel-polyfill": "^6.16.0",
-    "babel-preset-es2015": "^6.0.0",
-    "babel-preset-stage-2": "^6.18.0",
-    "cross-env": "^3.0.0",
-    "css-loader": "^0.26.0",
-    "file-loader": "^0.9.0",
-    "json-loader": "^0.5.4",
-    "vue-loader": "^9.9.5",
-    "vue-template-compiler": "^2.2.6",
-    "webpack": "^2.1.0-beta.25",
-    "webpack-dev-server": "^2.1.0-beta.0"
-  }
+    "name": "zushar",
+    "description": "a form building tool",
+    "version": "0.1.0",
+    "author": {
+        "name": "John w. Wambugu",
+        "email": "john@zisake.io"
+    },
+    "private": false,
+    "license": "MIT",
+    "scripts": {
+        "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot",
+        "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+        "start": "./node_modules/.bin/gulp test:server"
+    },
+    "dependencies": {
+        "bower": "^1.8.0",
+        "gulp": "^3.9.1",
+        "gulp-connect": "^5.0.0",
+        "jquery": "^3.1.1",
+        "lodash": "^4.17.2",
+        "moment": "^2.17.0",
+        "store": "^1.3.20",
+        "vue": "^2.1.3",
+        "vue-router": "^2.0.3",
+        "vuex": "^2.0.0",
+        "vuex-router-sync": "^3.0.0"
+    },
+    "devDependencies": {
+        "babel-core": "^6.0.0",
+        "babel-loader": "^6.0.0",
+        "babel-plugin-transform-runtime": "^6.15.0",
+        "babel-polyfill": "^6.16.0",
+        "babel-preset-es2015": "^6.0.0",
+        "babel-preset-stage-2": "^6.18.0",
+        "cross-env": "^3.0.0",
+        "css-loader": "^0.26.0",
+        "file-loader": "^0.9.0",
+        "json-loader": "^0.5.4",
+        "vue-loader": "^9.9.5",
+        "vue-template-compiler": "^2.2.6",
+        "webpack": "^2.1.0-beta.25",
+        "webpack-dev-server": "^2.1.0-beta.0"
+    }
 }
