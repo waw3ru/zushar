@@ -1,7 +1,7 @@
 import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
-@customElement('lit-app')
+@customElement('zushar-form-viewer')
 export class LitApp extends LitElement {
   static styles = [
     css`

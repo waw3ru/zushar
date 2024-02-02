@@ -1,13 +1,43 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lit App Lit Element Simple Starter Kit</title>
-</head>
-<body>
-    <lit-app></lit-app>
+
+    <style type="text/css">
+      html,
+      body,
+      #app {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+
+      * {
+        font-variant-ligatures: common-ligatures;
+        font-size: 0.875rem;
+        min-height: 0;
+        min-width: 0;
+        scroll-behavior: smooth;
+        text-size-adjust: 100%;
+        text-rendering: optimizelegibility;
+      }
+
+      :root {
+        --bs-body-color: #1e272e;
+        --bs-body-bg-rgb: #f5f6fa;
+        --bs-body-bg: rgb(245, 246, 250);
+        --bs-body-color-rgb: rgb(30, 39, 46);
+      }
+    </style>
+  </head>
+  <body>
+    <zushar-form-viewer></zushar-form-viewer>
+
     <script type="module" src="/src/lit-app.ts"></script>
-</body>
+  </body>
 </html>

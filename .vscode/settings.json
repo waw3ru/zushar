@@ -1,5 +1,10 @@
 {
 	"typescript.tsdk": "node_modules/typescript/lib",
     "lit-plugin.strict": true,
-	"editor.rulers": [140],
+	"editor.rulers": [
+		140
+	],
+	"cSpell.words": [
+		"zushar"
+	],
 }
