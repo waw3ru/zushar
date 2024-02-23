@@ -9,5 +9,10 @@
   ],
   "cSpell.ignoreWords": [
     "wdth"
-  ]
+  ],
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "never",
+    "source.fixAll": "explicit"
+  },
+  "editor.formatOnSave": true
 }

@@ -1,13 +1,14 @@
-import './app/editor.js';
+import './editor.js';
 import './main.scss';
 
 import { css, html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
+import { openComponentConfig } from './utils.js';
+
 const styles = css`
   :host {
     position: relative;
-    font-family: var(--zushar-font-family);
     color: var(--zushar-dark-color);
     display: block;
     overflow: hidden;
@@ -19,10 +20,16 @@ const styles = css`
 
 @customElement('zushar-form')
 export class ZusharForm extends LitElement {
+  static shadowRootOptions = openComponentConfig;
+
   static styles = [styles];
 
   protected render() {
-    return html`<zushar-form-editor></zushar-form-editor>`;
+    return html`
+      <div id="zushar_forms_v2_alpha">
+        <zushar-form-editor></zushar-form-editor>
+      </div>
+    `;
   }
   protected createRenderRoot() {
     return this;
