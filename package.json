@@ -4,13 +4,14 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "vite",
+    "serve": "vite",
     "build": "vite build"
   },
   "dependencies": {
     "lit": "^2.8.0",
     "nanoid": "^5.0.5",
-    "superstruct": "^1.0.3"
+    "superstruct": "^1.0.3",
+    "vanilla-framework": "^4.8.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.45",

@@ -1,12 +1,14 @@
+import './demo.js';
+
 import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
-@customElement('zushar-form-viewer')
+@customElement('zushar-form-editor')
 export class LitApp extends LitElement {
   static styles = [
     css`
-      :host {
-        display: block;
+      .txt-bold {
+        color: var(--zushar-primary-color);
       }
     `,
   ];
@@ -14,6 +16,8 @@ export class LitApp extends LitElement {
   @property() name = 'to Zushar Version 2';
 
   render() {
-    return html`<h1>Hello, ${this.name}</h1>`;
+    return html`
+      <p class="txt-bold">Hello, ${this.name} <zushar-demo></zushar-demo></p>
+    `;
   }
 }

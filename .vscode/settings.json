@@ -1,10 +1,13 @@
 {
-	"typescript.tsdk": "node_modules/typescript/lib",
-    "lit-plugin.strict": true,
-	"editor.rulers": [
-		140
-	],
-	"cSpell.words": [
-		"zushar"
-	],
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "lit-plugin.strict": true,
+  "editor.rulers": [140],
+  "cSpell.words": [
+    "Noto",
+    "optimizelegibility",
+    "zushar"
+  ],
+  "cSpell.ignoreWords": [
+    "wdth"
+  ]
 }
