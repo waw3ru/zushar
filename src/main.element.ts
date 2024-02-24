@@ -4,8 +4,6 @@ import './main.scss';
 import { css, html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
-import { openComponentConfig } from './utils.js';
-
 const styles = css`
   :host {
     position: relative;
@@ -19,18 +17,19 @@ const styles = css`
 `;
 
 @customElement('zushar-form')
-export class ZusharForm extends LitElement {
-  static shadowRootOptions = openComponentConfig;
-
+export class ZusharFormElement extends LitElement {
   static styles = [styles];
 
+  template = () => html`
+    <div id="zushar_forms_v2_alpha">
+      <zushar-form-editor></zushar-form-editor>
+    </div>
+  `;
+
   protected render() {
-    return html`
-      <div id="zushar_forms_v2_alpha">
-        <zushar-form-editor></zushar-form-editor>
-      </div>
-    `;
+    return this.template();
   }
+
   protected createRenderRoot() {
     return this;
   }

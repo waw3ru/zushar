@@ -3,6 +3,8 @@
   "lit-plugin.strict": true,
   "editor.rulers": [140],
   "cSpell.words": [
+    "inputmode",
+    "maxlength",
     "Noto",
     "optimizelegibility",
     "zushar"
