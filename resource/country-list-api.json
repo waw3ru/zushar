@@ -1,0 +1,8 @@
+{
+  "list_of_countries": {
+    "apiUrl": "https://gist.githubusercontent.com/waw3ru/dc5c4ce9f840ae6fc819963db929513a/raw/bdc2ce1c1e3f28f9cab5b4393c7549f38361be4e/countries.json",
+    "apiName": "country-list-api",
+    "apiMethod": "get",
+    "apiParams": {}
+  }
+}

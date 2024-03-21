@@ -1,0 +1,13 @@
+{
+    "recommendations": [
+        "runem.lit-plugin",
+        "redhat.vscode-yaml",
+        "mrmlnc.vscode-scss",
+        "ecmel.vscode-html-css",
+        "wix.vscode-import-cost",
+        "esbenp.prettier-vscode",
+        "aaron-bond.better-comments",
+        "streetsidesoftware.code-spell-checker"
+    ],
+    "unwantedRecommendations": []
+}

@@ -1,189 +1,40 @@
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="description" content="a form building tool" />
-        <meta
-            name="author"
-            content="John Waweru <wambugu.john.waweru@outlook.com>"
-        />
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lit App Lit Element Simple Starter Kit</title>
 
-        <title>zushar | simple form building tool</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-        <link rel="icon" href="/favi.png" />
-        <!-- <link
-            rel="stylesheet"
-            href="/bower_components/datepicker/dist/datepicker.css"
-        /> -->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.4.0/datepicker.min.css"
-        />
-        <!-- <link rel="stylesheet" href="/bower_components/semantic/dist/semantic.css"> -->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.css"
-        />
-        <link
-            rel="stylesheet"
-            href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css"
-            integrity="sha384-dNpIIXE8U05kAbPhy3G1cz+yZmTzA6CY8Vg/u2L9xRnHjJiAK76m2BIEaSEV+/aU"
-            crossorigin="anonymous"
-        />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css"
-            integrity="sha256-00w68NO3TLuHjKRHJmjrrgJBDtG/6OhbJEu1gtHcsuo="
-            crossorigin="anonymous"
-        />
-    </head>
-    <body>
-        <style type="text/css">
-            .sk-folding-cube {
-                margin: 20px auto;
-                width: 40px;
-                height: 40px;
-                position: relative;
-                -webkit-transform: rotateZ(45deg);
-                transform: rotateZ(45deg);
-            }
+    <style type="text/css">
+      html,
+      body,
+      #app {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
 
-            .sk-folding-cube .sk-cube {
-                float: left;
-                width: 50%;
-                height: 50%;
-                position: relative;
-                -webkit-transform: scale(1.1);
-                -ms-transform: scale(1.1);
-                transform: scale(1.1);
-            }
-            .sk-folding-cube .sk-cube:before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(55, 71, 79, 1);
-                -webkit-animation: sk-foldCubeAngle 2.4s infinite linear both;
-                animation: sk-foldCubeAngle 2.4s infinite linear both;
-                -webkit-transform-origin: 100% 100%;
-                -ms-transform-origin: 100% 100%;
-                transform-origin: 100% 100%;
-            }
-            .sk-folding-cube .sk-cube2 {
-                -webkit-transform: scale(1.1) rotateZ(90deg);
-                transform: scale(1.1) rotateZ(90deg);
-            }
-            .sk-folding-cube .sk-cube3 {
-                -webkit-transform: scale(1.1) rotateZ(180deg);
-                transform: scale(1.1) rotateZ(180deg);
-            }
-            .sk-folding-cube .sk-cube4 {
-                -webkit-transform: scale(1.1) rotateZ(270deg);
-                transform: scale(1.1) rotateZ(270deg);
-            }
-            .sk-folding-cube .sk-cube2:before {
-                -webkit-animation-delay: 0.3s;
-                animation-delay: 0.3s;
-            }
-            .sk-folding-cube .sk-cube3:before {
-                -webkit-animation-delay: 0.6s;
-                animation-delay: 0.6s;
-            }
-            .sk-folding-cube .sk-cube4:before {
-                -webkit-animation-delay: 0.9s;
-                animation-delay: 0.9s;
-            }
-            @-webkit-keyframes sk-foldCubeAngle {
-                0%,
-                10% {
-                    -webkit-transform: perspective(140px) rotateX(-180deg);
-                    transform: perspective(140px) rotateX(-180deg);
-                    opacity: 0;
-                }
-                25%,
-                75% {
-                    -webkit-transform: perspective(140px) rotateX(0deg);
-                    transform: perspective(140px) rotateX(0deg);
-                    opacity: 1;
-                }
-                90%,
-                100% {
-                    -webkit-transform: perspective(140px) rotateY(180deg);
-                    transform: perspective(140px) rotateY(180deg);
-                    opacity: 0;
-                }
-            }
+      body {
+        background-color: rgba(172, 90, 58, 0.175);
+      }
+    </style>
+  </head>
+  <body>
+    <zushar-form></zushar-form>
 
-            @keyframes sk-foldCubeAngle {
-                0%,
-                10% {
-                    -webkit-transform: perspective(140px) rotateX(-180deg);
-                    transform: perspective(140px) rotateX(-180deg);
-                    opacity: 0;
-                }
-                25%,
-                75% {
-                    -webkit-transform: perspective(140px) rotateX(0deg);
-                    transform: perspective(140px) rotateX(0deg);
-                    opacity: 1;
-                }
-                90%,
-                100% {
-                    -webkit-transform: perspective(140px) rotateY(180deg);
-                    transform: perspective(140px) rotateY(180deg);
-                    opacity: 0;
-                }
-            }
-        </style>
+    <script type="module" src="/src/main.element.ts"></script>
 
-        <style type="text/css">
-            /*
-      * @docs: imported custom font for zushar;
-      */
-            @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700");
-            * {
-                font-family: "Raleway", sans-serif;
-            }
-
-            html,
-            body {
-                width: 100%;
-                height: 100%;
-                padding: 0;
-                margin: 0;
-            }
-            #zushar {
-                width: 100%;
-                height: 100%;
-                padding: 0;
-                margin: 0;
-                padding-top: 100px;
-            }
-            .spinner-img {
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
-                margin-bottom: 20px;
-            }
-        </style>
-
-        <div id="zushar">
-            <img
-                src="data:image/png;base64,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"
-                alt="zushar official logo"
-                class="spinner-img"
-            />
-
-            <!-- a spinner as vue instance initializes -->
-            <div class="sk-folding-cube">
-                <div class="sk-cube1 sk-cube"></div>
-                <div class="sk-cube2 sk-cube"></div>
-                <div class="sk-cube4 sk-cube"></div>
-                <div class="sk-cube3 sk-cube"></div>
-            </div>
-        </div>
-        <script src="/dist/build.js" charset="utf-8"></script>
-    </body>
+    <!-- TODO(docs): How to override the theme of a field -->
+    <!-- <style type="text/css">
+      :root {
+        --zushar-primary-color: indigo;
+      }
+    </style> -->
+  </body>
 </html>
