@@ -1,3 +1,5 @@
+import './text-field.element.js';
+
 import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
@@ -7,10 +9,10 @@ import { openComponentConfig } from './utils';
 export class LitApp extends LitElement {
   static shadowRootOptions = openComponentConfig;
 
-  @property() name = 'to Zushar Version 2';
+  @property() projectName = 'to Zushar Version 2';
 
   protected render() {
-    return html` <p class="border">Hello, ${this.name}</p> `;
+    return html` <zushar-text-field></zushar-text-field> `;
   }
   protected createRenderRoot() {
     return this;
